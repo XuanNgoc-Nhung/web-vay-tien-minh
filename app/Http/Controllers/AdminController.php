@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\cauHinhWeb;
 use App\rutTien;
 use App\thongTinCaNhan;
 use Illuminate\Http\Request;
@@ -72,6 +73,25 @@ class AdminController extends Controller
             $res = [
                 'rc' => '0',
                 'data' => $data,
+                'total' => $total
+            ];
+        } else {
+            $res = [
+                'rc' => '1',
+                'rd' => 'Không tìm thấy bản ghi nào'
+            ];
+        }
+        return json_encode($res);
+    }
+    public function layThongTinCauHinh(Request $request){
+
+        $req = $request->all();
+        $list = cauHinhWeb::where('id',1)->get();
+        $total = $list->count();
+        if (count($list)) {
+            $res = [
+                'rc' => '0',
+                'data' => $list,
                 'total' => $total
             ];
         } else {

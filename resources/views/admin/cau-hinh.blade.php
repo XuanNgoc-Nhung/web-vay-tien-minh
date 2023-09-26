@@ -5,10 +5,10 @@
 @section("content")
     <div>
         <div id="app">
-            <quan-ly-khoan-vay/>
+            <quan-ly-cau-hinh/>
         </div>
     </div>
 @endsection
 @section("js_location")
-    <script src="{{asset('js/admin-quan-ly-khoan-vay.js?t='.Carbon\Carbon::now()->timestamp)}}"></script>
+    <script src="{{asset('js/admin-quan-ly-cau-hinh.js?t='.Carbon\Carbon::now()->timestamp)}}"></script>
 @endsection
