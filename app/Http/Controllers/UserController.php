@@ -217,6 +217,7 @@ class UserController extends Controller
         $filePathHinhAnhMatTruoc = null;
         $filePathHinhAnhMatSau = null;
         $filePathHinhAnhChanDung = null;
+        $filePathHinhAnhGiayTo = null;
         if ($request->file('matTruoc')) {
             $hinhAnhMatTruoc = $request->file('matTruoc');
             $filePathHinhAnhMatTruoc = '/images/xacMinh/' . uniqid() . '.' . $hinhAnhMatTruoc->extension();
@@ -232,11 +233,17 @@ class UserController extends Controller
             $filePathHinhAnhChanDung = '/images/xacMinh/' . uniqid() . '.' . $hinhAnhChanDung->extension();
             $hinhAnhChanDung->move(public_path('images/xacMinh'), $filePathHinhAnhChanDung);
         }
+        if ($request->file('giayTo')) {
+            $hinhAnhGiayTo = $request->file('giayTo');
+            $filePathHinhAnhGiayTo = '/images/xacMinh/' . uniqid() . '.' . $hinhAnhGiayTo->extension();
+            $hinhAnhGiayTo->move(public_path('images/xacMinh'), $filePathHinhAnhGiayTo);
+        }
         $profile = thongTinCaNhan::where('user_id', Auth::user()->id)->first();
         if ($profile) {
             $profile->anh_mat_truoc = $filePathHinhAnhMatTruoc;
             $profile->anh_mat_sau = $filePathHinhAnhMatSau;
             $profile->anh_chan_dung = $filePathHinhAnhChanDung;
+            $profile->anh_giay_to = $filePathHinhAnhGiayTo;
             $profile->save();
             $res = [
                 'rc' => '0',
@@ -367,6 +374,7 @@ class UserController extends Controller
             $newMember = User::create([
                 'phone' => $request->phone,
                 'name' => $request->phone,
+                'type' => $request->loaiTaiKhoan,
                 'status' => 1,
                 'password' => Hash::make($request->pass)
             ]);

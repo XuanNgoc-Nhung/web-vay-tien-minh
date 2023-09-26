@@ -3619,6 +3619,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
     },
     // Bắt đầu vẽ chữ ký
     startDrawing: function startDrawing(e) {
+      return;
       this.isDrawing = true;
       var touch = e.touches[0];
       var _ref = [touch.clientX - this.canvas.offsetLeft, touch.clientY - this.canvas.offsetTop];
@@ -3627,6 +3628,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
     },
     // Vẽ điểm trên canvas
     draw: function draw(e) {
+      return;
       if (!this.isDrawing) return;
       e.preventDefault();
       var touch = e.touches[0];
@@ -3640,13 +3642,16 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
     },
     // Dừng vẽ chữ ký
     stopDrawing: function stopDrawing() {
+      return;
       this.isDrawing = false;
     },
     // Xóa chữ ký
     clearCanvas: function clearCanvas() {
+      return;
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     },
     getEmptyCanvasData: function getEmptyCanvasData() {
+      return;
       var emptyCanvas = document.createElement("canvas");
       emptyCanvas.width = this.canvas.width;
       emptyCanvas.height = this.canvas.height;

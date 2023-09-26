@@ -29,12 +29,13 @@
                             <tr>
                                 <th>STT</th>
                                 <th>Số điện thoại</th>
+                                <th>Vai trò</th>
                                 <th>Ngân hàng</th>
                                 <th>Số tài khoản</th>
                                 <th>Chủ tài khoản</th>
                                 <th>Số dư tài khoản</th>
                                 <th>Thông báo khi rút tiền</th>
-                                <th>Vai trò</th>
+                                <th>Loại tài khoản</th>
                                 <th>Trạng thái rút tiền</th>
                                 <th>Hành động</th>
                             </tr>
@@ -43,6 +44,7 @@
                             <tr v-for="(item,index) in list_data" :key="index">
                                 <td class="text-center">{{ index + 1 }}</td>
                                 <td class="text-center">{{ item.phone }}</td>
+                                <td class="text-center">{{ item.role==1?'Quản trị viên':'Người dùng' }}</td>
                                 <td class="text-center">{{ item.thong_tin_tai_khoan.ngan_hang }}
                                     <td class="text-center">{{ item.thong_tin_tai_khoan.so_tai_khoan }}
                                         <td class="text-center">{{ item.thong_tin_tai_khoan.chu_tai_khoan }}
@@ -52,8 +54,8 @@
                                             </td>
                                             <td class="text-center">{{ item.thong_bao }}</td>
                                             <td class="text-center">{{
-                                                item.role == 2 ? 'Quản trị hệ thống' : item.role == 1 ? 'Quản trị viên'
-                                                : 'Người dùng'
+                                                item.type == 2 ? 'Khách hàng doanh nghiệp' : item.type == 1 ? 'Khách hàng cá nhân'
+                                                : 'Chưa xác định'
                                                 }}
                                             </td>
                                             <td class="text-center">
@@ -121,21 +123,15 @@
                     </el-col>
                     <el-col :span="6" style="margin-top:20px">
                         <label>Vai trò</label>
-                        <div v-if="thongTinChinhSua.role!=2">
-                            <el-select v-model="thongTinChinhSua.role" disabled placeholder="Chọn" style="width: 100%">
+                        <div>
+                            <el-select v-model="thongTinChinhSua.type" placeholder="Chọn" style="width: 100%">
                                 <el-option
-                                    v-for="item in danh_sach_vai_tro"
+                                    v-for="item in danh_sach_loai_tai_khoan"
                                     :key="item.name"
                                     :label="item.name"
                                     :value="item.value">
                                 </el-option>
                             </el-select>
-                        </div>
-                        <div v-else>
-                            <el-input placeholder="Nhập..."
-                                      disabled
-                                      value="Quản trị hệ thống"
-                            ></el-input>
                         </div>
                     </el-col>
                     <el-col :span="6" style="margin-top:20px">
@@ -427,9 +423,9 @@ export default {
                 thong_tin_tai_khoan: {},
             },
             infoUpdate: {},
-            danh_sach_vai_tro: [
-                {name: 'Quản trị viên', value: 1},
-                {name: 'Người dùng', value: 0},
+            danh_sach_loai_tai_khoan: [
+                {name: 'Khách hàng cá nhân', value: 1},
+                {name: 'Khách hàng doanh nghiệp', value: 2},
             ],
             danh_sach_thu_nhap: [
                 {name: 'Dưới 5tr'},
@@ -562,7 +558,7 @@ export default {
                     }
                     console.log('3')
                     dataForm.append('user_id', this.thongTinChinhSua.id)
-                    dataForm.append('role', this.thongTinChinhSua.role)
+                    dataForm.append('type', this.thongTinChinhSua.type)
                     dataForm.append('so_du', this.infoUpdate.so_du)
                     dataForm.append('thong_bao', this.thongTinChinhSua.thong_bao)
                     dataForm.append('ngan_hang', this.infoUpdate.ngan_hang)

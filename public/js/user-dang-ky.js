@@ -3557,7 +3557,8 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
       thongTinDangKy: {
         phone: '',
         pass: '',
-        rePass: ''
+        rePass: '',
+        loaiTaiKhoan: '1'
       }
     };
   },
@@ -3729,7 +3730,29 @@ var render = function render() {
         _vm.$set(_vm.thongTinDangKy, "rePass", $event.target.value);
       }
     }
-  }), _vm._v(" "), _c("button", {
+  }), _vm._v(" "), _c("div", [_c("el-radio", {
+    attrs: {
+      label: "1"
+    },
+    model: {
+      value: _vm.thongTinDangKy.loaiTaiKhoan,
+      callback: function callback($$v) {
+        _vm.$set(_vm.thongTinDangKy, "loaiTaiKhoan", $$v);
+      },
+      expression: "thongTinDangKy.loaiTaiKhoan"
+    }
+  }, [_vm._v("Khách hàng cá nhân")]), _vm._v(" "), _c("el-radio", {
+    attrs: {
+      label: "2"
+    },
+    model: {
+      value: _vm.thongTinDangKy.loaiTaiKhoan,
+      callback: function callback($$v) {
+        _vm.$set(_vm.thongTinDangKy, "loaiTaiKhoan", $$v);
+      },
+      expression: "thongTinDangKy.loaiTaiKhoan"
+    }
+  }, [_vm._v("Khách hàng doanh nghiệp")])], 1), _vm._v(" "), _c("button", {
     staticClass: "ant-btn ant-btn-default ant-btn-lg login-btn",
     staticStyle: {
       width: "calc(100% - 80px) !important",

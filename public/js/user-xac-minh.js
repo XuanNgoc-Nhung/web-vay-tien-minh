@@ -3554,25 +3554,6 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
   components: {},
   data: function data() {
     return {
-      danh_sach_thoi_han_vay: [{
-        name: '6 tháng',
-        value: 6
-      }, {
-        name: '12 tháng',
-        value: 12
-      }, {
-        name: '24 tháng',
-        value: 24
-      }, {
-        name: '36 tháng',
-        value: 36
-      }, {
-        name: '48 tháng',
-        value: 48
-      }, {
-        name: '60 tháng',
-        value: 60
-      }],
       thongTinVay: {
         traKyDau: 0,
         laiSuat: 0.8,
@@ -3583,21 +3564,40 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
       urlUpload: {
         matTruoc: '',
         matSau: '',
-        chanDung: ''
+        chanDung: '',
+        giayTo: ''
       },
       selectedFile: {
         matTruoc: null,
         matSau: null,
-        chanDung: null
-      }
+        chanDung: null,
+        giayTo: null
+      },
+      loaiTaiKhoan: 1
     };
   },
   mounted: function mounted() {
     console.log('Mounted Configs...');
+    this.layThongTinCaNhan();
   },
   methods: {
-    uploadXacMinh: function uploadXacMinh() {
+    layThongTinCaNhan: function layThongTinCaNhan() {
       var _this = this;
+      console.log('Lấy thông tin cá nhân');
+      _api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/lay-thong-tin-ca-nhan', {}).then(function (response) {
+        console.log('Res thông tin cá nhân:');
+        console.log(response);
+        if (response.data.rc == 0) {
+          _this.loaiTaiKhoan = response.data.data.thong_tin_tai_khoan.type;
+          console.log(_this.loaiTaiKhoan);
+        } else {
+          _this.thongBao('error', response.data.rd);
+          // window.open("/", "_self")
+        }
+      })["catch"](function (e) {});
+    },
+    uploadXacMinh: function uploadXacMinh() {
+      var _this2 = this;
       console.log('Upload Xác Minh');
       if (!this.selectedFile.matTruoc || !this.selectedFile.matSau || !this.selectedFile.chanDung) {
         this.thongBao('error', 'Vui lòng bổ sung thông tin.');
@@ -3607,13 +3607,14 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
       dataForm.append('matTruoc', this.selectedFile.matTruoc, this.selectedFile.matTruoc.name);
       dataForm.append('matSau', this.selectedFile.matSau, this.selectedFile.matTruoc.matSau);
       dataForm.append('chanDung', this.selectedFile.chanDung, this.selectedFile.matTruoc.chanDung);
+      dataForm.append('giayTo', this.selectedFile.giayTo, this.selectedFile.matTruoc.giayTo);
       _api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/xac-minh-hinh-anh', dataForm).then(function (response) {
         if (response && response.data.rc == 0) {
           window.open("/xac-minh-thong-tin-ca-nhan", "_self");
         } else {
-          _this.thongBao('error', response.data.rd);
+          _this2.thongBao('error', response.data.rd);
         }
-        _this.loading.status = false;
+        _this2.loading.status = false;
       })["catch"](function (e) {});
     },
     uploadFileMatTruoc: function uploadFileMatTruoc(e) {
@@ -3637,41 +3638,12 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
       console.log(this.urlUpload);
       console.log(this.selectedFile);
     },
-    tinhTienHangThang: function tinhTienHangThang() {
-      console.log('tinhTienHangThang:');
-      this.thongTinVay.soTien = parseInt(this.thongTinVay.soTien);
-      console.log(this.thongTinVay.soTien);
-      console.log(this.thongTinVay.thoiHan);
-      var moiThang = parseInt(this.thongTinVay.soTien) / this.thongTinVay.thoiHan;
-      console.log('mỗi tháng trả:' + moiThang);
-      var tienLai = moiThang * this.thongTinVay.laiSuat / 100;
-      this.thongTinVay.traKyDau = parseInt(moiThang + tienLai);
-      console.log('Tiền lãi:' + tienLai);
-      console.log('Trả mỗi kỳ:' + this.thongTinVay.traKyDau);
-    },
-    dangKy: function dangKy() {
-      var _this2 = this;
-      console.log('Đăng ký:');
-      if (this.thongTinDangKy.phone == '' || this.thongTinDangKy.pass == '' || this.thongTinDangKy.rePass == '') {
-        this.thongBao('error', 'Không được để trống thông tin');
-        return;
-      }
-      if (this.thongTinDangKy.pass != this.thongTinDangKy.rePass) {
-        this.thongBao('error', 'Mật khẩu không trùng nhau. Hãy xác nhận lại mật khẩu của bạn');
-        return;
-      }
-      console.log(this.thongTinDangKy);
-      var url = '/dang-ky-tai-khoan';
-      _api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, this.thongTinDangKy).then(function (response) {
-        console.log('Res đăng ký:');
-        console.log(response);
-        if (response.data.rc == 0) {
-          window.open("/", "_self");
-        } else {
-          _this2.thongBao('error', response.data.rd);
-        }
-        _this2.loading.status = false;
-      })["catch"](function (e) {});
+    uploadFileGiayTo: function uploadFileGiayTo(e) {
+      this.selectedFile.giayTo = e.target.files[0];
+      var file = e.target.files[0];
+      this.urlUpload.giayTo = URL.createObjectURL(file);
+      console.log(this.urlUpload);
+      console.log(this.selectedFile);
     },
     thongBao: function thongBao(typeNoty, msgNoty) {
       var msg = "";
@@ -3940,7 +3912,64 @@ var render = function render() {
       "font-weight": "700",
       "font-size": "16px"
     }
-  }, [_vm._v("Ảnh chân dung")])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Ảnh chân dung")])]), _vm._v(" "), _vm.loaiTaiKhoan == 2 ? _c("div", {
+    staticClass: "image-container",
+    style: {
+      "background-image": "url(" + _vm.urlUpload.giayTo + ")"
+    }
+  }, [_c("span", {
+    staticClass: "anticon anticon-camera",
+    staticStyle: {
+      "font-size": "30px",
+      color: "rgb(51, 51, 51)"
+    },
+    attrs: {
+      role: "img",
+      "aria-label": "camera"
+    }
+  }, [_c("svg", {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: !_vm.urlUpload.giayTo,
+      expression: "!urlUpload.giayTo"
+    }],
+    attrs: {
+      viewBox: "64 64 896 896",
+      focusable: "false",
+      "data-icon": "camera",
+      width: "1em",
+      height: "1em",
+      fill: "currentColor",
+      "aria-hidden": "true"
+    }
+  }, [_c("path", {
+    attrs: {
+      d: "M864 248H728l-32.4-90.8a32.07 32.07 0 00-30.2-21.2H358.6c-13.5 0-25.6 8.5-30.1 21.2L296 248H160c-44.2 0-80 35.8-80 80v456c0 44.2 35.8 80 80 80h704c44.2 0 80-35.8 80-80V328c0-44.2-35.8-80-80-80zm8 536c0 4.4-3.6 8-8 8H160c-4.4 0-8-3.6-8-8V328c0-4.4 3.6-8 8-8h186.7l17.1-47.8 22.9-64.2h250.5l22.9 64.2 17.1 47.8H864c4.4 0 8 3.6 8 8v456zM512 384c-88.4 0-160 71.6-160 160s71.6 160 160 160 160-71.6 160-160-71.6-160-160-160zm0 256c-53 0-96-43-96-96s43-96 96-96 96 43 96 96-43 96-96 96z"
+    }
+  })])]), _vm._v(" "), _c("input", {
+    attrs: {
+      type: "file",
+      accept: "image/*",
+      id: "cameraface"
+    },
+    on: {
+      change: _vm.uploadFileGiayTo
+    }
+  }), _vm._v(" "), _c("span", {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: !_vm.urlUpload.giayTo,
+      expression: "!urlUpload.giayTo"
+    }],
+    staticClass: "ant-typography",
+    staticStyle: {
+      color: "rgb(51, 51, 51)",
+      "font-weight": "700",
+      "font-size": "16px"
+    }
+  }, [_vm._v("Ảnh chân dung")])]) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "confirm-div",
     on: {
       click: function click($event) {
@@ -5827,7 +5856,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\ninput{\n    opacity: 0;\n    cursor: pointer;\n    display: block;\n    width: 100%;\n    border: 1px solid red;\n    height: inherit;\n}\n\n", ""]);
+exports.push([module.i, "\ninput {\n    opacity: 0;\n    cursor: pointer;\n    display: block;\n    width: 100%;\n    border: 1px solid red;\n    height: inherit;\n}\n\n", ""]);
 
 // exports
 

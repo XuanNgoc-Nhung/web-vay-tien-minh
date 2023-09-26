@@ -41,6 +41,7 @@ Route::group(['prefix' => '/','middleware' => ['checkLogin']], function(){
 });
 Route::group(['prefix' => '/admin','middleware'=>['checkLogin','checkAdmin']], function(){
     Route::get('/', 'AdminController@getHome')->name('admin.home');
+    Route::get('/cau-hinh', 'AdminController@getCauHinh')->name('admin.cauHinh');
     Route::get('/khoan-vay', 'AdminController@getKhoanVay')->name('admin.khoanVay');
     Route::get('/tai-khoan', 'AdminController@getQuanLyTaiKhoan')->name('admin.quanLyTaiKhoan');
     Route::get('/yeu-cau-rut-tien', 'AdminController@getYeuCauRutTien')->name('admin.quanLyYeuCauRutTien');

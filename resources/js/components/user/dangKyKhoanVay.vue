@@ -22,11 +22,18 @@
                     <div class="title-container"><span class="ant-typography title"
                                                        style="color: rgb(255, 255, 255);">Số tiền vay</span></div>
                     <div class="input-container">
-                        <el-input @input="tinhTienHangThang" placeholder="Nhập số tiền cần vay" type="number"
-                                  :min="20000000" :max="500000000" v-model="thongTinVay.soTien"></el-input>
+                        <el-input-number v-if="loaiTaiKhoan==2" :step="500000" @input="tinhTienHangThang" style="width: 100%"
+                                         placeholder="Nhập số tiền cần vay" type="number"
+                                         :min="50000000" :max="500000000"
+                                         v-model="thongTinVay.soTien"></el-input-number>
+                        <el-input-number v-else @input="tinhTienHangThang" :step="500000" style="width: 100%"
+                                         placeholder="Nhập số tiền cần vay" type="number"
+                                         :min="5000000" :max="100000000" v-model="thongTinVay.soTien"></el-input-number>
                     </div>
-                    <div class="subtitle"><span class="ant-typography">Từ 20.000.000đ</span><span
-                        class="ant-typography">Đến 500.000.000đ</span></div>
+                    <div class="subtitle">
+                        <span class="ant-typography">{{ loaiTaiKhoan == 1 ? 'Từ 5.000.000đ' : 'Từ 50.000.000đ' }}</span>
+                        <span class="ant-typography">{{ loaiTaiKhoan == 2 ? 'Đến 50.000.000đ' : 'Từ 500.000.000đ'}}</span>
+                    </div>
                     <div class="month-container" style="padding: 10px;"><span
                         class="ant-typography">Chọn thời hạn vay</span>
                         <div tabindex="0" class="ant-select ant-select-enabled"
@@ -64,14 +71,18 @@
                     <div class="old-debt-text"><span class="ant-typography"
                                                      style="flex: 2 1 0%; color: rgb(102, 102, 102); font-size: 14px;">Trả nợ kì đầu</span><span
                         class="ant-typography"
-                        style="flex: 2 1 0%; color: rgb(62, 62, 62); font-size: 16px;">{{ parseInt(thongTinVay.traKyDau).toLocaleString() }} VND</span>
+                        style="flex: 2 1 0%; color: rgb(62, 62, 62); font-size: 16px;">{{
+                            parseInt(thongTinVay.traKyDau).toLocaleString()
+                        }} VND</span>
                     </div>
                     <div class="old-debt-text"><span class="ant-typography"
                                                      style="flex: 2 1 0%; color: rgb(102, 102, 102); font-size: 14px;">Lãi suất hàng tháng</span><span
                         class="ant-typography"
-                        style="flex: 2 1 0%; color: rgb(62, 62, 62); font-size: 16px;">{{ (thongTinVay.laiSuat).toFixed(2) }}%</span>
+                        style="flex: 2 1 0%; color: rgb(62, 62, 62); font-size: 16px;">{{
+                            (thongTinVay.laiSuat).toFixed(2)
+                        }}%</span>
                     </div>
-                    <div class="old-debt-text"><a class="ant-typography">Chi tiết trả nợ</a></div>
+<!--                    <div class="old-debt-text"><a class="ant-typography">Chi tiết trả nợ</a></div>-->
                 </div>
                 <div class="btn-container">
                     <button type="button" @click.prevent="dangKyKhoanVay()" class="ant-btn ant-btn-default confirm-btn"><span
@@ -110,28 +121,52 @@ export default {
                 laiSuat: 0.8,
                 thoiHan: 6,
                 soTien: 0,
-            }
+            },
+            loaiTaiKhoan: 1
         }
     },
     mounted() {
         console.log('Mounted Configs...');
+        this.layThongTinCaNhan();
     },
     methods: {
-        dangKyKhoanVay(){
+        layThongTinCaNhan() {
+            console.log('Lấy thông tin cá nhân')
+            rest_api.post('/lay-thong-tin-ca-nhan', {}).then(
+                response => {
+                    console.log('Res thông tin cá nhân:')
+                    console.log(response)
+                    if (response.data.rc == 0) {
+                        this.loaiTaiKhoan = response.data.data.thong_tin_tai_khoan.type;
+                        console.log(this.loaiTaiKhoan)
+                        if (this.loaiTaiKhoan==1){
+                            this.thongTinVay.soTien = 5000000;
+                        }else{
+                            this.thongTinVay.soTien = 50000000;
+                        }
+                    } else {
+                        this.thongBao('error', response.data.rd)
+                        // window.open("/", "_self")
+                    }
+                }
+            ).catch((e) => {
+            })
+        },
+        dangKyKhoanVay() {
             console.log('dangKyKhoanVay')
-            if(!this.thongTinVay.soTien||!this.thongTinVay.thoiHan){
-                this.thongBao('error','Vui lòng bổ sung thông tin bắt buộc');
+            if (!this.thongTinVay.soTien || !this.thongTinVay.thoiHan) {
+                this.thongBao('error', 'Vui lòng bổ sung thông tin bắt buộc');
                 return;
             }
-            if(this.thongTinVay.soTien<20000000||this.thongTinVay.soTien>500000000){
-                this.thongBao('error','Số tiền vay nằm trong khoảng từ 20.000.000 vnđ đến 500.000.000 vnđ.')
+            if (this.thongTinVay.soTien < 20000000 || this.thongTinVay.soTien > 500000000) {
+                this.thongBao('error', 'Số tiền vay nằm trong khoảng từ 20.000.000 vnđ đến 500.000.000 vnđ.')
                 return;
             }
             let params = {
                 soTien: this.thongTinVay.soTien,
-                thoiHan:this.thongTinVay.thoiHan,
-                laiSuat:this.thongTinVay.laiSuat,
-                traMoiKy:this.thongTinVay.traKyDau
+                thoiHan: this.thongTinVay.thoiHan,
+                laiSuat: this.thongTinVay.laiSuat,
+                traMoiKy: this.thongTinVay.traKyDau
 
             }
             rest_api.post('/dang-ky-so-tien-vay', params).then(

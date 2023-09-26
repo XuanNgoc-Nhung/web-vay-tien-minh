@@ -3,8 +3,8 @@
     <div class="form-body">
         <input autocomplete="off" placeholder="Nhập số điện thoại..." type="text"
                v-model="thongTinDangKy.phone"
-                                  value="" class="ant-input ant-input-lg input"
-                                  style="border-radius: 50px !important; height: 46px; line-height: 46px; border-color: rgb(54, 124, 76) !important;">
+               value="" class="ant-input ant-input-lg input"
+               style="border-radius: 50px !important; height: 46px; line-height: 46px; border-color: rgb(54, 124, 76) !important;">
         <input autocomplete="off" type="password" placeholder="Nhập mật khẩu..."
                v-model="thongTinDangKy.pass"
                class="ant-input ant-input-lg input"
@@ -13,6 +13,10 @@
                class="ant-input ant-input-lg input"
                v-model="thongTinDangKy.rePass"
                style="border-radius: 50px !important; height: 46px; line-height: 46px; border-color: rgb(54, 124, 76) !important;">
+        <div>
+            <el-radio v-model="thongTinDangKy.loaiTaiKhoan" label="1">Khách hàng cá nhân</el-radio>
+            <el-radio v-model="thongTinDangKy.loaiTaiKhoan" label="2">Khách hàng doanh nghiệp</el-radio>
+        </div>
         <button type="button" class="ant-btn ant-btn-default ant-btn-lg login-btn"
                 @click.prevent="dangKy()"
                 style="width: calc(100% - 80px) !important; border-radius: 50px !important; background: red !important; opacity: 1 !important;">
@@ -42,33 +46,33 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 Vue.use(Icon);
 export default {
-    components: {
-    },
+    components: {},
     data() {
         return {
-            thongTinDangKy:{
-                phone:'',
-                pass:'',
-                rePass:''
-            }
+            thongTinDangKy: {
+                phone: '',
+                pass: '',
+                rePass: '',
+                loaiTaiKhoan: '1'
+            },
         }
     },
     mounted() {
         console.log('Mounted Configs...');
     },
     methods: {
-        dangKy(){
+        dangKy() {
             console.log('Đăng ký:')
-            if(this.thongTinDangKy.phone==''||this.thongTinDangKy.pass==''||this.thongTinDangKy.rePass==''){
-                this.thongBao('error','Không được để trống thông tin')
+            if (this.thongTinDangKy.phone == '' || this.thongTinDangKy.pass == '' || this.thongTinDangKy.rePass == '') {
+                this.thongBao('error', 'Không được để trống thông tin')
                 return;
             }
-            if(this.thongTinDangKy.pass.length<6||this.thongTinDangKy.pass.length>20){
-                this.thongBao('error','Mật khẩu chứa từ 6-20 ký tự')
+            if (this.thongTinDangKy.pass.length < 6 || this.thongTinDangKy.pass.length > 20) {
+                this.thongBao('error', 'Mật khẩu chứa từ 6-20 ký tự')
                 return;
             }
-            if(this.thongTinDangKy.pass!=this.thongTinDangKy.rePass){
-                this.thongBao('error','Mật khẩu không trùng nhau. Hãy xác nhận lại mật khẩu của bạn');
+            if (this.thongTinDangKy.pass != this.thongTinDangKy.rePass) {
+                this.thongBao('error', 'Mật khẩu không trùng nhau. Hãy xác nhận lại mật khẩu của bạn');
                 return
             }
             console.log(this.thongTinDangKy)
@@ -78,7 +82,7 @@ export default {
                     console.log('Res đăng ký:')
                     console.log(response)
                     if (response.data.rc == 0) {
-                        window.open("/","_self")
+                        window.open("/", "_self")
                     } else {
                         this.thongBao('error', response.data.rd)
                     }

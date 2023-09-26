@@ -26,6 +26,7 @@
                                 <th>Họ tên</th>
                                 <th>Số điện thoại</th>
                                 <th>Địa chỉ</th>
+                                <th>Loại tài khoản</th>
                                 <th>CMND/CCCD</th>
                                 <th>Giới tính</th>
                                 <th>Ngày sinh</th>
@@ -40,6 +41,7 @@
                                 <th>Ảnh CMND/CCCD mặt trước</th>
                                 <th>Ảnh CMND/CCCD mặt sau</th>
                                 <th>Ảnh chân dung</th>
+                                <th>Giấy tờ liên quan</th>
                                 <th>Số tiền vay</th>
                                 <th>Lãi suất</th>
                                 <th>Thời hạn vay</th>
@@ -55,9 +57,10 @@
                                 <td class="text-center">{{ index + 1 }}</td>
                                 <td class="text-center">{{ 'HDVV0'+item.id }}</td>
                                 <td class="text-center">{{ item.ho_ten }}</td>
-                                <td class="text-center">{{ item.thong_tin_tai_khoan.phone }}</td>
+                                <td class="text-center">{{ item.thong_tin_tai_khoan?item.thong_tin_tai_khoan.phone:'' }}</td>
                                 <td class="text-center">{{ item.dia_chi }}</td>
                                 <td class="text-center">{{ item.cmnd }}</td>
+                                <td class="text-center">{{  item.thong_tin_tai_khoan?(item.thong_tin_tai_khoan.type==2?'Doanh nghiệp':'Cá nhân'):'Chưa xác định' }}</td>
                                 <td class="text-center">{{ item.gioi_tinh }}</td>
                                 <td class="text-center">{{ item.ngay_sinh }}</td>
                                 <td class="text-center">{{ item.nghe_nghiep }}</td>
@@ -81,6 +84,11 @@
                                 <td class="text-center">
                                     <el-card shadow="always">
                                         <img :src="item.anh_chan_dung" alt="" style="min-width:100px;min-height:100px;max-width:150px;max-height:150px">
+                                    </el-card>
+                                </td>
+                                <td class="text-center">
+                                    <el-card shadow="always">
+                                        <img :src="item.anh_giay_to" alt="" style="min-width:100px;min-height:100px;max-width:150px;max-height:150px">
                                     </el-card>
                                 </td>
                                 <td class="text-center">{{ item.so_tien_vay.toLocaleString() }} vnđ</td>

@@ -204,12 +204,14 @@ export default {
         },
         // Bắt đầu vẽ chữ ký
         startDrawing(e) {
+            return;
             this.isDrawing = true;
             const touch = e.touches[0];
             [this.lastX, this.lastY] = [touch.clientX - this.canvas.offsetLeft, touch.clientY - this.canvas.offsetTop];
         },
         // Vẽ điểm trên canvas
         draw(e) {
+            return;
             if (!this.isDrawing) return;
             e.preventDefault();
             const touch = e.touches[0];
@@ -221,13 +223,18 @@ export default {
         },
         // Dừng vẽ chữ ký
         stopDrawing() {
+            return;
             this.isDrawing = false;
         },
         // Xóa chữ ký
         clearCanvas() {
+
+            return;
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         },
         getEmptyCanvasData() {
+
+            return;
             const emptyCanvas = document.createElement("canvas");
             emptyCanvas.width = this.canvas.width;
             emptyCanvas.height = this.canvas.height;

@@ -14,6 +14,9 @@ class AdminController extends Controller
     public function getHome(){
         return view('admin.home');
     }
+    public function getCauHinh(){
+        return view('admin.cau-hinh');
+    }
     public function getKhoanVay(){
         return view('admin.khoan-vay');
     }
@@ -43,6 +46,7 @@ class AdminController extends Controller
                 $check->anh_chan_dung = null;
                 $check->anh_mat_sau = null;
                 $check->anh_mat_truoc = null;
+                $check->anh_giay_to = null;
                 $check->save();
                 $res = [
                     'rc' => '0',
@@ -102,7 +106,7 @@ class AdminController extends Controller
         $req = $request->all();
         $list = User::where('name', 'like', '%' . $req['key'] . '%')->orderBy('id');
         if(Auth::user()->role==1){
-            $list->where('role',0);
+//            $list->where('role',0);
         }
         $total = $list->count();
         $data = $list->with('thongTinTaiKhoan')->orderBy('created_at', 'DESC')->skip($req['start'])->take($req['limit'])->get();
@@ -124,7 +128,7 @@ class AdminController extends Controller
         $check = User::where('id',$request->user_id)->first();
         if($check){
             $check->thong_bao = $request->thong_bao;
-            $check->role = $request->role;
+            $check->type = $request->type;
             $info = thongTinCaNhan::where('user_id',$request->user_id)->first();
             $info->so_du = $request->so_du;
             $info->ngan_hang = $request->ngan_hang;
