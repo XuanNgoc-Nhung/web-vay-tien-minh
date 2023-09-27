@@ -119,7 +119,7 @@
                         </p>
                         <p>- Chỉ tính số tiền bên A cho bên B vay</p>
                         <p>1.3 TIỀN LÃI &nbsp;<span id="interestRateSetting"
-                                                    style="color:red">{{ thongTinCaNhan.lai_suat }}%</span></p>
+                                                    style="color:red">{{(parseInt( thongTinCaNhan.lai_suat/100).toFixed(2)) }}%</span></p>
                         <p>- Chỉ tính khoản lãi liên quan đến số tiền gốc bao gồm cả số tiền lãi trong thời hạn vay
                             thông thường và nợ quá hạn.</p>
                         <p>1.4 QUÁ HẠN</p>
@@ -153,7 +153,7 @@
                         <tr>
                             <th class="ant-table-cell">Kỳ</th>
                             <th class="ant-table-cell">Số tiền</th>
-                            <th class="ant-table-cell">Ngày đóng</th>
+<!--                            <th class="ant-table-cell">Ngày đóng</th>-->
                         </tr>
                         </thead>
                         <tbody class="ant-table-tbody">
@@ -162,8 +162,8 @@
                             <td class="ant-table-cell"><span
                                 class="ant-typography"><strong>{{ thongTinCaNhan.tra_moi_ky ? thongTinCaNhan.tra_moi_ky.toLocaleString() : 0 }}</strong></span>
                             </td>
-                            <td class="ant-table-cell"><span class="ant-typography"><strong>13 - 9</strong></span>
-                            </td>
+<!--                            <td class="ant-table-cell"><span class="ant-typography"><strong>13 - 9</strong></span>-->
+<!--                            </td>-->
                         </tr>
                         </tbody>
                     </table>

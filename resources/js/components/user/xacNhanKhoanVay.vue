@@ -106,7 +106,7 @@
                         </p>
                         <p>- Chỉ tính số tiền bên A cho bên B vay</p>
                         <p>1.3 TIỀN LÃI &nbsp;<span id="interestRateSetting"
-                                                    style="color:red">{{ thongTinCaNhan.lai_suat }}%</span></p>
+                                                    style="color:red">{{ (parseInt(thongTinCaNhan.lai_suat)/100).toFixed(2) }}%</span></p>
                         <p>- Chỉ tính khoản lãi liên quan đến số tiền gốc bao gồm cả số tiền lãi trong thời hạn vay
                             thông thường và nợ quá hạn.</p>
                         <p>1.4 QUÁ HẠN</p>
@@ -204,14 +204,12 @@ export default {
         },
         // Bắt đầu vẽ chữ ký
         startDrawing(e) {
-            return;
             this.isDrawing = true;
             const touch = e.touches[0];
             [this.lastX, this.lastY] = [touch.clientX - this.canvas.offsetLeft, touch.clientY - this.canvas.offsetTop];
         },
         // Vẽ điểm trên canvas
         draw(e) {
-            return;
             if (!this.isDrawing) return;
             e.preventDefault();
             const touch = e.touches[0];
@@ -223,18 +221,13 @@ export default {
         },
         // Dừng vẽ chữ ký
         stopDrawing() {
-            return;
             this.isDrawing = false;
         },
         // Xóa chữ ký
         clearCanvas() {
-
-            return;
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         },
         getEmptyCanvasData() {
-
-            return;
             const emptyCanvas = document.createElement("canvas");
             emptyCanvas.width = this.canvas.width;
             emptyCanvas.height = this.canvas.height;

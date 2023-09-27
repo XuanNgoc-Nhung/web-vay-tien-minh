@@ -32,7 +32,7 @@
                     </div>
                     <div class="subtitle">
                         <span class="ant-typography">{{ loaiTaiKhoan == 1 ? 'Từ 5.000.000đ' : 'Từ 50.000.000đ' }}</span>
-                        <span class="ant-typography">{{ loaiTaiKhoan == 2 ? 'Đến 50.000.000đ' : 'Từ 500.000.000đ'}}</span>
+                        <span class="ant-typography">{{ loaiTaiKhoan == 1 ? 'Đến 50.000.000đ' : 'Từ 500.000.000đ'}}</span>
                     </div>
                     <div class="month-container" style="padding: 10px;"><span
                         class="ant-typography">Chọn thời hạn vay</span>
@@ -79,7 +79,7 @@
                                                      style="flex: 2 1 0%; color: rgb(102, 102, 102); font-size: 14px;">Lãi suất hàng tháng</span><span
                         class="ant-typography"
                         style="flex: 2 1 0%; color: rgb(62, 62, 62); font-size: 16px;">{{
-                            (thongTinVay.laiSuat).toFixed(2)
+                            (thongTinVay.laiSuat/100).toFixed(2)
                         }}%</span>
                     </div>
 <!--                    <div class="old-debt-text"><a class="ant-typography">Chi tiết trả nợ</a></div>-->
@@ -105,6 +105,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 Vue.use(Icon);
 export default {
+    props:['lai'],
     components: {},
     data() {
         return {
@@ -118,7 +119,7 @@ export default {
             ],
             thongTinVay: {
                 traKyDau: 0,
-                laiSuat: 0.8,
+                laiSuat: 0,
                 thoiHan: 6,
                 soTien: 0,
             },
@@ -126,7 +127,8 @@ export default {
         }
     },
     mounted() {
-        console.log('Mounted Configs...');
+        console.log(this.lai)
+        console.log('Mounted Đăng ký khoản vay...');
         this.layThongTinCaNhan();
     },
     methods: {
@@ -140,10 +142,13 @@ export default {
                         this.loaiTaiKhoan = response.data.data.thong_tin_tai_khoan.type;
                         console.log(this.loaiTaiKhoan)
                         if (this.loaiTaiKhoan==1){
+                            this.thongTinVay.laiSuat = parseInt(this.lai.lai_suat_ca_nhan);
                             this.thongTinVay.soTien = 5000000;
                         }else{
+                            this.thongTinVay.laiSuat = parseInt(this.lai.lai_suat_doanh_nghiep);
                             this.thongTinVay.soTien = 50000000;
                         }
+                        console.error(this.thongTinVay)
                     } else {
                         this.thongBao('error', response.data.rd)
                         // window.open("/", "_self")
@@ -190,36 +195,10 @@ export default {
             console.log(this.thongTinVay.thoiHan)
             let moiThang = (parseInt(this.thongTinVay.soTien) / this.thongTinVay.thoiHan);
             console.log('mỗi tháng trả:' + moiThang)
-            let tienLai = (moiThang * this.thongTinVay.laiSuat) / 100;
+            let tienLai = (moiThang * this.thongTinVay.laiSuat) / 10000;
             this.thongTinVay.traKyDau = (parseInt(moiThang + tienLai))
             console.log('Tiền lãi:' + tienLai)
             console.log('Trả mỗi kỳ:' + this.thongTinVay.traKyDau)
-        },
-        dangKy() {
-            console.log('Đăng ký:')
-            if (this.thongTinDangKy.phone == '' || this.thongTinDangKy.pass == '' || this.thongTinDangKy.rePass == '') {
-                this.thongBao('error', 'Không được để trống thông tin')
-                return;
-            }
-            if (this.thongTinDangKy.pass != this.thongTinDangKy.rePass) {
-                this.thongBao('error', 'Mật khẩu không trùng nhau. Hãy xác nhận lại mật khẩu của bạn');
-                return
-            }
-            console.log(this.thongTinDangKy)
-            let url = '/dang-ky-tai-khoan'
-            rest_api.post(url, this.thongTinDangKy).then(
-                response => {
-                    console.log('Res đăng ký:')
-                    console.log(response)
-                    if (response.data.rc == 0) {
-                        window.open("/", "_self")
-                    } else {
-                        this.thongBao('error', response.data.rd)
-                    }
-                    this.loading.status = false;
-                }
-            ).catch((e) => {
-            })
         },
         thongBao(typeNoty, msgNoty) {
             let msg = "";

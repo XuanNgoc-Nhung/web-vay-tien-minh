@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\cauHinhWeb;
 use App\rutTien;
 use App\thongTinCaNhan;
 use App\User;
@@ -48,7 +49,8 @@ class UserController extends Controller
 
     public function getDangKyKhoanVay()
     {
-        return view('user.dang-ky-khoan-vay');
+        $ch = cauHinhWeb::where('id', 1)->first();
+        return view('user.dang-ky-khoan-vay',compact('ch'));
     }
 
     public function getXacMinhThongTin()

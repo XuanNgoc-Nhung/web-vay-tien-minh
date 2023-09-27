@@ -92,7 +92,7 @@
                                     </el-card>
                                 </td>
                                 <td class="text-center">{{ item.so_tien_vay.toLocaleString() }} vnđ</td>
-                                <td class="text-center">{{ item.lai_suat }}</td>
+                                <td class="text-center">{{ (parseInt(item.lai_suat)/100).toFixed(2) }}%</td>
                                 <td class="text-center">{{ item.thoi_han_vay }}</td>
                                 <td class="text-center">{{ item.tra_moi_ky.toLocaleString() }} vnđ</td>
                                 <td class="text-center">{{ item.so_du.toLocaleString() }} vnđ</td>

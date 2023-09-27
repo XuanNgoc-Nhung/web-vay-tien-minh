@@ -16,21 +16,29 @@
                         <table class="datatable table-bordered table hover-table">
                             <thead class="thead-light">
                             <tr>
-                                <th>Lãi suất cá nhân</th>
-                                <th>Lãi suất doanh nghiệp</th>
+                                <th>Lãi suất cá nhân (‱)</th>
+                                <th>Lãi suất doanh nghiệp(‱)</th>
+                                <th>Hành động</th>
                             </tr>
                             </thead>
                             <tbody v-if="list_data&&list_data.length">
                             <tr v-for="(item,index) in list_data" :key="index">
                                 <td class="text-center">
-                                    <el-input size="mini" v-model="item.lai_suat_ca_nhan">
-                                        <template slot="append">%</template>
-                                    </el-input>
+                                    <el-input-number size="" :max="10000" :min="0"  :step="1"
+                                                     v-model="item.lai_suat_ca_nhan">
+                                    </el-input-number>
+                                    =
+                                    <el-input style="width:150px" disabled :value="parseInt(item.lai_suat_ca_nhan)/100+'%'"> </el-input>
                                 </td>
                                 <td class="text-center">
-                                    <el-input size="mini" v-model="item.lai_suat_doanh_nghiep">
-                                        <template slot="append">%</template>
-                                    </el-input>
+                                    <el-input-number size="" max="10000" :min="0" :step="1"
+                                                     v-model="item.lai_suat_doanh_nghiep">
+                                    </el-input-number>
+                                    =
+                                    <el-input style="width:150px" disabled :value="parseInt(item.lai_suat_doanh_nghiep)/100+'%'"> </el-input>
+                                </td>
+                                <td class="text-center">
+                                    <el-button type="warning" @click.prevent="updateLaiSuat(item)">Cập nhật</el-button>
                                 </td>
                             </tr>
                             </tbody>
@@ -79,18 +87,17 @@ export default {
         this.getData();
     },
     methods: {
-        updateStatus(item, status) {
-            let params = {
-                id: item.id,
-                trang_thai: status,
-            }
+        updateLaiSuat(item) {
+            console.log('updateLaiSuat')
+            console.log(item)
             this.loading.status = true;
             this.loading.text = 'Loading...'
             this.list_data = [];
 
-            rest_api.post('/admin/lay-thong-tin-cau-hinh', params).then(
+            rest_api.post('/admin/cap-nhat-lai-xuat', item).then(
                 response => {
                     if (response.data.rc == 0) {
+                        this.thongBao('success', 'Cập nhật thành công')
                         this.getData()
                     } else {
                         this.thongBao('error', response.data.rd)
@@ -110,7 +117,6 @@ export default {
         },
         getData() {
             console.log('getData')
-
             let params = {
                 start: this.paging.start,
                 limit: this.paging.limit,

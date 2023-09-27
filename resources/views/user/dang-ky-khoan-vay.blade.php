@@ -4,7 +4,7 @@
 @endsection
 @section("content")
     <div id="app">
-        <dang-ky-khoan-vay></dang-ky-khoan-vay>
+        <dang-ky-khoan-vay :lai="{{json_encode($ch)}}"></dang-ky-khoan-vay>
     </div>
 @endsection
 @section("js_location")

@@ -53,6 +53,7 @@ Route::group(['prefix' => '/admin','middleware'=>['checkLogin','checkAdmin']], f
     Route::post('/cap-nhat-trang-thai-rut-tien', 'AdminController@capNhatTrangThaiRutTien');
     Route::post('/danh-sach-yeu-cau-rut-tien', 'AdminController@danhSachYeuCauRutTien');
     Route::post('/lay-thong-tin-cau-hinh', 'AdminController@layThongTinCauHinh');
+    Route::post('/cap-nhat-lai-xuat', 'AdminController@capNhatThongTinCauHinh');
 });
 Route::get('/dang-ky', 'UserController@getDangKy')->name('user.dangKy');
 Route::get('/dang-nhap', 'UserController@getDangNhap')->name('user.dangNhap');

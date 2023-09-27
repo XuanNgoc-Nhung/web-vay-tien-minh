@@ -218,6 +218,30 @@ class AdminController extends Controller
         }
         return json_encode($res);
     }
+    public function capNhatThongTinCauHinh(Request $request){
+        Log::info('Cập nhật thông tin cấu hình');
+        $check = cauHinhWeb::where('id',$request->id)->first();
+        Log::info($check);
+        if($check){
+            Log::info('Tìm thấy để sửa');
+            Log::info($request->lai_suat_ca_nhan);
+            Log::info($request->lai_suat_doanh_nghiep);
+            $check->lai_suat_ca_nhan = $request->lai_suat_ca_nhan;
+            $check->lai_suat_doanh_nghiep = $request->lai_suat_doanh_nghiep;
+            $check->save();
+            $res = [
+                'rc' => '0',
+                'data' => $check,
+                'rd' => "Cập nhật trạng thái thành công",
+            ];
+        }else{
+            $res = [
+                'rc' => '-1',
+                'rd' => "Không tìm thấy bản ghi nào",
+            ];
+        }
+        return json_encode($res);
+    }
     public function capNhatTrangThaiRutTien(Request $request){
         $check = rutTien::where('id',$request->id)->first();
         if($check){
