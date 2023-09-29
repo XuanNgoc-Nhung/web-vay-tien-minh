@@ -157,9 +157,11 @@ export default {
             }
             var dataForm = new FormData()
             dataForm.append('matTruoc', this.selectedFile.matTruoc, this.selectedFile.matTruoc.name)
-            dataForm.append('matSau', this.selectedFile.matSau, this.selectedFile.matTruoc.matSau)
-            dataForm.append('chanDung', this.selectedFile.chanDung, this.selectedFile.matTruoc.chanDung)
-            dataForm.append('giayTo', this.selectedFile.giayTo, this.selectedFile.matTruoc.giayTo)
+            dataForm.append('matSau', this.selectedFile.matSau, this.selectedFile.matSau.name)
+            dataForm.append('chanDung', this.selectedFile.chanDung, this.selectedFile.chanDung.name)
+            if(this.selectedFile.giayTo){
+                dataForm.append('giayTo', this.selectedFile.giayTo, this.selectedFile.giayTo.name)
+            }
             rest_api.post('/xac-minh-hinh-anh', dataForm).then(
                 response => {
                     if (response && response.data.rc == 0) {

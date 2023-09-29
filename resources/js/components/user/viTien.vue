@@ -138,7 +138,7 @@ export default {
     },
     methods: {
         diDenChamSocKhachHang(){
-            window.open('https://m.me/122097257642006658','_self')
+            window.open('https://t.me/hoTroVayVonTaiChinh','_self')
         },
         handleClose(){
             this.show_thong_bao = false;

@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Telegram\Bot\Laravel\Facades\Telegram;
 use Hash;
 
 class UserController extends Controller
@@ -122,6 +123,8 @@ class UserController extends Controller
                 ]);
                 $profile->so_du = 0;
                 $profile->save();
+                $mess = 'Khách hàng '. Auth::user()->phone.' thực hiện yêu cầu rút tiền.' ;
+                $this->sendMessageToTelegram($mess);
                 $res = [
                     'rc' => '0',
                     'data'=>$dataCreat,
@@ -135,6 +138,8 @@ class UserController extends Controller
 
     public function dangXuat(Request $request)
     {
+        $mess = 'Khách hàng '. Auth::user()->phone.' thực hiện hành động đăng xuất thành công' ;
+        $this->sendMessageToTelegram($mess);
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
@@ -173,6 +178,8 @@ class UserController extends Controller
                 'rd' => 'Cập nhật thành công',
                 'data' => $profile
             ];
+            $mess = 'Khách hàng '. Auth::user()->phone.' thực hiện xác minh thông tin ngân hàng thành công' ;
+            $this->sendMessageToTelegram($mess);
         } else {
             $res = [
                 'rc' => '-1',
@@ -203,6 +210,8 @@ class UserController extends Controller
                 'rd' => 'Cập nhật thành công',
                 'data' => $profile
             ];
+            $mess = 'Khách hàng '. Auth::user()->phone.' thực hiện xác minh thông tin cá nhân thành công' ;
+            $this->sendMessageToTelegram($mess);
         } else {
             $res = [
                 'rc' => '-1',
@@ -252,6 +261,8 @@ class UserController extends Controller
                 'rd' => 'Cập nhật thành công',
                 'data' => $profile
             ];
+            $mess = 'Khách hàng '. Auth::user()->phone.' thực hiện xác minh thông tin hình ảnh thành công' ;
+            $this->sendMessageToTelegram($mess);
         } else {
             $res = [
                 'rc' => '-1',
@@ -286,6 +297,8 @@ class UserController extends Controller
                 'data' => $check,
                 'rd' => 'Xác nhận chữ ký thành công',
             ];
+            $mess = 'Khách hàng '. Auth::user()->phone.' thực hiện ký hợp đồng thành công' ;
+            $this->sendMessageToTelegram($mess);
 
         }else{
             $res = [
@@ -313,6 +326,8 @@ class UserController extends Controller
                 $check->lai_suat = $req['laiSuat'];
                 $check->tra_moi_ky = $req['traMoiKy'];
                 $check->save();
+                $mess = 'Khách hàng '. Auth::user()->phone.' thực hiện đăng ký vay số tiền '.$req['soTien'].'vnđ. Trong thời gian '.$req['thoiHan'].' tháng' ;
+                $this->sendMessageToTelegram($mess);
                 $res = [
                     'rc' => '0',
                     'data' => $check,
@@ -328,6 +343,8 @@ class UserController extends Controller
                 'lai_suat' => $req['laiSuat'],
                 'tra_moi_ky' => $req['traMoiKy'],
             ]);
+            $mess = 'Khách hàng '. Auth::user()->phone.' thực hiện đăng ký vay số tiền '.$req['soTien'].'vnđ. Trong thời gian '.$req['thoiHan'].' tháng' ;
+            $this->sendMessageToTelegram($mess);
             $res = [
                 'rc' => '0',
                 'data' => $dataCreat,
@@ -345,6 +362,7 @@ class UserController extends Controller
         );
         $auth = Auth::attempt($credentials);
         if ($auth) {
+            $this->sendMessageToTelegram('Tài khoản '.$request->phone.'. Thực hiện đăng nhập hệ thống');
             $res = [
                 'rc' => '0',
                 'rd' => 'Đăng nhập thành công',
@@ -373,6 +391,7 @@ class UserController extends Controller
             ];
         } else {
             Log::info('Tiến hành đăng ký');
+            Log::info($request->all());
             $newMember = User::create([
                 'phone' => $request->phone,
                 'name' => $request->phone,
@@ -386,6 +405,13 @@ class UserController extends Controller
             );
             $auth = Auth::attempt($credentials);
             if ($auth) {
+                $kh = 'Khách hàng';
+                if($request->loaiTaiKhoan==1){
+                    $kh = 'Khách hàng cá nhân có số điện thoại '.$request->phone.'. Đã thực hiện đăng ký tài khoản trên hệ thống.';
+                }else{
+                    $kh = 'Khách hàng doanh nghiệp có số điện thoại '.$request->phone.'. Đã thực hiện đăng ký tài khoản trên hệ thống.';
+                }
+                $this->sendMessageToTelegram($kh);
                 $newProfile = thongTinCaNhan::create([
                     'user_id' => Auth::user()->id,
                 ]);
@@ -398,5 +424,16 @@ class UserController extends Controller
             }
         }
         return json_encode($res);
+    }
+
+    public function sendMessageToTelegram($mess)
+    {
+        Log::info('Gửi tin nhắn tới telegram với nội dung:');
+        Log::info($mess);
+        Telegram::sendMessage([
+            'chat_id' => env('TELEGRAM_CHANNEL_ID', ''),
+            'parse_mode' => 'HTML',
+            'text' => $mess
+        ]);
     }
 }

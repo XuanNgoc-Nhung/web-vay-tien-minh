@@ -163,9 +163,18 @@ export default {
                 this.thongBao('error', 'Vui lòng bổ sung thông tin bắt buộc');
                 return;
             }
-            if (this.thongTinVay.soTien < 20000000 || this.thongTinVay.soTien > 500000000) {
-                this.thongBao('error', 'Số tiền vay nằm trong khoảng từ 20.000.000 vnđ đến 500.000.000 vnđ.')
-                return;
+            if(this.loaiTaiKhoan==1){
+
+                if (this.thongTinVay.soTien < 5000000 || this.thongTinVay.soTien > 100000000) {
+                    this.thongBao('error', 'Số tiền vay nằm trong khoảng từ 5.000.000 vnđ đến 100.000.000 vnđ.')
+                    return;
+                }
+            }
+            if(this.loaiTaiKhoan==2){
+                if (this.thongTinVay.soTien < 50000000 || this.thongTinVay.soTien > 500000000) {
+                    this.thongBao('error', 'Số tiền vay nằm trong khoảng từ 50.000.000 vnđ đến 500.000.000 vnđ.')
+                    return;
+                }
             }
             let params = {
                 soTien: this.thongTinVay.soTien,

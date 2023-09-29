@@ -58,6 +58,7 @@ Route::group(['prefix' => '/admin','middleware'=>['checkLogin','checkAdmin']], f
 Route::get('/dang-ky', 'UserController@getDangKy')->name('user.dangKy');
 Route::get('/dang-nhap', 'UserController@getDangNhap')->name('user.dangNhap');
 Route::post('/dang-ky-tai-khoan', 'UserController@dangKyTaiKhoan');
+Route::post('/logout', 'UserController@dangXuat')->name('logout');
 Route::post('/dang-nhap-tai-khoan', 'UserController@dangNhapTaiKhoan');
 
 //Route::get('/', function () {

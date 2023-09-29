@@ -39,4 +39,8 @@ class User extends Authenticatable
     public function thongTinTaiKhoan(){
         return $this->hasOne(thongTinCaNhan::class,'user_id','id');
     }
+    public function routeNotificationForTelegram()
+    {
+        return $this->user_id;
+    }
 }
