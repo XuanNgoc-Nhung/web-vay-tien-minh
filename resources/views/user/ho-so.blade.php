@@ -1,6 +1,6 @@
 @extends("user.layouts.app")
 @section("title")
-    <title>Đăng ký</title>
+    <title>Hồ sơ vay vốn</title>
 @endsection
 @section("content")
     <div id="app">
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                         @endif
-                        @if($profile->ho_ten==null||$profile->ho_ten==''||!$profile->ho_ten)
+                        @if($profile->anh_chan_dung&&($profile->ho_ten==null||$profile->ho_ten==''||!$profile->ho_ten))
                             <div class="alert-container">
                                 <div><span class="ant-typography" style="font-size: 17px; color: rgb(18, 18, 18);"><strong>Xác thực thông tin cá nhân</strong></span>
                                     <div
@@ -71,7 +71,7 @@
                                                     d="M512 244c176.18 0 319 142.82 319 319v233a32 32 0 01-32 32H225a32 32 0 01-32-32V563c0-176.18 142.82-319 319-319zM484 68h56a8 8 0 018 8v96a8 8 0 01-8 8h-56a8 8 0 01-8-8V76a8 8 0 018-8zM177.25 191.66a8 8 0 0111.32 0l67.88 67.88a8 8 0 010 11.31l-39.6 39.6a8 8 0 01-11.31 0l-67.88-67.88a8 8 0 010-11.31l39.6-39.6zm669.6 0l39.6 39.6a8 8 0 010 11.3l-67.88 67.9a8 8 0 01-11.32 0l-39.6-39.6a8 8 0 010-11.32l67.89-67.88a8 8 0 0111.31 0zM192 892h640a32 32 0 0132 32v24a8 8 0 01-8 8H168a8 8 0 01-8-8v-24a32 32 0 0132-32zm148-317v253h64V575h-64z"></path></svg></span>
                                         </div>
                                         <div><span class="ant-typography"
-                                                   style="font-size: 16px; font-weight: 400; color: rgb(18, 18, 18);">Bổ sung thông tin ngân hàng để hoàn tất định danh</span>
+                                                   style="font-size: 16px; font-weight: 400; color: rgb(18, 18, 18);">Bổ sung thông tin để hoàn tất định danh</span>
                                         </div>
                                     </div>
                                     <div
@@ -86,7 +86,7 @@
                                 </div>
                             </div>
                         @endif
-                        @if(!$profile->so_tai_khoan||$profile->so_tai_khoan==''||$profile->so_tai_khoan==null)
+                        @if($profile->ho_ten&&(!$profile->so_tai_khoan||$profile->so_tai_khoan==''||$profile->so_tai_khoan==null))
                             <div class="alert-container">
                                 <div><span class="ant-typography" style="font-size: 17px; color: rgb(18, 18, 18);"><strong>Xác thực thông ngân hàng</strong></span>
                                     <div
@@ -117,7 +117,7 @@
                                 </div>
                             </div>
                         @endif
-                        @if(!$profile->chu_ky||$profile->chu_ky==''||$profile->chu_ky==null)
+                        @if($profile->so_tai_khoan&&(!$profile->chu_ky||$profile->chu_ky==''||$profile->chu_ky==null))
                             <div class="alert-container">
                                 <div><span class="ant-typography" style="font-size: 17px; color: rgb(18, 18, 18);"><strong>Ký hợp đồng</strong></span>
                                     <div
@@ -133,7 +133,7 @@
                                                     d="M512 244c176.18 0 319 142.82 319 319v233a32 32 0 01-32 32H225a32 32 0 01-32-32V563c0-176.18 142.82-319 319-319zM484 68h56a8 8 0 018 8v96a8 8 0 01-8 8h-56a8 8 0 01-8-8V76a8 8 0 018-8zM177.25 191.66a8 8 0 0111.32 0l67.88 67.88a8 8 0 010 11.31l-39.6 39.6a8 8 0 01-11.31 0l-67.88-67.88a8 8 0 010-11.31l39.6-39.6zm669.6 0l39.6 39.6a8 8 0 010 11.3l-67.88 67.9a8 8 0 01-11.32 0l-39.6-39.6a8 8 0 010-11.32l67.89-67.88a8 8 0 0111.31 0zM192 892h640a32 32 0 0132 32v24a8 8 0 01-8 8H168a8 8 0 01-8-8v-24a32 32 0 0132-32zm148-317v253h64V575h-64z"></path></svg></span>
                                         </div>
                                         <div><span class="ant-typography"
-                                                   style="font-size: 16px; font-weight: 400; color: rgb(18, 18, 18);">Bổ sung thông chữ ký để hoàn tất hồ sơ</span>
+                                                   style="font-size: 16px; font-weight: 400; color: rgb(18, 18, 18);">Ký hợp đồng để hoàn tất hồ sơ</span>
                                         </div>
                                     </div>
                                     <div
