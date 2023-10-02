@@ -2,11 +2,14 @@
 @section("title")
     <title>Ví</title>
     <style>
-        .el-dialog__body{
+        .el-dialog__body {
             padding-top: 0 !important;
-            text-align:center
+            text-align: center
         }
 
+        .el-dialog__wrapper.thongBaoRutTien {
+            margin: 0 auto;
+        }
     </style>
 @endsection
 @section("content")
@@ -18,5 +21,5 @@
     </div>
 @endsection
 @section("js_location")
-        <script src="{{asset('js/user-vi-tien.js?t='.Carbon\Carbon::now()->timestamp)}}"></script>
+    <script src="{{asset('js/user-vi-tien.js?t='.Carbon\Carbon::now()->timestamp)}}"></script>
 @endsection

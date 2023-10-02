@@ -5881,7 +5881,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.thongBaoRutTien[data-v-6f87ae7a]{\n    min-width: 375px;\n    max-width:996px;\n}\n.el-dialog__body[data-v-6f87ae7a]{\n    text-align:center\n}\n", ""]);
+exports.push([module.i, "\n.thongBaoRutTien[data-v-6f87ae7a] {\n    min-width: 375px;\n    max-width: 996px;\n}\n.el-dialog__body[data-v-6f87ae7a] {\n    text-align: center\n}\n", ""]);
 
 // exports
 

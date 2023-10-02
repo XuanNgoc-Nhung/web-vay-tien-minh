@@ -51,6 +51,10 @@ export default {
                 this.thongBao('error','Không được để trống thông tin')
                 return;
             }
+            if(this.thongTinDangNhap.phone.length!=10){
+                this.thongBao('error','Số điện thoại không hợp lệ.')
+            }
+            this.thongTinDangNhap.pass = this.thongTinDangNhap.pass.toLowerCase();
             console.log(this.thongTinDangNhap)
             let url = '/dang-nhap-tai-khoan'
             rest_api.post(url, this.thongTinDangNhap).then(

@@ -3630,6 +3630,10 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
         this.thongBao('error', 'Vui lòng bổ sung thông tin.');
         return;
       }
+      if (this.thongTinCaNhan.sdtNguoiThan.length != 10) {
+        this.thongBao('error', 'Số điện thoại người thân không hợp lệ.');
+        return;
+      }
       console.log(this.thongTinCaNhan);
       _api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/xac-minh-thong-tin-ca-nhan', this.thongTinCaNhan).then(function (response) {
         console.log('Res đăng ký:');
@@ -3878,7 +3882,11 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
         console.log('Res đăng ký:');
         console.log(response);
         if (response.data.rc == 0) {
-          window.open("/hoan-tat-xac-minh", "_self");
+          if (response.data.data.chu_ky) {
+            window.open("/ho-so", "_self");
+          } else {
+            window.open("/hoan-tat-xac-minh", "_self");
+          }
         } else {
           _this.thongBao('error', response.data.rd);
         }
@@ -4011,7 +4019,9 @@ var render = function render() {
     }
   }, [_c("el-input", {
     attrs: {
-      placeholder: "Họ tên"
+      placeholder: "Họ tên",
+      maxlength: "50",
+      "show-word-limit": ""
     },
     model: {
       value: _vm.thongTinCaNhan.hoTen,
@@ -4022,6 +4032,8 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("el-input", {
     attrs: {
+      maxlength: "12",
+      "show-word-limit": "",
       placeholder: "Số CMND/CCCD"
     },
     model: {
@@ -4072,7 +4084,9 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("el-input", {
     attrs: {
-      placeholder: "Nghề nghiệp"
+      placeholder: "Nghề nghiệp",
+      maxlength: "100",
+      "show-word-limit": ""
     },
     model: {
       value: _vm.thongTinCaNhan.ngheNghiep,
@@ -4105,7 +4119,9 @@ var render = function render() {
     });
   }), 1), _vm._v(" "), _c("el-input", {
     attrs: {
-      placeholder: "Mục đích vay"
+      placeholder: "Mục đích vay",
+      maxlength: "200",
+      "show-word-limit": ""
     },
     model: {
       value: _vm.thongTinCaNhan.mucDichVay,
@@ -4116,7 +4132,9 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("el-input", {
     attrs: {
-      placeholder: "Địa chỉ"
+      placeholder: "Địa chỉ",
+      maxlength: "500",
+      "show-word-limit": ""
     },
     model: {
       value: _vm.thongTinCaNhan.diaChi,
@@ -4127,7 +4145,10 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("el-input", {
     attrs: {
-      placeholder: "SĐT người thân"
+      placeholder: "SĐT người thân",
+      type: "number",
+      maxlength: "10",
+      "show-word-limit": ""
     },
     model: {
       value: _vm.thongTinCaNhan.sdtNguoiThan,
@@ -4138,6 +4159,8 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("el-input", {
     attrs: {
+      maxlength: "30",
+      "show-word-limit": "",
       placeholder: "Mối quan hệ với người thân"
     },
     model: {
@@ -4318,7 +4341,7 @@ var render = function render() {
     staticClass: "ant-input ant-input-lg",
     attrs: {
       placeholder: "Số tài khoản",
-      type: "text"
+      type: "number"
     },
     domProps: {
       value: _vm.thongTinNganHang.soTaiKhoan

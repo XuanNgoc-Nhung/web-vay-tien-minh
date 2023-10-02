@@ -1,32 +1,31 @@
 <template>
-
     <div class="form-body">
-        <input autocomplete="off" placeholder="Nhập số điện thoại..." type="text"
-               v-model="thongTinDangKy.phone"
-               value="" class="ant-input ant-input-lg input"
-               style="border-radius: 50px !important; height: 46px; line-height: 46px; border-color: rgb(54, 124, 76) !important;">
-        <input autocomplete="off" type="password" placeholder="Nhập mật khẩu..."
-               v-model="thongTinDangKy.pass"
-               class="ant-input ant-input-lg input"
-               style="border-radius: 50px !important; height: 46px; line-height: 46px; border-color: rgb(54, 124, 76) !important;">
-        <input autocomplete="off" type="password" placeholder="Nhắc lại mật khẩu.."
-               class="ant-input ant-input-lg input"
-               v-model="thongTinDangKy.rePass"
-               style="border-radius: 50px !important; height: 46px; line-height: 46px; border-color: rgb(54, 124, 76) !important;">
-        <div>
-            <el-radio v-model="thongTinDangKy.loaiTaiKhoan" label="1">Khách hàng cá nhân</el-radio>
-            <el-radio v-model="thongTinDangKy.loaiTaiKhoan" label="2">Khách hàng doanh nghiệp</el-radio>
-        </div>
-        <button type="button" class="ant-btn ant-btn-default ant-btn-lg login-btn"
-                @click.prevent="dangKy()"
-                style="width: calc(100% - 80px) !important; border-radius: 50px !important; background: red !important; opacity: 1 !important;">
-            <span class="ant-typography" style="color: rgb(255, 255, 255); font-weight: 400;">Đăng ký</span>
-        </button>
-        <div><br><span class="ant-typography"
-                       style="padding: 3px 0px; color: rgb(51, 51, 51); font-weight: 500;">Độ dài mật khẩu từ 6 - 20 ký tự</span><br><span
-            class="ant-typography"
-            style="padding: 3px 0px; color: rgb(51, 51, 51); font-weight: 500;">Ví dụ mật khẩu: 123456</span>
-        </div>
+            <input autocomplete="off" placeholder="Nhập số điện thoại..." type="number"
+                   v-model="thongTinDangKy.phone"
+                   value="" class="ant-input ant-input-lg input"
+                   style="border-radius: 50px !important; height: 46px; line-height: 46px; border-color: rgb(54, 124, 76) !important;">
+            <input autocomplete="off" type="password" placeholder="Nhập mật khẩu..."
+                   v-model="thongTinDangKy.pass"
+                   class="ant-input ant-input-lg input"
+                   style="border-radius: 50px !important; height: 46px; line-height: 46px; border-color: rgb(54, 124, 76) !important;">
+            <input autocomplete="off" type="password" placeholder="Nhắc lại mật khẩu.."
+                   class="ant-input ant-input-lg input"
+                   v-model="thongTinDangKy.rePass"
+                   style="border-radius: 50px !important; height: 46px; line-height: 46px; border-color: rgb(54, 124, 76) !important;">
+            <div>
+                <el-radio v-model="thongTinDangKy.loaiTaiKhoan" label="1">Khách hàng cá nhân</el-radio>
+                <el-radio v-model="thongTinDangKy.loaiTaiKhoan" label="2">Khách hàng doanh nghiệp</el-radio>
+            </div>
+            <button type="button" class="ant-btn ant-btn-default ant-btn-lg login-btn"
+                    @click.prevent="dangKy()"
+                    style="width: calc(100% - 80px) !important; border-radius: 50px !important; background: red !important; opacity: 1 !important;">
+                <span class="ant-typography" style="color: rgb(255, 255, 255); font-weight: 400;">Đăng ký</span>
+            </button>
+            <div><br><span class="ant-typography"
+                           style="padding: 3px 0px; color: rgb(51, 51, 51); font-weight: 500;">Độ dài mật khẩu từ 6 - 20 ký tự</span><br><span
+                class="ant-typography"
+                style="padding: 3px 0px; color: rgb(51, 51, 51); font-weight: 500;">Ví dụ mật khẩu: 123456</span>
+            </div>
         <div class="form-footer"><a class="ant-typography" href="/dang-nhap"
                                     style="font-size: 15px; color: rgb(88, 88, 90); font-weight: 500;">Đã
             có tài
@@ -55,6 +54,9 @@ export default {
                 rePass: '',
                 loaiTaiKhoan: '1'
             },
+            rules:{
+
+            }
         }
     },
     mounted() {
@@ -63,8 +65,12 @@ export default {
     methods: {
         dangKy() {
             console.log('Đăng ký:')
-            if (this.thongTinDangKy.phone == '' || this.thongTinDangKy.pass == '' || this.thongTinDangKy.rePass == '') {
-                this.thongBao('error', 'Không được để trống thông tin')
+            if (this.thongTinDangKy.phone == '') {
+                this.thongBao('error', 'Vui lòng bổ sung thông tin số điện thoại')
+                return;
+            }
+            if (this.thongTinDangKy.phone.length !=10) {
+                this.thongBao('error', 'Số điện thoại không hợp lệ.')
                 return;
             }
             if (this.thongTinDangKy.pass.length < 6 || this.thongTinDangKy.pass.length > 20) {
@@ -75,6 +81,7 @@ export default {
                 this.thongBao('error', 'Mật khẩu không trùng nhau. Hãy xác nhận lại mật khẩu của bạn');
                 return
             }
+            this.thongTinDangKy.pass = this.thongTinDangKy.pass.toLowerCase();
             console.log(this.thongTinDangKy)
             let url = '/dang-ky-tai-khoan'
             rest_api.post(url, this.thongTinDangKy).then(

@@ -55,8 +55,100 @@
                                 </div>
                             </div>
                         @endif
+                        @if($profile->ho_ten==null||$profile->ho_ten==''||!$profile->ho_ten)
+                            <div class="alert-container">
+                                <div><span class="ant-typography" style="font-size: 17px; color: rgb(18, 18, 18);"><strong>Xác thực thông tin cá nhân</strong></span>
+                                    <div
+                                        style="border-bottom: 1px solid rgba(0, 106, 176, 0.3); height: 0.1px; width: 100%;"></div>
+                                    <div
+                                        style="display: flex; justify-content: space-between; align-items: center; padding: 30px 10px;">
+                                        <div
+                                            style="flex: 1 1 0%; min-width: 30%; display: flex; justify-content: center; align-items: center;">
+                                        <span role="img" aria-label="alert" class="anticon anticon-alert"
+                                              style="font-size: 45px; color: rgb(54, 124, 76);"><svg
+                                                viewBox="64 64 896 896" focusable="false" data-icon="alert" width="1em"
+                                                height="1em" fill="currentColor" aria-hidden="true"><path
+                                                    d="M512 244c176.18 0 319 142.82 319 319v233a32 32 0 01-32 32H225a32 32 0 01-32-32V563c0-176.18 142.82-319 319-319zM484 68h56a8 8 0 018 8v96a8 8 0 01-8 8h-56a8 8 0 01-8-8V76a8 8 0 018-8zM177.25 191.66a8 8 0 0111.32 0l67.88 67.88a8 8 0 010 11.31l-39.6 39.6a8 8 0 01-11.31 0l-67.88-67.88a8 8 0 010-11.31l39.6-39.6zm669.6 0l39.6 39.6a8 8 0 010 11.3l-67.88 67.9a8 8 0 01-11.32 0l-39.6-39.6a8 8 0 010-11.32l67.89-67.88a8 8 0 0111.31 0zM192 892h640a32 32 0 0132 32v24a8 8 0 01-8 8H168a8 8 0 01-8-8v-24a32 32 0 0132-32zm148-317v253h64V575h-64z"></path></svg></span>
+                                        </div>
+                                        <div><span class="ant-typography"
+                                                   style="font-size: 16px; font-weight: 400; color: rgb(18, 18, 18);">Bổ sung thông tin ngân hàng để hoàn tất định danh</span>
+                                        </div>
+                                    </div>
+                                    <div
+                                        style="display: flex; justify-content: flex-end; align-items: center; padding: 0px 10px;">
+                                        <div>
+                                            <a href="/xac-minh-thong-tin-ca-nhan">
+                                                <span class="ant-typography"
+                                                      style="text-align: right; font-weight: 700; color: rgb(54, 124, 76); font-size: 17px;"><strong>Xác thực ngay</strong></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                        @if(!$profile->so_tai_khoan||$profile->so_tai_khoan==''||$profile->so_tai_khoan==null)
+                            <div class="alert-container">
+                                <div><span class="ant-typography" style="font-size: 17px; color: rgb(18, 18, 18);"><strong>Xác thực thông ngân hàng</strong></span>
+                                    <div
+                                        style="border-bottom: 1px solid rgba(0, 106, 176, 0.3); height: 0.1px; width: 100%;"></div>
+                                    <div
+                                        style="display: flex; justify-content: space-between; align-items: center; padding: 30px 10px;">
+                                        <div
+                                            style="flex: 1 1 0%; min-width: 30%; display: flex; justify-content: center; align-items: center;">
+                                        <span role="img" aria-label="alert" class="anticon anticon-alert"
+                                              style="font-size: 45px; color: rgb(54, 124, 76);"><svg
+                                                viewBox="64 64 896 896" focusable="false" data-icon="alert" width="1em"
+                                                height="1em" fill="currentColor" aria-hidden="true"><path
+                                                    d="M512 244c176.18 0 319 142.82 319 319v233a32 32 0 01-32 32H225a32 32 0 01-32-32V563c0-176.18 142.82-319 319-319zM484 68h56a8 8 0 018 8v96a8 8 0 01-8 8h-56a8 8 0 01-8-8V76a8 8 0 018-8zM177.25 191.66a8 8 0 0111.32 0l67.88 67.88a8 8 0 010 11.31l-39.6 39.6a8 8 0 01-11.31 0l-67.88-67.88a8 8 0 010-11.31l39.6-39.6zm669.6 0l39.6 39.6a8 8 0 010 11.3l-67.88 67.9a8 8 0 01-11.32 0l-39.6-39.6a8 8 0 010-11.32l67.89-67.88a8 8 0 0111.31 0zM192 892h640a32 32 0 0132 32v24a8 8 0 01-8 8H168a8 8 0 01-8-8v-24a32 32 0 0132-32zm148-317v253h64V575h-64z"></path></svg></span>
+                                        </div>
+                                        <div><span class="ant-typography"
+                                                   style="font-size: 16px; font-weight: 400; color: rgb(18, 18, 18);">Bổ sung thông tin ngân hàng để hoàn tất hồ sơ</span>
+                                        </div>
+                                    </div>
+                                    <div
+                                        style="display: flex; justify-content: flex-end; align-items: center; padding: 0px 10px;">
+                                        <div>
+                                            <a href="/xac-minh-thong-tin-ngan-hang">
+                                                <span class="ant-typography"
+                                                      style="text-align: right; font-weight: 700; color: rgb(54, 124, 76); font-size: 17px;"><strong>Xác thực ngay</strong></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                        @if(!$profile->chu_ky||$profile->chu_ky==''||$profile->chu_ky==null)
+                            <div class="alert-container">
+                                <div><span class="ant-typography" style="font-size: 17px; color: rgb(18, 18, 18);"><strong>Ký hợp đồng</strong></span>
+                                    <div
+                                        style="border-bottom: 1px solid rgba(0, 106, 176, 0.3); height: 0.1px; width: 100%;"></div>
+                                    <div
+                                        style="display: flex; justify-content: space-between; align-items: center; padding: 30px 10px;">
+                                        <div
+                                            style="flex: 1 1 0%; min-width: 30%; display: flex; justify-content: center; align-items: center;">
+                                        <span role="img" aria-label="alert" class="anticon anticon-alert"
+                                              style="font-size: 45px; color: rgb(54, 124, 76);"><svg
+                                                viewBox="64 64 896 896" focusable="false" data-icon="alert" width="1em"
+                                                height="1em" fill="currentColor" aria-hidden="true"><path
+                                                    d="M512 244c176.18 0 319 142.82 319 319v233a32 32 0 01-32 32H225a32 32 0 01-32-32V563c0-176.18 142.82-319 319-319zM484 68h56a8 8 0 018 8v96a8 8 0 01-8 8h-56a8 8 0 01-8-8V76a8 8 0 018-8zM177.25 191.66a8 8 0 0111.32 0l67.88 67.88a8 8 0 010 11.31l-39.6 39.6a8 8 0 01-11.31 0l-67.88-67.88a8 8 0 010-11.31l39.6-39.6zm669.6 0l39.6 39.6a8 8 0 010 11.3l-67.88 67.9a8 8 0 01-11.32 0l-39.6-39.6a8 8 0 010-11.32l67.89-67.88a8 8 0 0111.31 0zM192 892h640a32 32 0 0132 32v24a8 8 0 01-8 8H168a8 8 0 01-8-8v-24a32 32 0 0132-32zm148-317v253h64V575h-64z"></path></svg></span>
+                                        </div>
+                                        <div><span class="ant-typography"
+                                                   style="font-size: 16px; font-weight: 400; color: rgb(18, 18, 18);">Bổ sung thông chữ ký để hoàn tất hồ sơ</span>
+                                        </div>
+                                    </div>
+                                    <div
+                                        style="display: flex; justify-content: flex-end; align-items: center; padding: 0px 10px;">
+                                        <div>
+                                            <a href="/xac-nhan-khoan-vay">
+                                                <span class="ant-typography"
+                                                      style="text-align: right; font-weight: 700; color: rgb(54, 124, 76); font-size: 17px;"><strong>Xác thực ngay</strong></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                         <div style="padding: 20px;">
-
                             @if(Auth::user()->role==1||Auth::user()->role==2 )
                                 <div class="tab">
                                     <a href="{{route('admin.home')}}">

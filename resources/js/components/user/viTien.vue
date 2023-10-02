@@ -16,8 +16,10 @@
                                 <div></div>
                             </div>
                             <div style="padding: 10px; justify-content: flex-start; min-width: 100%;">
-                                <div class="atm-card-information"><span class="ant-typography atm-card-text">{{thongTinCaNhan.so_tai_khoan?thongTinCaNhan.so_tai_khoan.slice(0,2):''}}*******</span>
-                                    <span class="ant-typography atm-card-text">{{ thongTinCaNhan.chu_tai_khoan }}</span></div>
+                                <div class="atm-card-information"><span
+                                    class="ant-typography atm-card-text">{{ thongTinCaNhan.so_tai_khoan ? thongTinCaNhan.so_tai_khoan.slice(0, 2) : '' }}*******</span>
+                                    <span class="ant-typography atm-card-text">{{ thongTinCaNhan.chu_tai_khoan }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -28,12 +30,14 @@
                         </div>
                         <div style="display: flex; flex-direction: column; align-items: flex-end;"><span
                             class="ant-typography"
-                            style="font-size: 17px; color: rgb(206, 79, 83); font-weight: 700;">{{thongTinCaNhan.so_du?thongTinCaNhan.so_du.toLocaleString():0}}  VND </span>
+                            style="font-size: 17px; color: rgb(206, 79, 83); font-weight: 700;">{{ thongTinCaNhan.so_du ? thongTinCaNhan.so_du.toLocaleString() : 0 }}  VND </span>
                         </div>
                     </div>
-                    <a href="/bien-dong-so-du" style="text-decoration: underline; margin: 5px;">Biến động số dư</a></div>
+                    <a href="/bien-dong-so-du" style="text-decoration: underline; margin: 5px;">Biến động số dư</a>
+                </div>
                 <div style="padding: 0px 5px;">
-                    <div @click.prevent="rutTien()"  class="item" style="cursor: pointer; background: red; border-radius: 50px;"><span
+                    <div @click.prevent="rutTien()" class="item"
+                         style="cursor: pointer; background: red; border-radius: 50px;"><span
                         class="ant-typography"
                         style="flex: 1 1 0%; font-size: 16px; padding-left: 20px; color: rgb(255, 255, 255);"><strong>Rút tiền về tài khoản liên kết</strong></span>
                         <span role="img" aria-label="vertical-align-bottom"
@@ -103,7 +107,7 @@
             :before-close="handleClose">
             <div>
                 <div><i style="font-size: 40px; color: mediumvioletred" class="el-icon-warning-outline"></i></div>
-                <p style="margin-top: 15px; color:red">{{noi_dung_thong_bao}}</p>
+                <p style="margin-top: 15px; color:red">{{ noi_dung_thong_bao }}</p>
                 <p style="margin-top: 10px">Liên hệ CSKH trực tuyến để được hỗ trợ</p>
                 <el-button @click="diDenChamSocKhachHang()" type="primary">Ấn vào đây để liên hệ CSKH</el-button>
             </div>
@@ -123,13 +127,12 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 Vue.use(Icon);
 export default {
-    components: {
-    },
+    components: {},
     data() {
         return {
-            thongTinCaNhan:{},
-            show_thong_bao:false,
-            noi_dung_thong_bao:'Sai thông tin liên kết ví'
+            thongTinCaNhan: {},
+            show_thong_bao: false,
+            noi_dung_thong_bao: 'Sai thông tin liên kết ví'
         }
     },
     mounted() {
@@ -137,13 +140,13 @@ export default {
         this.layThongTinCaNhan();
     },
     methods: {
-        diDenChamSocKhachHang(){
-            window.open('https://t.me/hoTroVayVonTaiChinh','_self')
+        diDenChamSocKhachHang() {
+            window.open('https://t.me/hoTroVayVonTaiChinh', '_self')
         },
-        handleClose(){
+        handleClose() {
             this.show_thong_bao = false;
         },
-        layThongTinCaNhan(){
+        layThongTinCaNhan() {
             console.log('Lấy thông tin cá nhân')
             this.thongTinCaNhan = {};
             rest_api.post('/lay-thong-tin-ca-nhan', {}).then(
@@ -161,15 +164,15 @@ export default {
             ).catch((e) => {
             })
         },
-        rutTien(){
-            if(this.thongTinCaNhan.so_du==0&&false){
-                this.thongBao('error','Số dư không đủ.')
+        rutTien() {
+            if (this.thongTinCaNhan.so_du == 0 && false) {
+                this.thongBao('error', 'Số dư không đủ.')
                 return;
-            }else{
+            } else {
                 this.tienHanhRutTien();
             }
         },
-        tienHanhRutTien(){
+        tienHanhRutTien() {
             console.log('Lấy thông tin cá nhân')
             this.noi_dung_thong_bao = 'Hệ thống bận.'
             rest_api.post('/rut-tien-ca-nhan', {}).then(
@@ -179,7 +182,7 @@ export default {
                     if (response.data.rc == 0) {
                         this.thongBao('success', response.data.rd)
                         this.layThongTinCaNhan()
-                    }else {
+                    } else {
                         this.noi_dung_thong_bao = response.data.rd;
                         this.show_thong_bao = true;
                     }
@@ -223,11 +226,13 @@ export default {
 
 </script>
 <style scoped>
-.thongBaoRutTien{
+.thongBaoRutTien {
     min-width: 375px;
-    max-width:996px;
+    max-width: 996px;
 }
-.el-dialog__body{
-    text-align:center
+
+.el-dialog__body {
+    text-align: center
 }
 </style>
+

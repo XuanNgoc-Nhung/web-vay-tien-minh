@@ -51,8 +51,11 @@
                             class="ant-typography success-contract-title">Hợp đồng vay của bạn đã được đăng ký thành công.</span>
                         <div class="contact-container"><span
                                 class="ant-typography contact-text"><strong>→</strong></span>
-                            <div class="contact"><span
-                                    class="ant-typography contact-title">Liên hệ CSKH để duyệt hồ sơ</span></div>
+                            <div class="contact">
+                                <a href="https://t.me/hoTroVayVonTaiChinh">
+                                    <span class="ant-typography contact-title">Liên hệ CSKH để duyệt hồ sơ</span>
+                                </a>
+                            </div>
                             <span class="ant-typography contact-text"><strong>←</strong></span></div>
                     </div>
                 </div>

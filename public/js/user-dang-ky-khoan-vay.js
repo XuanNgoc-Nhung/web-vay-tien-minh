@@ -3616,7 +3616,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
       var _this2 = this;
       console.log('dangKyKhoanVay');
       if (!this.thongTinVay.soTien || !this.thongTinVay.thoiHan) {
-        this.thongBao('error', 'Vui lòng bổ sung thông tin bắt buộc');
+        this.thongBao('error', 'Vui lòng nhập số tiền muốn vay.');
         return;
       }
       if (this.loaiTaiKhoan == 1) {
@@ -3811,7 +3811,7 @@ var render = function render() {
     staticClass: "ant-typography"
   }, [_vm._v(_vm._s(_vm.loaiTaiKhoan == 1 ? "Từ 5.000.000đ" : "Từ 50.000.000đ"))]), _vm._v(" "), _c("span", {
     staticClass: "ant-typography"
-  }, [_vm._v(_vm._s(_vm.loaiTaiKhoan == 1 ? "Đến 50.000.000đ" : "Từ 500.000.000đ"))])]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.loaiTaiKhoan == 1 ? "Đến 100.000.000đ" : "Từ 500.000.000đ"))])]), _vm._v(" "), _c("div", {
     staticClass: "month-container",
     staticStyle: {
       padding: "10px"
@@ -3865,9 +3865,9 @@ var render = function render() {
     staticClass: "details-information"
   }, [_c("span", {
     staticClass: "ant-typography"
-  }, [_vm._v("Số tiền")]), _c("span", {
+  }, [_vm._v("Số tiền")]), _vm._v(" "), _c("span", {
     staticClass: "ant-typography"
-  }, [_vm._v(_vm._s(parseInt(_vm.thongTinVay.soTien).toLocaleString()) + " đ")])]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(parseInt(_vm.thongTinVay.soTien ? _vm.thongTinVay.soTien : 0).toLocaleString()) + " đ")])]), _vm._v(" "), _c("div", {
     staticClass: "details-information"
   }, [_c("span", {
     staticClass: "ant-typography"
@@ -3889,7 +3889,7 @@ var render = function render() {
       color: "rgb(62, 62, 62)",
       "font-size": "16px"
     }
-  }, [_vm._v(_vm._s(parseInt(_vm.thongTinVay.traKyDau).toLocaleString()) + " VND")])]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(parseInt(_vm.thongTinVay.traKyDau ? _vm.thongTinVay.traKyDau : "0").toLocaleString()) + " VND")])]), _vm._v(" "), _c("div", {
     staticClass: "old-debt-text"
   }, [_c("span", {
     staticClass: "ant-typography",

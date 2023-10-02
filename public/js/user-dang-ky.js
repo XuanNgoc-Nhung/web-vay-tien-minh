@@ -3559,7 +3559,8 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
         pass: '',
         rePass: '',
         loaiTaiKhoan: '1'
-      }
+      },
+      rules: {}
     };
   },
   mounted: function mounted() {
@@ -3569,8 +3570,12 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
     dangKy: function dangKy() {
       var _this = this;
       console.log('Đăng ký:');
-      if (this.thongTinDangKy.phone == '' || this.thongTinDangKy.pass == '' || this.thongTinDangKy.rePass == '') {
-        this.thongBao('error', 'Không được để trống thông tin');
+      if (this.thongTinDangKy.phone == '') {
+        this.thongBao('error', 'Vui lòng bổ sung thông tin số điện thoại');
+        return;
+      }
+      if (this.thongTinDangKy.phone.length != 10) {
+        this.thongBao('error', 'Số điện thoại không hợp lệ.');
         return;
       }
       if (this.thongTinDangKy.pass.length < 6 || this.thongTinDangKy.pass.length > 20) {
@@ -3581,6 +3586,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
         this.thongBao('error', 'Mật khẩu không trùng nhau. Hãy xác nhận lại mật khẩu của bạn');
         return;
       }
+      this.thongTinDangKy.pass = this.thongTinDangKy.pass.toLowerCase();
       console.log(this.thongTinDangKy);
       var url = '/dang-ky-tai-khoan';
       _api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, this.thongTinDangKy).then(function (response) {
@@ -3662,7 +3668,7 @@ var render = function render() {
     attrs: {
       autocomplete: "off",
       placeholder: "Nhập số điện thoại...",
-      type: "text",
+      type: "number",
       value: ""
     },
     domProps: {

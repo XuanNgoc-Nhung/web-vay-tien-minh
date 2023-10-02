@@ -32,7 +32,7 @@
                     </div>
                     <div class="subtitle">
                         <span class="ant-typography">{{ loaiTaiKhoan == 1 ? 'Từ 5.000.000đ' : 'Từ 50.000.000đ' }}</span>
-                        <span class="ant-typography">{{ loaiTaiKhoan == 1 ? 'Đến 50.000.000đ' : 'Từ 500.000.000đ'}}</span>
+                        <span class="ant-typography">{{ loaiTaiKhoan == 1 ? 'Đến 100.000.000đ' : 'Từ 500.000.000đ'}}</span>
                     </div>
                     <div class="month-container" style="padding: 10px;"><span
                         class="ant-typography">Chọn thời hạn vay</span>
@@ -54,8 +54,9 @@
                     <div class="information-form"><span class="ant-typography form-title"
                                                         style="color: rgb(255, 255, 255); font-weight: bold;">Thông tin khoản vay</span>
                         <div class="information">
-                            <div class="details-information"><span class="ant-typography">Số tiền</span><span
-                                class="ant-typography">{{ parseInt(thongTinVay.soTien).toLocaleString() }} đ</span>
+                            <div class="details-information"><span class="ant-typography">Số tiền</span>
+                                <span
+                                class="ant-typography">{{ parseInt(thongTinVay.soTien?thongTinVay.soTien:0).toLocaleString() }} đ</span>
                             </div>
                             <div class="details-information"><span class="ant-typography">Thời hạn vay</span><span
                                 class="ant-typography"> {{ thongTinVay.thoiHan }} tháng</span></div>
@@ -72,7 +73,7 @@
                                                      style="flex: 2 1 0%; color: rgb(102, 102, 102); font-size: 14px;">Trả nợ kì đầu</span><span
                         class="ant-typography"
                         style="flex: 2 1 0%; color: rgb(62, 62, 62); font-size: 16px;">{{
-                            parseInt(thongTinVay.traKyDau).toLocaleString()
+                            parseInt(thongTinVay.traKyDau?thongTinVay.traKyDau:'0').toLocaleString()
                         }} VND</span>
                     </div>
                     <div class="old-debt-text"><span class="ant-typography"
@@ -160,7 +161,7 @@ export default {
         dangKyKhoanVay() {
             console.log('dangKyKhoanVay')
             if (!this.thongTinVay.soTien || !this.thongTinVay.thoiHan) {
-                this.thongBao('error', 'Vui lòng bổ sung thông tin bắt buộc');
+                this.thongBao('error', 'Vui lòng nhập số tiền muốn vay.');
                 return;
             }
             if(this.loaiTaiKhoan==1){

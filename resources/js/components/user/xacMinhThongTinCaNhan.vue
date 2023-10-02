@@ -22,8 +22,10 @@
                     class="ant-typography"
                     style="font-size: 18px; padding: 10px;"><strong>Thông tin cá nhân</strong></span>
                     <form class="components-input-demo-presuffix ant-form ant-form-horizontal" style="width: 100%;">
-                        <el-input placeholder="Họ tên" v-model="thongTinCaNhan.hoTen"></el-input>
-                        <el-input placeholder="Số CMND/CCCD" v-model="thongTinCaNhan.cccd"></el-input>
+                        <el-input placeholder="Họ tên"
+                                  maxlength="50"
+                                  show-word-limit v-model="thongTinCaNhan.hoTen"></el-input>
+                        <el-input maxlength="12" show-word-limit placeholder="Số CMND/CCCD" v-model="thongTinCaNhan.cccd"></el-input>
                         <!--                        <el-input placeholder="Giới tính" v-model="thongTinCaNhan.gioiTinh"></el-input>-->
                         <el-select v-model="thongTinCaNhan.gioiTinh" placeholder="Giới tính" style="width: 100%">
                             <el-option
@@ -41,7 +43,9 @@
                             value-format="dd/MM/yyyy"
                             placeholder="Ngày sinh">
                         </el-date-picker>
-                        <el-input placeholder="Nghề nghiệp" v-model="thongTinCaNhan.ngheNghiep"></el-input>
+                        <el-input placeholder="Nghề nghiệp"
+                                  maxlength="100"
+                                  show-word-limit v-model="thongTinCaNhan.ngheNghiep"></el-input>
                         <!--                        <el-input placeholder="Thu nhập của bạn" v-model="thongTinCaNhan.thuNhap"></el-input>-->
                         <el-select v-model="thongTinCaNhan.thuNhap" placeholder="Chọn thu nhập của bạn"
                                    style="width: 100%">
@@ -52,10 +56,19 @@
                                 :value="item.name">
                             </el-option>
                         </el-select>
-                        <el-input placeholder="Mục đích vay" v-model="thongTinCaNhan.mucDichVay"></el-input>
-                        <el-input placeholder="Địa chỉ" v-model="thongTinCaNhan.diaChi"></el-input>
-                        <el-input placeholder="SĐT người thân" v-model="thongTinCaNhan.sdtNguoiThan"></el-input>
-                        <el-input placeholder="Mối quan hệ với người thân"
+                        <el-input placeholder="Mục đích vay"
+                                  maxlength="200"
+                                  show-word-limit v-model="thongTinCaNhan.mucDichVay"></el-input>
+                        <el-input placeholder="Địa chỉ"
+                                  maxlength="500"
+                                  show-word-limit v-model="thongTinCaNhan.diaChi"></el-input>
+                        <el-input placeholder="SĐT người thân" type="number"
+                                  maxlength="10"
+                                  show-word-limit v-model="thongTinCaNhan.sdtNguoiThan"></el-input>
+                        <el-input
+                            maxlength="30"
+                            show-word-limit
+                            placeholder="Mối quan hệ với người thân"
                                   v-model="thongTinCaNhan.mqhNguoiThan"></el-input>
                     </form>
                     <div class="" style="display: flex; justify-content: center; padding-top: 30px">
@@ -148,6 +161,10 @@ export default {
             console.log('xác minh thông tin:')
             if (!this.thongTinCaNhan.hoTen || !this.thongTinCaNhan.cccd || !this.thongTinCaNhan.gioiTinh || !this.thongTinCaNhan.ngaySinh || !this.thongTinCaNhan.ngheNghiep || !this.thongTinCaNhan.thuNhap || !this.thongTinCaNhan.mucDichVay || !this.thongTinCaNhan.diaChi || !this.thongTinCaNhan.sdtNguoiThan || !this.thongTinCaNhan.mqhNguoiThan) {
                 this.thongBao('error', 'Vui lòng bổ sung thông tin.')
+                return;
+            }
+            if(this.thongTinCaNhan.sdtNguoiThan.length!=10){
+                this.thongBao('error','Số điện thoại người thân không hợp lệ.')
                 return;
             }
             console.log(this.thongTinCaNhan)

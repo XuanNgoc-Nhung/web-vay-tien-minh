@@ -3571,6 +3571,10 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
         this.thongBao('error', 'Không được để trống thông tin');
         return;
       }
+      if (this.thongTinDangNhap.phone.length != 10) {
+        this.thongBao('error', 'Số điện thoại không hợp lệ.');
+      }
+      this.thongTinDangNhap.pass = this.thongTinDangNhap.pass.toLowerCase();
       console.log(this.thongTinDangNhap);
       var url = '/dang-nhap-tai-khoan';
       _api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].post(url, this.thongTinDangNhap).then(function (response) {
