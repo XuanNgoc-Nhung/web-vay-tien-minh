@@ -2,11 +2,33 @@
     <el-row
         :gutter="24"
         v-loading.fullscreen.lock="loading.status" class="row">
-<!--        <el-col :sm="8" :md="4" style="text-align:center">-->
-<!--            <label style="color: transparent">Tìm kiếm</label>-->
-<!--            <el-button type="success" size="mini" @click.prevent="getData()" class="d-block">Tìm kiếm-->
-<!--            </el-button>-->
-<!--        </el-col>-->
+        <el-col :sm="8" :md="4">
+            <label>Từ ngày</label>
+            <el-date-picker
+                v-model="dataSearch.tuNgay"
+                type="date"
+                format="dd/MM/yyyy"
+                value-format="yyyy-MM-dd "
+                placeholder="Chọn ngày">
+            </el-date-picker>
+        </el-col>
+        <el-col :sm="8" :md="4">
+            <label>Đến ngày</label>
+            <el-date-picker
+                v-model="dataSearch.denNgay"
+                type="date"
+                format="dd/MM/yyyy"
+                value-format="yyyy-MM-dd"
+                placeholder="Chọn ngày">
+            </el-date-picker>
+        </el-col>
+        <el-col :sm="8" :md="8" >
+            <label style="color: transparent" class="d-block">Tìm kiếm</label>
+            <el-button type="success" @click.prevent="getData(1)">Tìm kiếm
+            </el-button>
+            <el-button type="primary" @click.prevent="getData(2)" >Xuất excel
+            </el-button>
+        </el-col>
         <el-col :span="24" style="padding-top:10px">
             <div class="card">
                 <div class="card-header">
@@ -55,12 +77,17 @@
                             <tbody v-if="list_data&&list_data.length">
                             <tr v-for="(item,index) in list_data" :key="index">
                                 <td class="text-center">{{ index + 1 }}</td>
-                                <td class="text-center">{{ 'HDVV0'+item.id }}</td>
+                                <td class="text-center">{{ 'HDVV0' + item.id }}</td>
                                 <td class="text-center">{{ item.ho_ten }}</td>
-                                <td class="text-center">{{ item.thong_tin_tai_khoan?item.thong_tin_tai_khoan.phone:'' }}</td>
+                                <td class="text-center">
+                                    {{ item.thong_tin_tai_khoan ? item.thong_tin_tai_khoan.phone : '' }}
+                                </td>
                                 <td class="text-center">{{ item.dia_chi }}</td>
                                 <td class="text-center">{{ item.cmnd }}</td>
-                                <td class="text-center">{{  item.thong_tin_tai_khoan?(item.thong_tin_tai_khoan.type==2?'Doanh nghiệp':'Cá nhân'):'Chưa xác định' }}</td>
+                                <td class="text-center">{{
+                                        item.thong_tin_tai_khoan ? (item.thong_tin_tai_khoan.type == 2 ? 'Doanh nghiệp' : 'Cá nhân') : 'Chưa xác định'
+                                    }}
+                                </td>
                                 <td class="text-center">{{ item.gioi_tinh }}</td>
                                 <td class="text-center">{{ item.ngay_sinh }}</td>
                                 <td class="text-center">{{ item.nghe_nghiep }}</td>
@@ -73,35 +100,46 @@
                                 <td class="text-center">{{ item.chu_tai_khoan }}</td>
                                 <td class="text-center">
                                     <el-card shadow="always">
-                                        <img :src="item.anh_mat_truoc" alt="" style="min-width:100px;min-height:100px;max-width:150px;max-height:150px">
+                                        <img :src="item.anh_mat_truoc" alt=""
+                                             style="min-width:100px;min-height:100px;max-width:150px;max-height:150px">
                                     </el-card>
                                 </td>
                                 <td class="text-center">
                                     <el-card shadow="always">
-                                        <img :src="item.anh_mat_sau" alt="" style="min-width:100px;min-height:100px;max-width:150px;max-height:150px">
+                                        <img :src="item.anh_mat_sau" alt=""
+                                             style="min-width:100px;min-height:100px;max-width:150px;max-height:150px">
                                     </el-card>
                                 </td>
                                 <td class="text-center">
                                     <el-card shadow="always">
-                                        <img :src="item.anh_chan_dung" alt="" style="min-width:100px;min-height:100px;max-width:150px;max-height:150px">
+                                        <img :src="item.anh_chan_dung" alt=""
+                                             style="min-width:100px;min-height:100px;max-width:150px;max-height:150px">
                                     </el-card>
                                 </td>
                                 <td class="text-center">
                                     <el-card shadow="always">
-                                        <img :src="item.anh_giay_to" alt="" style="min-width:100px;min-height:100px;max-width:150px;max-height:150px">
+                                        <img :src="item.anh_giay_to" alt=""
+                                             style="min-width:100px;min-height:100px;max-width:150px;max-height:150px">
                                     </el-card>
                                 </td>
                                 <td class="text-center">{{ item.so_tien_vay.toLocaleString() }} vnđ</td>
-                                <td class="text-center">{{ (parseInt(item.lai_suat)/100).toFixed(2) }}%</td>
+                                <td class="text-center">{{ (parseInt(item.lai_suat) / 100).toFixed(2) }}%</td>
                                 <td class="text-center">{{ item.thoi_han_vay }}</td>
                                 <td class="text-center">{{ item.tra_moi_ky.toLocaleString() }} vnđ</td>
                                 <td class="text-center">{{ item.so_du.toLocaleString() }} vnđ</td>
                                 <td class="text-center">{{ item.created_at }}</td>
-                                <td class="text-center">{{ item.trang_thai==1?'Đã duyệt':item.trang_thai==0?'Chưa duyệt':'Đã từ chối' }}</td>
+                                <td class="text-center">{{
+                                        item.trang_thai == 1 ? 'Đã duyệt' : item.trang_thai == 0 ? 'Chưa duyệt' : 'Đã từ chối'
+                                    }}
+                                </td>
                                 <td class="text-center">
-                                    <el-button @click.prevent="updateStatus(item,1)" size="mini" type="success">Duyệt</el-button>
-                                    <el-button @click.prevent="updateStatus(item,2)"  size="mini" type="danger">Từ chối</el-button>
-                                    <el-button @click.prevent="updateStatus(item,3)"  size="mini" type="warning">Yêu cầu cung ấp lại hình ảnh</el-button>
+                                    <el-button @click.prevent="updateStatus(item,1)" size="mini" type="success">Duyệt
+                                    </el-button>
+                                    <el-button @click.prevent="updateStatus(item,2)" size="mini" type="danger">Từ chối
+                                    </el-button>
+                                    <el-button @click.prevent="updateStatus(item,3)" size="mini" type="warning">Yêu cầu
+                                        cung ấp lại hình ảnh
+                                    </el-button>
                                 </td>
 
                             </tr>
@@ -129,6 +167,8 @@ import rest_api from "../../api/rest_api";
 import Vue from 'vue';
 import ElementUI from 'element-ui';
 import PhanTrang from "../Ui/phanTrang.vue";
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 import {
     Icon
 } from 'element-ui';
@@ -144,9 +184,16 @@ export default {
     data() {
         return {
             list_data: [],
+            list_data_export: [],
             loading: {
                 status: false,
                 text: 'Loading...'
+            },
+            dataSearch:{
+                tuNgay:'',
+                denNgay:'',
+                key:'',
+                type:1
             },
             trangbatdau: false,
             paging: {
@@ -159,13 +206,62 @@ export default {
     },
     mounted() {
         console.log('Mounted Giao dịch admin...');
-        this.getData();
+        this.getData(1);
     },
     methods: {
-        updateStatus(item, status){
+        getData2(){
+            console.log('getData2')
+
+            const jsonData = [
+                { Name: 'John', Age: 30 },
+                { Name: 'Jane', Age: 25 },
+            ];
+
+            const worksheet = XLSX.utils.json_to_sheet(this.list_data_export);
+
+            const columnWidths = [{ wch: 5 },
+                { wch: 5 },
+                { wch: 30 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+                { wch: 20 },
+            ]; // Chiều rộng của cột A và B
+            worksheet['!cols'] = columnWidths;
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+
+            const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+            const data = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+
+            saveAs(data, 'excel_file.xlsx');
+        },
+        updateStatus(item, status) {
             let params = {
                 id: item.id,
-                trang_thai:status,
+                trang_thai: status,
             }
             this.loading.status = true;
             this.loading.text = 'Loading...'
@@ -191,24 +287,35 @@ export default {
             this.paging.currentPage = e.currentPage;
             this.getData()
         },
-        getData(){
+        getData(e) {
             console.log('getData')
-
+            this.dataSearch.type = e==1?1:2;
             let params = {
+                tuNgay:this.dataSearch.tuNgay,
+                denNgay:this.dataSearch.denNgay,
+                toanBo:this.dataSearch.type==2?true:false,
                 start: this.paging.start,
                 limit: this.paging.limit,
-                key: '',
+                key: this.dataSearch.key,
             }
             this.loading.status = true;
             this.loading.text = 'Loading...'
-            this.list_data = [];
 
+            if(this.dataSearch.type==1){
+
+                this.list_data = [];
+            }
             rest_api.post('/admin/danh-sach-yeu-cau-vay', params).then(
                 response => {
                     if (response.data.rc == 0) {
-                        this.list_data = response.data.data;
-                        this.paging.total = response.data.total
-                        this.thongBao('success', 'Lấy dữ liệu thành công')
+                        if(this.dataSearch.type==1){
+                            this.list_data = response.data.data;
+                            this.paging.total = response.data.total
+                            this.thongBao('success', 'Lấy dữ liệu thành công')
+                        }else{
+                            this.list_data_export = response.data.data
+                            this.getData2()
+                        }
                     } else {
                         this.thongBao('error', response.data.rd)
                     }

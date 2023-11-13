@@ -64,11 +64,26 @@ class AdminController extends Controller
         return json_encode($res);
     }
     public function danhSachYeuCauVay(Request $request){
-
         $req = $request->all();
         $list = thongTinCaNhan::where('so_tien_vay','>',0)->with('thongTinTaiKhoan');
+        if($req['tuNgay']&&$req['denNgay']){
+            Log::info('Tìm trong khoảng thời gian');
+            $list->whereBetween('created_at', [$req['tuNgay'].' 00:00:00', $req['denNgay'].' 23:59:59']);
+        }
+        if($req['tuNgay']&&$req['denNgay']==''){
+            Log::info('Chỉ có ngày bắt đầu');
+            $list->where('created_at', '>=', $req['tuNgay'].' 00:00:00');
+        }
+        if($req['tuNgay']==''&&$req['denNgay']){
+            Log::info('Chỉ có ngày kết thúc');
+            $list->where('created_at', '<=', $req['denNgay'].' 23:59:59');
+        }
         $total = $list->count();
-        $data = $list->orderBy('created_at', 'DESC')->skip($req['start'])->take($req['limit'])->get();
+        if($req['toanBo']){
+            $data = $list->orderBy('created_at', 'DESC')->get();
+        }else{
+            $data = $list->orderBy('created_at', 'DESC')->skip($req['start'])->take($req['limit'])->get();
+        }
         if (count($data)) {
             $res = [
                 'rc' => '0',

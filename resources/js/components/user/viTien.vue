@@ -141,7 +141,7 @@ export default {
     },
     methods: {
         diDenChamSocKhachHang() {
-            window.open('https://t.me/hoTroVayVonTaiChinh', '_self')
+            window.open('https://t.me/vaytienonlinevietcredia', '_self')
         },
         handleClose() {
             this.show_thong_bao = false;

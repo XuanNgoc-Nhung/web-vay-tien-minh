@@ -25,6 +25,8 @@
     },
     "dependencies": {
         "bootstrap-vue": "^2.23.1",
-        "element-ui": "^2.15.13"
+        "element-ui": "^2.15.13",
+        "file-saver": "^2.0.5",
+        "xlsx": "^0.16.9"
     }
 }
