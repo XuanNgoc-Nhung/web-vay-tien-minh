@@ -30,6 +30,7 @@
                             </a>
                         </div>
                     </div>
+
                     <div class="noti-text-container"><span
                             class="ant-typography noti-text">096***2 đã rút 40.000.000 đ</span></div>
                     <div style="display: flex; justify-content: center; min-height: 100px;">
