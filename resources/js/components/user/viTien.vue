@@ -37,7 +37,7 @@
                 </div>
                 <div style="padding: 0px 5px;">
                     <div @click.prevent="rutTien()" class="item"
-                         style="cursor: pointer; background: red; border-radius: 50px;"><span
+                         style="cursor: pointer; background: rgb(20, 30, 210); border-radius: 50px;"><span
                         class="ant-typography"
                         style="flex: 1 1 0%; font-size: 16px; padding-left: 20px; color: rgb(255, 255, 255);"><strong>Rút tiền về tài khoản liên kết</strong></span>
                         <span role="img" aria-label="vertical-align-bottom"

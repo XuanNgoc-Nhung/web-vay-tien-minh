@@ -12,7 +12,8 @@
                    class="ant-input ant-input-lg input"
                    v-model="thongTinDangKy.rePass"
                    style="border-radius: 50px !important; height: 46px; line-height: 46px; border-color: rgb(54, 124, 76) !important;">
-            <div>
+            <div v-if="false">
+
                 <el-radio v-model="thongTinDangKy.loaiTaiKhoan" label="1">Khách hàng cá nhân</el-radio>
                 <el-radio v-model="thongTinDangKy.loaiTaiKhoan" label="2">Khách hàng doanh nghiệp</el-radio>
             </div>

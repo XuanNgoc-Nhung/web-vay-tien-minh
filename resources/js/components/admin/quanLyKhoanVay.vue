@@ -122,7 +122,7 @@
                                              style="min-width:100px;min-height:100px;max-width:150px;max-height:150px">
                                     </el-card>
                                 </td>
-                                <td class="text-center">{{ item.so_tien_vay.toLocaleString() }} vnđ</td>
+                                <td class="text-center">{{ parseInt(item.so_tien_vay).toLocaleString() }} vnđ</td>
                                 <td class="text-center">{{ (parseInt(item.lai_suat) / 100).toFixed(2) }}%</td>
                                 <td class="text-center">{{ item.thoi_han_vay }}</td>
                                 <td class="text-center">{{ item.tra_moi_ky.toLocaleString() }} vnđ</td>
@@ -133,12 +133,12 @@
                                     }}
                                 </td>
                                 <td class="text-center">
-                                    <el-button @click.prevent="updateStatus(item,1)" size="mini" type="success">Duyệt
+                                    <el-button :disabled="item.trang_thai == 1" @click.prevent="updateStatus(item,1)" size="mini" type="success">Duyệt
                                     </el-button>
-                                    <el-button @click.prevent="updateStatus(item,2)" size="mini" type="danger">Từ chối
+                                    <el-button :disabled="item.trang_thai == 1 " @click.prevent="updateStatus(item,2)" size="mini" type="danger">Từ chối
                                     </el-button>
-                                    <el-button @click.prevent="updateStatus(item,3)" size="mini" type="warning">Yêu cầu
-                                        cung ấp lại hình ảnh
+                                    <el-button :disabled="item.trang_thai == 1 " @click.prevent="updateStatus(item,3)" size="mini" type="warning">Yêu cầu
+                                        cung cấp lại hình ảnh
                                     </el-button>
                                 </td>
 
@@ -287,7 +287,8 @@ export default {
             this.paging.currentPage = e.currentPage;
             this.getData()
         },
-        getData(e) {
+        getData() {
+            let e =1;
             console.log('getData')
             this.dataSearch.type = e==1?1:2;
             let params = {

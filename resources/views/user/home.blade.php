@@ -38,7 +38,7 @@
                             <img src="/static/media/vay-tin-chap-vpbank.jpg" class="ant-image-img"
                                  style="border-radius: 10px; margin-bottom: 20px;"></div>
                     </div>
-                    <a style="cursor: pointer" onclick="checkDangKyKhoanVay()" class="text-center">
+                    <a style="cursor: pointer; text-align: center" onclick="checkDangKyKhoanVay()" class="text-center">
                         <button type="button" class="ant-btn ant-btn-default choose-btn"
                                 style="margin-top: 20px !important;">
                             <span class="ant-typography"
