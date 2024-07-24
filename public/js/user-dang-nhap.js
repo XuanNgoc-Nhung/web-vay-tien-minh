@@ -3701,7 +3701,7 @@ var render = function render() {
     staticStyle: {
       width: "calc(100% - 80px) !important",
       "border-radius": "50px !important",
-      background: "red !important",
+      background: "rgb(20, 30, 210) !important",
       opacity: "1 !important"
     },
     attrs: {
@@ -3716,7 +3716,7 @@ var render = function render() {
   }, [_c("span", {
     staticClass: "ant-typography",
     staticStyle: {
-      color: "rgb(255, 255, 255)",
+      color: "white",
       "font-weight": "400"
     }
   }, [_vm._v("Đăng nhập")])]), _vm._v(" "), _vm._m(0)]);

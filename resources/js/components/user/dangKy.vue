@@ -19,8 +19,8 @@
             </div>
             <button type="button" class="ant-btn ant-btn-default ant-btn-lg login-btn"
                     @click.prevent="dangKy()"
-                    style="width: calc(100% - 80px) !important; border-radius: 50px !important; background: red !important; opacity: 1 !important;">
-                <span class="ant-typography" style="color: rgb(255, 255, 255); font-weight: 400;">Đăng ký</span>
+                    style="width: calc(100% - 80px) !important; border-radius: 50px !important; background: rgb(20, 30, 210) !important; opacity: 1 !important;">
+                <span class="ant-typography" style="color: white; font-weight: 400;">Đăng ký</span>
             </button>
             <div><br><span class="ant-typography"
                            style="padding: 3px 0px; color: rgb(51, 51, 51); font-weight: 500;">Độ dài mật khẩu từ 6 - 20 ký tự</span><br><span

@@ -8,8 +8,8 @@
                class="ant-input ant-input-lg input"
                style="border-radius: 50px !important; height: 46px; line-height: 46px; border-color: rgb(54, 124, 76) !important;">
         <button type="button" @click.prevent="dangNhapTaiKhoan()" class="ant-btn ant-btn-default ant-btn-lg login-btn"
-                style="width: calc(100% - 80px) !important; border-radius: 50px !important; background: red !important; opacity: 1 !important;">
-            <span class="ant-typography" style="color: rgb(255, 255, 255); font-weight: 400;">Đăng nhập</span>
+                style="width: calc(100% - 80px) !important; border-radius: 50px !important; background: rgb(20, 30, 210) !important; opacity: 1 !important;">
+            <span class="ant-typography" style="color: white; font-weight: 400;">Đăng nhập</span>
         </button>
         <div class="form-footer"><a class="ant-typography"
                                     href="/dang-ky"

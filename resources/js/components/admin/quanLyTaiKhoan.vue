@@ -44,7 +44,7 @@
                             <tr v-for="(item,index) in list_data" :key="index">
                                 <td class="text-center">{{ index + 1 }}</td>
                                 <td class="text-center">{{ item.phone }}</td>
-                                <td class="text-center">{{ item.role==1?'Quản trị viên':'Người dùng' }}</td>
+                                <td class="text-center">{{ item.role == 1 ? 'Quản trị viên' : 'Người dùng' }}</td>
                                 <td class="text-center">{{ item.thong_tin_tai_khoan.ngan_hang }}
                                     <td class="text-center">{{ item.thong_tin_tai_khoan.so_tai_khoan }}
                                         <td class="text-center">{{ item.thong_tin_tai_khoan.chu_tai_khoan }}
@@ -54,8 +54,8 @@
                                             </td>
                                             <td class="text-center">{{ item.thong_bao }}</td>
                                             <td class="text-center">{{
-                                                item.type == 2 ? 'Khách hàng doanh nghiệp' : item.type == 1 ? 'Khách hàng cá nhân'
-                                                : 'Chưa xác định'
+                                                    item.type == 2 ? 'Khách hàng doanh nghiệp' : item.type == 1 ? 'Khách hàng cá nhân'
+                                                        : 'Chưa xác định'
                                                 }}
                                             </td>
                                             <td class="text-center">
@@ -238,43 +238,18 @@
                         <label>Ảnh mặt trước CCCD</label>
                         <div class="source d-flex">
                             <ul class="el-upload-list el-upload-list--picture-card " style="display: contents">
-                                <template
-                                    v-for="(link,i) in anhMatTruocCCCD"
+                                <li
+                                    tabindex="0"
+                                    class="el-upload-list__item is-ready"
                                 >
-                                    <li
-                                        tabindex="0"
-                                        class="el-upload-list__item is-ready"
-                                    >
-                                        <div class="w-100 h-100">
-                                            <img
-                                                :src="link.link"
-                                                alt=""
-                                                class="el-upload-list__item-thumbnail"
-                                            >
-                                        </div>
-                                    </li>
-                                </template>
-                                <li>
-                                    <div class="">
-                                        <el-upload
-                                            ref="anhMatTruoc"
-                                            :show-file-list="false"
-                                            :on-change="upLoadAnhMatTruocCCCD"
-                                            accept=".jpeg,jfif,.jpg,.png"
-                                            action="/"
-                                            :auto-upload="false"
+                                    <div class="w-100 h-100">
+                                        <img
+                                            :src="infoUpdate.anh_mat_truoc"
+                                            alt=""
+                                            class="el-upload-list__item-thumbnail"
                                         >
-                                            <div
-                                                tabindex="0"
-                                                class="el-upload el-upload--picture-card"
-                                            >
-                                                <i
-                                                    class="el-icon-plus"
-                                                /></div>
-                                        </el-upload>
                                     </div>
                                 </li>
-
                             </ul>
 
                         </div>
@@ -283,90 +258,41 @@
                         <label>Ảnh mặt sau CCCD</label>
                         <div class="source d-flex">
                             <ul class="el-upload-list el-upload-list--picture-card " style="display: contents">
-                                <template
-                                    v-for="(link,i) in anhMatSauCCCD"
+                                <li
+                                    tabindex="0"
+                                    class="el-upload-list__item is-ready"
                                 >
-                                    <li
-                                        tabindex="0"
-                                        class="el-upload-list__item is-ready"
-                                    >
-                                        <div class="w-100 h-100">
-                                            <img
-                                                :src="link.link"
-                                                alt=""
-                                                class="el-upload-list__item-thumbnail"
-                                            >
-                                        </div>
-                                    </li>
-                                </template>
-                                <li>
-                                    <div class="">
-                                        <el-upload
-                                            ref="anhMatSau"
-                                            :show-file-list="false"
-                                            :on-change="upLoadAnhMatSauCCCD"
-                                            accept=".jpeg,jfif,.jpg,.png"
-                                            action="/"
-                                            :auto-upload="false"
+                                    <div class="w-100 h-100">
+                                        <img
+                                            :src="infoUpdate.anh_mat_sau"
+                                            alt=""
+                                            class="el-upload-list__item-thumbnail"
                                         >
-                                            <div
-                                                tabindex="0"
-                                                class="el-upload el-upload--picture-card"
-                                            >
-                                                <i
-                                                    class="el-icon-plus"
-                                                /></div>
-                                        </el-upload>
                                     </div>
                                 </li>
-
                             </ul>
+
 
                         </div>
                     </el-col>
                     <el-col :span="8" style="margin-top: 20px">
                         <label>Ảnh chân dung cầm CCCD</label>
                         <div class="source d-flex">
+
                             <ul class="el-upload-list el-upload-list--picture-card " style="display: contents">
-                                <template
-                                    v-for="(link,i) in anhChanDungCCCD"
+                                <li
+                                    tabindex="0"
+                                    class="el-upload-list__item is-ready"
                                 >
-                                    <li
-                                        tabindex="0"
-                                        class="el-upload-list__item is-ready"
-                                    >
-                                        <div class="w-100 h-100">
-                                            <img
-                                                :src="link.link"
-                                                alt=""
-                                                class="el-upload-list__item-thumbnail"
-                                            >
-                                        </div>
-                                    </li>
-                                </template>
-                                <li>
-                                    <div class="">
-                                        <el-upload
-                                            ref="anhChanDung"
-                                            :show-file-list="false"
-                                            :on-change="upLoadAnhChanDungCCCD"
-                                            accept=".jpeg,jfif,.jpg,.png"
-                                            action="/"
-                                            :auto-upload="false"
+                                    <div class="w-100 h-100">
+                                        <img
+                                            :src="infoUpdate.anh_chan_dung"
+                                            alt=""
+                                            class="el-upload-list__item-thumbnail"
                                         >
-                                            <div
-                                                tabindex="0"
-                                                class="el-upload el-upload--picture-card"
-                                            >
-                                                <i
-                                                    class="el-icon-plus"
-                                                /></div>
-                                        </el-upload>
                                     </div>
                                 </li>
-
                             </ul>
-
                         </div>
                     </el-col>
                 </el-row>
@@ -397,7 +323,7 @@ export default {
     },
     data() {
         return {
-            keySearch:'',
+            keySearch: '',
             anhMatTruocCCCD: [],
             anhMatSauCCCD: [],
             anhChanDungCCCD: [],

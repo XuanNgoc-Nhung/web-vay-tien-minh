@@ -3543,6 +3543,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var element_ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(element_ui__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var element_ui_lib_theme_chalk_index_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! element-ui/lib/theme-chalk/index.css */ "./node_modules/element-ui/lib/theme-chalk/index.css");
 /* harmony import */ var element_ui_lib_theme_chalk_index_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(element_ui_lib_theme_chalk_index_css__WEBPACK_IMPORTED_MODULE_3__);
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return { value: void 0, done: !0 }; } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable || "" === iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } throw new TypeError(_typeof(iterable) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
 
@@ -3554,6 +3558,11 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
   components: {},
   data: function data() {
     return {
+      width: 640,
+      height: 480,
+      imageDataMatTruoc: null,
+      imageDataMatSau: null,
+      imageDataChanDung: null,
       thongTinVay: {
         traKyDau: 0,
         laiSuat: 0.8,
@@ -3573,50 +3582,330 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
         chanDung: null,
         giayTo: null
       },
-      loaiTaiKhoan: 1
+      loaiTaiKhoan: 1,
+      currentDevice: null,
+      devices: []
     };
   },
   mounted: function mounted() {
     console.log('Mounted Configs...');
     this.layThongTinCaNhan();
+    this.startCamera();
   },
   methods: {
-    layThongTinCaNhan: function layThongTinCaNhan() {
+    startCameraBak: function startCameraBak() {
       var _this = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var stream;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return navigator.mediaDevices.enumerateDevices();
+            case 3:
+              _this.devices = _context.sent;
+              _this.currentDevice = _this.devices.find(function (device) {
+                return device.kind === 'videoinput';
+              });
+
+              // Bắt đầu truy cập camera
+              _context.next = 7;
+              return navigator.mediaDevices.getUserMedia({
+                video: {
+                  deviceId: _this.currentDevice.deviceId
+                }
+              });
+            case 7:
+              stream = _context.sent;
+              _this.$refs.videoElement.srcObject = stream;
+              _context.next = 14;
+              break;
+            case 11:
+              _context.prev = 11;
+              _context.t0 = _context["catch"](0);
+              console.error('Không thể truy cập camera:', _context.t0);
+            case 14:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, null, [[0, 11]]);
+      }))();
+    },
+    startCamera: function startCamera() {
+      var _this2 = this;
+      navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: this.currentFacingMode
+        }
+      }).then(function (stream) {
+        _this2.$refs.videoElement.srcObject = stream;
+        _this2.stream = stream;
+      })["catch"](function (error) {
+        console.error('Error accessing camera:', error);
+      });
+    },
+    toggleCamera: function toggleCamera() {
+      this.currentFacingMode = this.currentFacingMode === 'environment' ? 'user' : 'environment';
+      this.stream.getTracks().forEach(function (track) {
+        return track.stop();
+      });
+      this.startCamera();
+    },
+    toggleCameraBak: function toggleCameraBak() {
+      var _this3 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var currentIndex, stream;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              // Tìm thiết bị camera tiếp theo
+              currentIndex = _this3.devices.indexOf(_this3.currentDevice);
+              _this3.currentDevice = _this3.devices[(currentIndex + 1) % _this3.devices.length];
+
+              // Bắt đầu truy cập camera mới
+              _context2.next = 5;
+              return navigator.mediaDevices.getUserMedia({
+                video: {
+                  deviceId: _this3.currentDevice.deviceId
+                }
+              });
+            case 5:
+              stream = _context2.sent;
+              _this3.$refs.videoElement.srcObject = stream;
+              _context2.next = 12;
+              break;
+            case 9:
+              _context2.prev = 9;
+              _context2.t0 = _context2["catch"](0);
+              console.error('Không thể chuyển đổi camera:', _context2.t0);
+            case 12:
+            case "end":
+              return _context2.stop();
+          }
+        }, _callee2, null, [[0, 9]]);
+      }))();
+    },
+    startCameraBak2: function startCameraBak2() {
+      var _this4 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var stream;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              _context3.next = 3;
+              return navigator.mediaDevices.getUserMedia({
+                video: {
+                  width: _this4.width,
+                  height: _this4.height
+                },
+                audio: false
+              });
+            case 3:
+              stream = _context3.sent;
+              // Cập nhật video element với stream video
+              _this4.$refs.videoElement.srcObject = stream;
+              _context3.next = 10;
+              break;
+            case 7:
+              _context3.prev = 7;
+              _context3.t0 = _context3["catch"](0);
+              console.error('Lỗi khi khởi động camera:', _context3.t0);
+            case 10:
+            case "end":
+              return _context3.stop();
+          }
+        }, _callee3, null, [[0, 7]]);
+      }))();
+    },
+    sendImageToAPI: function sendImageToAPI() {
+      var _this5 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+        var formData, response;
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) switch (_context4.prev = _context4.next) {
+            case 0:
+              console.log('sendImageToAPI');
+              console.log(_this5.imageDataMatTruoc);
+              if (_this5.imageDataMatTruoc) {
+                _context4.next = 5;
+                break;
+              }
+              console.error('Không có ảnh chụp để gửi');
+              return _context4.abrupt("return");
+            case 5:
+              _context4.prev = 5;
+              // Tạo FormData và thêm ảnh vào
+              formData = new FormData();
+              formData.append('image', _this5.imageDataMatTruoc, 'image.png');
+
+              // Gửi FormData lên API
+              _context4.next = 10;
+              return fetch('/api/upload', {
+                method: 'POST',
+                body: formData
+              });
+            case 10:
+              response = _context4.sent;
+              if (response.ok) {
+                console.log('Ảnh đã được gửi lên API thành công');
+              } else {
+                console.error('Lỗi khi gửi ảnh lên API:', response.status);
+              }
+              _context4.next = 17;
+              break;
+            case 14:
+              _context4.prev = 14;
+              _context4.t0 = _context4["catch"](5);
+              console.error('Lỗi khi gửi ảnh lên API:', _context4.t0);
+            case 17:
+            case "end":
+              return _context4.stop();
+          }
+        }, _callee4, null, [[5, 14]]);
+      }))();
+    },
+    chupAnhChanDung: function chupAnhChanDung() {
+      try {
+        // Tạo một canvas và vẽ ảnh từ video element
+        var canvas = document.createElement('canvas');
+        canvas.width = this.width;
+        canvas.height = this.height;
+        canvas.getContext('2d').drawImage(this.$refs.videoElement, 0, 0, this.width, this.height);
+        // Lưu ảnh chụp được vào biến imageDataMatTruoc
+        this.imageDataChanDung = canvas.toDataURL('image/jpeg');
+      } catch (error) {
+        console.error('Lỗi khi chụp ảnh:', error);
+      }
+    },
+    chupAnhMatSau: function chupAnhMatSau() {
+      try {
+        // Tạo một canvas và vẽ ảnh từ video element
+        var canvas = document.createElement('canvas');
+        canvas.width = this.width;
+        canvas.height = this.height;
+        canvas.getContext('2d').drawImage(this.$refs.videoElement, 0, 0, this.width, this.height);
+
+        // Lưu ảnh chụp được vào biến imageDataMatTruoc
+        this.imageDataMatSau = canvas.toDataURL('image/jpeg');
+      } catch (error) {
+        console.error('Lỗi khi chụp ảnh:', error);
+      }
+    },
+    chupAnhMatTruoc: function chupAnhMatTruoc() {
+      try {
+        // Tạo một canvas và vẽ ảnh từ video element
+        var canvas = document.createElement('canvas');
+        canvas.width = this.width;
+        canvas.height = this.height;
+        canvas.getContext('2d').drawImage(this.$refs.videoElement, 0, 0, this.width, this.height);
+
+        // Lưu ảnh chụp được vào biến imageDataMatTruoc
+        this.imageDataMatTruoc = canvas.toDataURL('image/jpeg');
+      } catch (error) {
+        console.error('Lỗi khi chụp ảnh:', error);
+      }
+    },
+    captureImage: function captureImage() {
+      try {
+        // Tạo một canvas và vẽ ảnh từ video element
+        var canvas = document.createElement('canvas');
+        canvas.width = this.width;
+        canvas.height = this.height;
+        canvas.getContext('2d').drawImage(this.$refs.videoElement, 0, 0, this.width, this.height);
+
+        // Lưu ảnh chụp được vào biến imageDataMatTruoc
+        this.imageDataMatTruoc = canvas.toDataURL('image/jpeg');
+      } catch (error) {
+        console.error('Lỗi khi chụp ảnh:', error);
+      }
+    },
+    uploadImage: function uploadImage() {
+      var _this6 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+        var formData;
+        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+          while (1) switch (_context5.prev = _context5.next) {
+            case 0:
+              _context5.prev = 0;
+              // Upload ảnh lên server
+              formData = new FormData();
+              formData.append('image', _this6.imageDataMatTruocToBlob(_this6.imageDataMatTruoc));
+              _context5.next = 5;
+              return fetch('/upload', {
+                method: 'POST',
+                body: formData
+              });
+            case 5:
+              console.log('Ảnh đã được upload thành công!');
+              _context5.next = 11;
+              break;
+            case 8:
+              _context5.prev = 8;
+              _context5.t0 = _context5["catch"](0);
+              console.error('Lỗi khi upload ảnh:', _context5.t0);
+            case 11:
+            case "end":
+              return _context5.stop();
+          }
+        }, _callee5, null, [[0, 8]]);
+      }))();
+    },
+    imageDataMatTruocToBlob: function imageDataMatTruocToBlob(dataUrl) {
+      var parts = dataUrl.split(';base64,');
+      var contentType = parts[0].split(':')[1];
+      var raw = window.atob(parts[1]);
+      var rawLength = raw.length;
+      var uint8Array = new Uint8Array(rawLength);
+      for (var i = 0; i < rawLength; ++i) {
+        uint8Array[i] = raw.charCodeAt(i);
+      }
+      return new Blob([uint8Array], {
+        type: contentType
+      });
+    },
+    layThongTinCaNhan: function layThongTinCaNhan() {
+      var _this7 = this;
       console.log('Lấy thông tin cá nhân');
       _api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/lay-thong-tin-ca-nhan', {}).then(function (response) {
         console.log('Res thông tin cá nhân:');
         console.log(response);
         if (response.data.rc == 0) {
-          _this.loaiTaiKhoan = response.data.data.thong_tin_tai_khoan.type;
-          console.log(_this.loaiTaiKhoan);
+          _this7.loaiTaiKhoan = response.data.data.thong_tin_tai_khoan.type;
+          console.log(_this7.loaiTaiKhoan);
         } else {
-          _this.thongBao('error', response.data.rd);
+          _this7.thongBao('error', response.data.rd);
           // window.open("/", "_self")
         }
       })["catch"](function (e) {});
     },
     uploadXacMinh: function uploadXacMinh() {
-      var _this2 = this;
+      var _this8 = this;
       console.log('Upload Xác Minh');
-      if (!this.selectedFile.matTruoc || !this.selectedFile.matSau || !this.selectedFile.chanDung) {
+      if (!this.imageDataMatSau || !this.imageDataMatTruoc || !this.imageDataChanDung) {
         this.thongBao('error', 'Vui lòng bổ sung thông tin.');
         return;
       }
-      var dataForm = new FormData();
-      dataForm.append('matTruoc', this.selectedFile.matTruoc, this.selectedFile.matTruoc.name);
-      dataForm.append('matSau', this.selectedFile.matSau, this.selectedFile.matSau.name);
-      dataForm.append('chanDung', this.selectedFile.chanDung, this.selectedFile.chanDung.name);
-      if (this.selectedFile.giayTo) {
-        dataForm.append('giayTo', this.selectedFile.giayTo, this.selectedFile.giayTo.name);
-      }
-      _api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/xac-minh-hinh-anh', dataForm).then(function (response) {
+      // var dataForm = new FormData()
+      // dataForm.append('matTruoc', this.selectedFile.matTruoc, this.selectedFile.matTruoc.name)
+      // dataForm.append('matSau', this.selectedFile.matSau, this.selectedFile.matSau.name)
+      // dataForm.append('chanDung', this.selectedFile.chanDung, this.selectedFile.chanDung.name)
+      // if (this.selectedFile.giayTo) {
+      //     dataForm.append('giayTo', this.selectedFile.giayTo, this.selectedFile.giayTo.name)
+      // }
+      _api_rest_api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/xac-minh-hinh-anh', {
+        matTruoc: this.imageDataMatTruoc,
+        matSau: this.imageDataMatSau,
+        chanDung: this.imageDataChanDung
+      }).then(function (response) {
         if (response && response.data.rc == 0) {
           window.open("/xac-minh-thong-tin-ca-nhan", "_self");
         } else {
-          _this2.thongBao('error', response.data.rd);
+          _this8.thongBao('error', response.data.rd);
         }
-        _this2.loading.status = false;
+        _this8.loading.status = false;
       })["catch"](function (e) {});
     },
     uploadFileMatTruoc: function uploadFileMatTruoc(e) {
@@ -3743,27 +4032,72 @@ var render = function render() {
       transform: "none"
     }
   }, [_vm._m(0), _vm._v(" "), _c("div", {
-    staticClass: "image-container",
-    style: {
-      "background-image": "url(" + _vm.urlUpload.matTruoc + ")"
+    staticStyle: {
+      "text-align": "center"
     }
-  }, [_c("span", {
+  }, [_c("div", {
+    staticStyle: {
+      "border-radius": "10px"
+    }
+  }, [_c("video", {
+    ref: "videoElement",
+    attrs: {
+      width: "250",
+      height: "200",
+      autoplay: ""
+    }
+  })]), _vm._v(" "), _c("button", {
+    staticStyle: {
+      bottom: "5px",
+      right: "15px",
+      width: "15%"
+    },
+    on: {
+      click: _vm.toggleCamera
+    }
+  }, [_c("i", {
+    staticClass: "el-icon-video-camera"
+  })])]), _vm._v(" "), _c("div", {
+    staticClass: "image-container",
+    staticStyle: {
+      position: "relative"
+    }
+  }, [_vm.imageDataMatTruoc ? _c("div", {
+    staticStyle: {
+      position: "absolute",
+      right: "10px",
+      top: "10px"
+    }
+  }, [_c("i", {
+    staticClass: "el-icon-refresh-right",
+    staticStyle: {
+      "font-size": "20px",
+      cursor: "pointer"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        _vm.imageDataMatTruoc = null;
+      }
+    }
+  })]) : _vm._e(), _vm._v(" "), !_vm.imageDataMatTruoc ? _c("span", {
     staticClass: "anticon anticon-camera",
     staticStyle: {
+      cursor: "pointer",
       "font-size": "30px",
       color: "rgb(51, 51, 51)"
     },
     attrs: {
       role: "img",
       "aria-label": "camera"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.chupAnhMatTruoc();
+      }
     }
   }, [_c("svg", {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: !_vm.urlUpload.matTruoc,
-      expression: "!urlUpload.matTruoc"
-    }],
     attrs: {
       viewBox: "64 64 896 896",
       focusable: "false",
@@ -3777,51 +4111,64 @@ var render = function render() {
     attrs: {
       d: "M864 248H728l-32.4-90.8a32.07 32.07 0 00-30.2-21.2H358.6c-13.5 0-25.6 8.5-30.1 21.2L296 248H160c-44.2 0-80 35.8-80 80v456c0 44.2 35.8 80 80 80h704c44.2 0 80-35.8 80-80V328c0-44.2-35.8-80-80-80zm8 536c0 4.4-3.6 8-8 8H160c-4.4 0-8-3.6-8-8V328c0-4.4 3.6-8 8-8h186.7l17.1-47.8 22.9-64.2h250.5l22.9 64.2 17.1 47.8H864c4.4 0 8 3.6 8 8v456zM512 384c-88.4 0-160 71.6-160 160s71.6 160 160 160 160-71.6 160-160-71.6-160-160-160zm0 256c-53 0-96-43-96-96s43-96 96-96 96 43 96 96-43 96-96 96z"
     }
-  })])]), _vm._v(" "), _c("input", {
-    ref: "uploadShop",
-    attrs: {
-      type: "file",
-      accept: "image/*",
-      id: "camerafront"
-    },
-    on: {
-      change: _vm.uploadFileMatTruoc
-    }
-  }), _vm._v(" "), _c("span", {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: !_vm.urlUpload.matTruoc,
-      expression: "!urlUpload.matTruoc"
-    }],
+  })])]) : _vm._e(), _vm._v(" "), !_vm.imageDataMatTruoc ? _c("div", {
     staticClass: "ant-typography",
     staticStyle: {
       color: "rgb(51, 51, 51)",
       "font-weight": "700",
       "font-size": "16px"
     }
-  }, [_vm._v("Mặt trước CMND / CCCD")])]), _vm._v(" "), _c("div", {
-    staticClass: "image-container",
-    style: {
-      "background-image": "url(" + _vm.urlUpload.matSau + ")"
+  }, [_vm._v("Mặt trước CMND / CCCD")]) : _c("img", {
+    ref: "matTruoc",
+    staticStyle: {
+      width: "100%",
+      height: "inherit !important",
+      "border-radius": "10px"
+    },
+    attrs: {
+      src: _vm.imageDataMatTruoc
     }
-  }, [_c("span", {
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "image-container",
+    staticStyle: {
+      position: "relative"
+    }
+  }, [_vm.imageDataMatSau ? _c("div", {
+    staticStyle: {
+      position: "absolute",
+      right: "10px",
+      top: "10px"
+    }
+  }, [_c("i", {
+    staticClass: "el-icon-refresh-right",
+    staticStyle: {
+      "font-size": "20px",
+      cursor: "pointer"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        _vm.imageDataMatSau = null;
+      }
+    }
+  })]) : _vm._e(), _vm._v(" "), !_vm.imageDataMatSau ? _c("span", {
     staticClass: "anticon anticon-camera",
     staticStyle: {
+      cursor: "pointer",
       "font-size": "30px",
       color: "rgb(51, 51, 51)"
     },
     attrs: {
       role: "img",
       "aria-label": "camera"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.chupAnhMatSau();
+      }
     }
   }, [_c("svg", {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: !_vm.urlUpload.matSau,
-      expression: "!urlUpload.matSau"
-    }],
     attrs: {
       viewBox: "64 64 896 896",
       focusable: "false",
@@ -3835,50 +4182,64 @@ var render = function render() {
     attrs: {
       d: "M864 248H728l-32.4-90.8a32.07 32.07 0 00-30.2-21.2H358.6c-13.5 0-25.6 8.5-30.1 21.2L296 248H160c-44.2 0-80 35.8-80 80v456c0 44.2 35.8 80 80 80h704c44.2 0 80-35.8 80-80V328c0-44.2-35.8-80-80-80zm8 536c0 4.4-3.6 8-8 8H160c-4.4 0-8-3.6-8-8V328c0-4.4 3.6-8 8-8h186.7l17.1-47.8 22.9-64.2h250.5l22.9 64.2 17.1 47.8H864c4.4 0 8 3.6 8 8v456zM512 384c-88.4 0-160 71.6-160 160s71.6 160 160 160 160-71.6 160-160-71.6-160-160-160zm0 256c-53 0-96-43-96-96s43-96 96-96 96 43 96 96-43 96-96 96z"
     }
-  })])]), _vm._v(" "), _c("input", {
-    attrs: {
-      type: "file",
-      accept: "image/*",
-      id: "cameraback"
-    },
-    on: {
-      change: _vm.uploadFileMatSau
-    }
-  }), _vm._v(" "), _c("span", {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: !_vm.urlUpload.matSau,
-      expression: "!urlUpload.matSau"
-    }],
+  })])]) : _vm._e(), _vm._v(" "), !_vm.imageDataMatSau ? _c("div", {
     staticClass: "ant-typography",
     staticStyle: {
       color: "rgb(51, 51, 51)",
       "font-weight": "700",
       "font-size": "16px"
     }
-  }, [_vm._v("Mặt sau CMND / CCCD")])]), _vm._v(" "), _c("div", {
-    staticClass: "image-container",
-    style: {
-      "background-image": "url(" + _vm.urlUpload.chanDung + ")"
+  }, [_vm._v("Mặt sau CMND / CCCD")]) : _c("img", {
+    ref: "matSau",
+    staticStyle: {
+      width: "100%",
+      height: "inherit !important",
+      "border-radius": "10px"
+    },
+    attrs: {
+      src: _vm.imageDataMatSau
     }
-  }, [_c("span", {
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "image-container",
+    staticStyle: {
+      position: "relative"
+    }
+  }, [_vm.imageDataChanDung ? _c("div", {
+    staticStyle: {
+      position: "absolute",
+      right: "10px",
+      top: "10px"
+    }
+  }, [_c("i", {
+    staticClass: "el-icon-refresh-right",
+    staticStyle: {
+      "font-size": "20px",
+      cursor: "pointer"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        _vm.imageDataChanDung = null;
+      }
+    }
+  })]) : _vm._e(), _vm._v(" "), !_vm.imageDataChanDung ? _c("span", {
     staticClass: "anticon anticon-camera",
     staticStyle: {
+      cursor: "pointer",
       "font-size": "30px",
       color: "rgb(51, 51, 51)"
     },
     attrs: {
       role: "img",
       "aria-label": "camera"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.chupAnhChanDung();
+      }
     }
   }, [_c("svg", {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: !_vm.urlUpload.chanDung,
-      expression: "!urlUpload.chanDung"
-    }],
     attrs: {
       viewBox: "64 64 896 896",
       focusable: "false",
@@ -3892,29 +4253,23 @@ var render = function render() {
     attrs: {
       d: "M864 248H728l-32.4-90.8a32.07 32.07 0 00-30.2-21.2H358.6c-13.5 0-25.6 8.5-30.1 21.2L296 248H160c-44.2 0-80 35.8-80 80v456c0 44.2 35.8 80 80 80h704c44.2 0 80-35.8 80-80V328c0-44.2-35.8-80-80-80zm8 536c0 4.4-3.6 8-8 8H160c-4.4 0-8-3.6-8-8V328c0-4.4 3.6-8 8-8h186.7l17.1-47.8 22.9-64.2h250.5l22.9 64.2 17.1 47.8H864c4.4 0 8 3.6 8 8v456zM512 384c-88.4 0-160 71.6-160 160s71.6 160 160 160 160-71.6 160-160-71.6-160-160-160zm0 256c-53 0-96-43-96-96s43-96 96-96 96 43 96 96-43 96-96 96z"
     }
-  })])]), _vm._v(" "), _c("input", {
-    attrs: {
-      type: "file",
-      accept: "image/*",
-      id: "cameraface"
-    },
-    on: {
-      change: _vm.uploadFileChanDung
-    }
-  }), _vm._v(" "), _c("span", {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: !_vm.urlUpload.chanDung,
-      expression: "!urlUpload.chanDung"
-    }],
+  })])]) : _vm._e(), _vm._v(" "), !_vm.imageDataChanDung ? _c("div", {
     staticClass: "ant-typography",
     staticStyle: {
       color: "rgb(51, 51, 51)",
       "font-weight": "700",
       "font-size": "16px"
     }
-  }, [_vm._v("Ảnh chân dung")])]), _vm._v(" "), _vm.loaiTaiKhoan == 2 ? _c("div", {
+  }, [_vm._v("Ảnh chân dung")]) : _c("img", {
+    staticStyle: {
+      width: "100%",
+      height: "inherit !important",
+      "border-radius": "10px"
+    },
+    attrs: {
+      src: _vm.imageDataChanDung
+    }
+  })]), _vm._v(" "), false ? undefined : _vm._e(), _vm._v(" "), false ? undefined : _vm._e(), _vm._v(" "), _vm.loaiTaiKhoan == 2 ? _c("div", {
     staticClass: "image-container",
     style: {
       "background-image": "url(" + _vm.urlUpload.giayTo + ")"

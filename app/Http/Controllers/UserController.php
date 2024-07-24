@@ -225,36 +225,36 @@ class UserController extends Controller
     {
         Log::info('Xác minh thông tin hình ảnh:');
         $req = $request->all();
-        $filePathHinhAnhMatTruoc = null;
-        $filePathHinhAnhMatSau = null;
-        $filePathHinhAnhChanDung = null;
-        $filePathHinhAnhGiayTo = null;
-        if ($request->file('matTruoc')) {
-            $hinhAnhMatTruoc = $request->file('matTruoc');
-            $filePathHinhAnhMatTruoc = '/images/xacMinh/' . uniqid() . '.' . $hinhAnhMatTruoc->extension();
-            $hinhAnhMatTruoc->move(public_path('images/xacMinh'), $filePathHinhAnhMatTruoc);
-        }
-        if ($request->file('matSau')) {
-            $hinhAnhMatSau = $request->file('matSau');
-            $filePathHinhAnhMatSau = '/images/xacMinh/' . uniqid() . '.' . $hinhAnhMatSau->extension();
-            $hinhAnhMatSau->move(public_path('images/xacMinh'), $filePathHinhAnhMatSau);
-        }
-        if ($request->file('chanDung')) {
-            $hinhAnhChanDung = $request->file('chanDung');
-            $filePathHinhAnhChanDung = '/images/xacMinh/' . uniqid() . '.' . $hinhAnhChanDung->extension();
-            $hinhAnhChanDung->move(public_path('images/xacMinh'), $filePathHinhAnhChanDung);
-        }
-        if ($request->file('giayTo')) {
-            $hinhAnhGiayTo = $request->file('giayTo');
-            $filePathHinhAnhGiayTo = '/images/xacMinh/' . uniqid() . '.' . $hinhAnhGiayTo->extension();
-            $hinhAnhGiayTo->move(public_path('images/xacMinh'), $filePathHinhAnhGiayTo);
-        }
+//        $filePathHinhAnhMatTruoc = null;
+//        $filePathHinhAnhMatSau = null;
+//        $filePathHinhAnhChanDung = null;
+//        $filePathHinhAnhGiayTo = null;
+//        if ($request->file('matTruoc')) {
+//            $hinhAnhMatTruoc = $request->file('matTruoc');
+//            $filePathHinhAnhMatTruoc = '/images/xacMinh/' . uniqid() . '.' . $hinhAnhMatTruoc->extension();
+//            $hinhAnhMatTruoc->move(public_path('images/xacMinh'), $filePathHinhAnhMatTruoc);
+//        }
+//        if ($request->file('matSau')) {
+//            $hinhAnhMatSau = $request->file('matSau');
+//            $filePathHinhAnhMatSau = '/images/xacMinh/' . uniqid() . '.' . $hinhAnhMatSau->extension();
+//            $hinhAnhMatSau->move(public_path('images/xacMinh'), $filePathHinhAnhMatSau);
+//        }
+//        if ($request->file('chanDung')) {
+//            $hinhAnhChanDung = $request->file('chanDung');
+//            $filePathHinhAnhChanDung = '/images/xacMinh/' . uniqid() . '.' . $hinhAnhChanDung->extension();
+//            $hinhAnhChanDung->move(public_path('images/xacMinh'), $filePathHinhAnhChanDung);
+//        }
+//        if ($request->file('giayTo')) {
+//            $hinhAnhGiayTo = $request->file('giayTo');
+//            $filePathHinhAnhGiayTo = '/images/xacMinh/' . uniqid() . '.' . $hinhAnhGiayTo->extension();
+//            $hinhAnhGiayTo->move(public_path('images/xacMinh'), $filePathHinhAnhGiayTo);
+//        }
         $profile = thongTinCaNhan::where('user_id', Auth::user()->id)->first();
         if ($profile) {
-            $profile->anh_mat_truoc = $filePathHinhAnhMatTruoc;
-            $profile->anh_mat_sau = $filePathHinhAnhMatSau;
-            $profile->anh_chan_dung = $filePathHinhAnhChanDung;
-            $profile->anh_giay_to = $filePathHinhAnhGiayTo;
+            $profile->anh_mat_truoc = $request->matTruoc;
+            $profile->anh_mat_sau = $request->matSau;
+            $profile->anh_chan_dung = $request->chanDung;
+            $profile->anh_giay_to = '234';
             $profile->save();
             $res = [
                 'rc' => '0',
@@ -430,10 +430,10 @@ class UserController extends Controller
     {
         Log::info('Gửi tin nhắn tới telegram với nội dung:');
         Log::info($mess);
-        Telegram::sendMessage([
-            'chat_id' => env('TELEGRAM_CHANNEL_ID', ''),
-            'parse_mode' => 'HTML',
-            'text' => $mess
-        ]);
+//        Telegram::sendMessage([
+//            'chat_id' => env('TELEGRAM_CHANNEL_ID', ''),
+//            'parse_mode' => 'HTML',
+//            'text' => $mess
+//        ]);
     }
 }
