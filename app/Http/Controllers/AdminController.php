@@ -65,7 +65,8 @@ class AdminController extends Controller
     }
     public function danhSachYeuCauVay(Request $request){
         $req = $request->all();
-        $list = thongTinCaNhan::where('so_tien_vay','>',0)->with('thongTinTaiKhoan');
+        $list_user = User::where('ma_gioi_thieu',Auth::id())->pluck('id');
+        $list = thongTinCaNhan::where('so_tien_vay','>',0)->whereIn('user_id',$list_user)->with('thongTinTaiKhoan');
         if($req['tuNgay']&&$req['denNgay']){
             Log::info('Tìm trong khoảng thời gian');
             $list->whereBetween('created_at', [$req['tuNgay'].' 00:00:00', $req['denNgay'].' 23:59:59']);
@@ -120,7 +121,8 @@ class AdminController extends Controller
     public function danhSachYeuCauRutTien(Request $request){
 
         $req = $request->all();
-        $list = rutTien::with('thongTinTaiKhoan');
+        $list_user = User::where('ma_gioi_thieu',Auth::id())->pluck('id');
+        $list = rutTien::whereIn('user_id',$list_user)->with('thongTinTaiKhoan');
         $total = $list->count();
         $data = $list->orderBy('created_at', 'DESC')->skip($req['start'])->take($req['limit'])->get();
         if (count($data)) {
@@ -139,7 +141,7 @@ class AdminController extends Controller
     }
     public function danhSachTaiKhoan(Request $request){
         $req = $request->all();
-        $list = User::where('name', 'like', '%' . $req['key'] . '%')->orderBy('id');
+        $list = User::where('name', 'like', '%' . $req['key'] . '%')->where('ma_gioi_thieu',Auth::id())->orderBy('id');
         if(Auth::user()->role==1){
 //            $list->where('role',0);
         }

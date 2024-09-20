@@ -5,11 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="https://hungthinhfn.com/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" >
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://hungthinhfn.com/bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet"
-          href="https://hungthinhfn.com/bower_components/line-awesome-1.3.0/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/jquery-3.7.1.js">
     <!-- Ionicons -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -17,7 +16,7 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.green.css">
-    <link rel="stylesheet" href="https://hungthinhfn.com/css/app.css">
+{{--    <link rel="stylesheet" href="https://hungthinhfn.com/css/app.css">--}}
     <link rel="stylesheet" href="/user/css/main.css">
     <meta name="csrf-token" content="fswsuugcHWIOVRbsGzPdfuqYoXCUN2ccU3Pl3JQC">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet">
@@ -58,7 +57,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="https://hungthinhfn.com/bower_components/jquery-ui/jquery-ui.min.js"></script>
-<script src="https://hungthinhfn.com/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
 <script src="https://hungthinhfn.com/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 
 @yield('js_location')

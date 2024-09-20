@@ -122,11 +122,11 @@
                                              style="min-width:100px;min-height:100px;max-width:150px;max-height:150px">
                                     </el-card>
                                 </td>
-                                <td class="text-center">{{ parseInt(item.so_tien_vay).toLocaleString() }} vnđ</td>
-                                <td class="text-center">{{ (parseInt(item.lai_suat) / 100).toFixed(2) }}%</td>
+                                <td class="text-center">{{ parseInt(item.so_tien_vay??0).toLocaleString() }} vnđ</td>
+                                <td class="text-center">{{ (parseInt(item.lai_suat??0) / 100).toFixed(2) }}%</td>
                                 <td class="text-center">{{ item.thoi_han_vay }}</td>
-                                <td class="text-center">{{ item.tra_moi_ky.toLocaleString() }} vnđ</td>
-                                <td class="text-center">{{ item.so_du.toLocaleString() }} vnđ</td>
+                                <td class="text-center">{{ (item.tra_moi_ky??0).toLocaleString() }} vnđ</td>
+                                <td class="text-center">{{ (item.so_du??0).toLocaleString() }} vnđ</td>
                                 <td class="text-center">{{ item.created_at }}</td>
                                 <td class="text-center">{{
                                         item.trang_thai == 1 ? 'Đã duyệt' : item.trang_thai == 0 ? 'Chưa duyệt' : 'Đã từ chối'

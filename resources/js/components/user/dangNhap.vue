@@ -53,6 +53,7 @@ export default {
             }
             if(this.thongTinDangNhap.phone.length!=10){
                 this.thongBao('error','Số điện thoại không hợp lệ.')
+                return;
             }
             this.thongTinDangNhap.pass = this.thongTinDangNhap.pass.toLowerCase();
             console.log(this.thongTinDangNhap)

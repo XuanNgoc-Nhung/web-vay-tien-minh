@@ -28,11 +28,11 @@
                                          v-model="thongTinVay.soTien"></el-input-number>
                         <el-input-number v-else @input="tinhTienHangThang" :step="500000" style="width: 100%"
                                          placeholder="Nhập số tiền cần vay" type="number"
-                                         :min="5000000" :max="100000000" v-model="thongTinVay.soTien"></el-input-number>
+                                         :min="5000000" :max="300000000" v-model="thongTinVay.soTien"></el-input-number>
                     </div>
                     <div class="subtitle">
                         <span class="ant-typography">{{ loaiTaiKhoan == 1 ? 'Từ 5.000.000đ' : 'Từ 50.000.000đ' }}</span>
-                        <span class="ant-typography">{{ loaiTaiKhoan == 1 ? 'Đến 100.000.000đ' : 'Từ 500.000.000đ'}}</span>
+                        <span class="ant-typography">{{ loaiTaiKhoan == 1 ? 'Đến 300.000.000đ' : 'Từ 500.000.000đ'}}</span>
                     </div>
                     <div class="month-container" style="padding: 10px;"><span
                         class="ant-typography">Chọn thời hạn vay</span>
@@ -116,7 +116,7 @@ export default {
                 {name: '24 tháng', value: 24},
                 {name: '36 tháng', value: 36},
                 {name: '48 tháng', value: 48},
-                {name: '60 tháng', value: 60},
+                // {name: '60 tháng', value: 60},
             ],
             thongTinVay: {
                 traKyDau: 0,
@@ -166,8 +166,8 @@ export default {
             }
             if(this.loaiTaiKhoan==1){
 
-                if (this.thongTinVay.soTien < 5000000 || this.thongTinVay.soTien > 100000000) {
-                    this.thongBao('error', 'Số tiền vay nằm trong khoảng từ 5.000.000 vnđ đến 100.000.000 vnđ.')
+                if (this.thongTinVay.soTien < 5000000 || this.thongTinVay.soTien > 300000000) {
+                    this.thongBao('error', 'Số tiền vay nằm trong khoảng từ 5.000.000 vnđ đến 300.000.000 vnđ.')
                     return;
                 }
             }

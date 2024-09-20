@@ -79,60 +79,79 @@
                     <div>
                         <h5 style="text-align: center;"><b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b></h5><h5
                         style="text-align: center; "><b>ĐỘC LẬP - TỰ DO - HANH PHÚC</b></h5><h5
-                        style="text-align: center; "><b>ĐƠN VAY VỐN KIÊM HỢP ĐỒNG</b></h5><h5>Bên A (Bên cho vay) :
-                        CÔNG TY TÀI CHÍNH CỔ PHẦN TÍN VIỆT Tên quốc tế  VIETCREDIT FINANCE JOINT STOCK COMPANY<br></h5>
-                        <p>Mã số hợp đồng:&nbsp;<span id="codeContractSetting"
-                                                      style="color:red">{{ 'HDVV0' + thongTinCaNhan.id }}</span>
+                        style="text-align: center; "><b>HỢP ĐỒNG VAY TIỀN</b></h5><h5>Bên A (Bên cho vay) :Công ty Tài chính Trách nhiệm hữu hạn HOME CREDIT<br></h5>
+<!--                        <p>Mã số hợp đồng:&nbsp;<span id="codeContractSetting"-->
+<!--                                                      style="color:red">{{ 'HDVV0' + thongTinCaNhan.id }}</span>-->
+<!--                        </p>-->
+                        <p>Bên B(Bên vay) Ông/Bà: {{thongTinCaNhan.ho_ten}}</p>
+                        <p>Số CMT / CCCD: {{thongTinCaNhan.cmnd}}</p>
+                        <p>Ngày ký: {{thongTinCaNhan.created_at}}</p>
+                        <p>Số tiền khoản vay: {{
+                                thongTinCaNhan.so_tien_vay ? (parseInt(thongTinCaNhan.so_tien_vay)).toLocaleString() : 0
+                            }} VNĐ</p>
+                        <p>Mã hợp đồng: {{ 'HDVV0' + thongTinCaNhan.id }}</p>
+                        <p>Thời gian vay: {{thongTinCaNhan.created_at}}</p>
+                        <p>Lãi xuất vay: {{
+                                ((parseInt(thongTinCaNhan.lai_suat) / 100).toFixed(2))}} % mỗi tháng</p>
+                        <p>
+                            Hợp đồng nêu rõ các bên đã đặt được thỏa thuận vay sau khi thương lượng và trên
+                            cơ sở bình đẳng, tự nguyện và nhất trí. Tất cả các bên cần đọc kỹ tất cả các điều
+                            khoản trong thỏa thuận này, sau khi ký vào thỏa thuận này coi như các bên đã hiểu
+                            đầy đủ và đồng ý hoàn toàn với tất cả các điều khoản và nội dung trong thỏa thuận
+                            này. <br>
+                            1.Phù hợp với các nguyên tắc bình đẳng, tự nguyện, trung thực và uy tín, hai bên
+                            thống nhất ký kết hợp đồng vay sau khi thương lượng và cùng cam kết thực hiện.<br>
+                            2.Bên B cung cấp tài liệu đính kèm của hợp đồng vay và có hiệu lực pháp lý như
+                            hợp đồng vay này.<br>
+                            3.Bên B sẽ tạo lệnh tính tiền gốc và lãi dựa trên số tiền vay từ ví ứng dụng do bên A
+                            cung cấp.<br>
+                            4.Điều khoản đảm bảo.<br>
+                            - Bên vay không được sử dụng tiền vay để thực hiện các hoạt động bất hợp pháp.
+                            Nếu không, bên A có quyền yêu cầu bên B hoàn trả ngay tiền gốc và lãi, bên B phải
+                            chịu các trách nhiệm pháp lý phát sinh từ đó.<br>
+                            - Bên vay phải trả nợ gốc và lãi trong thời gian quy định hợp đồng. Đối với phần
+                            quá hạn, người cho vay có quyền thu hồi nợ trong thời hạn và thu ( lãi quá hạn ) %
+                            trên tổng số tiền vay trong ngày.<br>
+                            - Gốc và lãi của mỗi lần trả nợ sẽ được hệ thống tự động chuyển từ tài khoản ngân
+                            hàng do bên B bảo lưu sang tài khoản ngân hàng của bên A. Bên B phải đảm bảo có
+                            đủ tiền trong tài khoản ngân hàng trước ngày trả nợ hàng tháng.<br>
+                            5.Chịu trách nhiệm do vi phạm hợp đồng<br>
+                            - Nếu bên B không trả được khoản vay theo quy định trong hợp đồng. Bên B phải
+                            chịu các khoản bồi thường thiệt hại đã thanh lý và phí luật sư, phí kiện tụng, chi phí
+                            đi lại và các chi phí khác phát sinh do kiện tụng.<br>
+                            - Khi bên A cho rẳng bên B đã hoặc có thể xảy ra tình huống ảnh hưởng đến khoản
+                            vay thì bên A có quyền yêu cầu bên B phải trả lại kịp thời trước thời hạn.<br>
+                            - Người vay và người bảo lãnh không được vi phạm điều lệ hợp đồng vì bất kỳ lý
+                            do gì<br>
+                            6.Phương thức giải quyết tranh chấp hợp đồng.<br>
+                            Tranh chấp phát sinh trong quá trình thực hiện hợp đồng này sẽ được giải quyết
+                            thông qua thương lượng thân thiện giữa các bên hoặc có thể nhờ bên thứ ba làm
+                            trung gian hòa giải. Nếu thương lượng hoặc hòa giải không thành, có thể khởi kiện
+                            ra tòa án nhân dân nơi bên A có trụ sở.<br>
+                            7.Khi người vay trong quá trình xét duyệt khoản vay không thành công do nhiều
+                            yếu tố khác nhau như chứng minh thư sai, thẻ ngân hàng sai , danh bạ sai. Việc
+                            thông tin sai lệch này sẽ khiến hệ thống phát hiện nghi ngờ gian lận hoặc giả mạo
+                            khoản vay và bên vay phải chủ động hợp tác với bên A để xử lý.<br>
+                            8.Nếu không hợp tác. Bên A có quyền khởi kiện ra Tòa án nhân dân và trình báo lên
+                            Trung tâm Báo cáo tín dụng của Ngân hàng nhà nước Việt Nam, hồ sơ nợ xấu sẽ
+                            được phản ánh trong báo cáo tín dụng, ảnh hưởng đến tín dụng sau này của người
+                            vay, vay vốn ngân hàng và hạn chế tiều dùng của người thân, con cái người vay...
                         </p>
-                        <p>Địa chỉ :&nbsp;số 285 Cách Mạng Tháng Tám, Phường 12, Quận 10, TP.HCM</p>
-                        <p>Mã số doanh nghiệp : 0102383351</p>
-                        <p>Người đại diện pháp luật : ÔNG (BÀ) HỒ MINH TUẤN</p>
-                        <p>Chức vụ : Thành Viên Hội Đồng Quản Trị Kiêm giám Đốc</p>
-                        <p>Hai bên thống nhất việc bên A cho bên B vay tiền từ nguồn vốn của bên A theo các điều
-                            kiện dưới đây.</p>
-                        <p>ĐIỀU : THÔNG TIN CƠ BẢN VỀ KHÁCH HÀNG</p>
-                        <p>1.1 Họ Và Tên :&nbsp;<span id="nameSetting"
-                                                      style="color:red">{{ thongTinCaNhan.ho_ten }}</span>&nbsp;&nbsp;Mã
-                            số hợp đồng:&nbsp;<span id="codeContract1Setting"
-                                                    style="color:red">{{ 'HDVV0' + thongTinCaNhan.id }}</span>
-                        </p>
-                        <p>Số CMND / CCCD :&nbsp;<span id="cccdSetting"
-                                                       style="color:red">{{ thongTinCaNhan.cmnd }}</span></p>
-                        <p>Số điện thoại :&nbsp;<span id="usernameSetting"
-                                                      style="color:red">{{
-                                thongTinCaNhan.thong_tin_tai_khoan ? thongTinCaNhan.thong_tin_tai_khoan.phone : ''
-                            }}</span>
-                        </p>
-                        <p>Ngày vay :&nbsp;<span id="createdSetting"
-                                                 style="color:red">{{ thongTinCaNhan.created_at }}</span></p>
-                        <p>Số tiền vay : <span id="moneySetting"
-                                               style="color:red">{{
-                                thongTinCaNhan.so_tien_vay ? thongTinCaNhan.so_tien_vay.toLocaleString() : 0
-                            }} VNĐ</span>
-                        </p>
-                        <p>Kỳ hạn vay : <span id="monthSetting"
-                                              style="color:red">{{ thongTinCaNhan.thoi_han_vay }}</span> tháng</p>
-                        <p>1.2 TIỀN VAY&nbsp;<span id="money1Setting"
-                                                   style="color:red">{{
-                                thongTinCaNhan.so_tien_vay ? thongTinCaNhan.so_tien_vay.toLocaleString() : 0
-                            }}</span>
-                        </p>
-                        <p>- Chỉ tính số tiền bên A cho bên B vay</p>
-                        <p>1.3 TIỀN LÃI &nbsp;<span id="interestRateSetting"
-                                                    style="color:red">{{(parseInt( thongTinCaNhan.lai_suat/100).toFixed(2)) }}%</span></p>
-                        <p>- Chỉ tính khoản lãi liên quan đến số tiền gốc bao gồm cả số tiền lãi trong thời hạn vay
-                            thông thường và nợ quá hạn.</p>
-                        <p>1.4 QUÁ HẠN</p>
-                        <p>- Quá hạn sẽ phát sinh lãi quá hạn và các khoản chi phí khác.</p>
-                        <p>- Chỉ tính việc bên B hoàn trả tiền gốc và lãi của khoản vay và thanh toán phí tín dụng
-                            duyệt nhanh, phí quản lý tài khoản.</p>
-                        <p style="text-align: center; "><img style="max-width:100%;"
-                                                             src="/static/media/anhConDau.jpg"><br>
-                        </p>
-                        <p><br></p>
-                        <p><br></p>
                     </div>
-                    <div><br> <p>Người vay ký</p> <img id="contractAppend" :src="thongTinCaNhan.chu_ky" width="250px"> <h5 id="contractAppendName">{{thongTinCaNhan.ho_ten}}</h5></div>
+                    <div>
+                        <el-row :gutter="20">
+                            <el-col :span="12">
+
+                                <p>Người vay ký</p> <img id="contractAppend" :src="thongTinCaNhan.chu_ky" width="250px"> <h5
+                                id="contractAppendName">{{ thongTinCaNhan.ho_ten }}</h5>
+                            </el-col>
+                            <el-col :span="12">
+                                <p style="text-align: center; "><img style="max-width:100%;"
+                                                                     src="/static/media/anhConDau.jpg"><br>
+                                </p>
+                            </el-col>
+                        </el-row>
+                    </div>
                 </div>
             </div>
             <span slot="footer" class="dialog-footer">
@@ -153,17 +172,19 @@
                         <tr>
                             <th class="ant-table-cell">Kỳ</th>
                             <th class="ant-table-cell">Số tiền</th>
-<!--                            <th class="ant-table-cell">Ngày đóng</th>-->
+                            <!--                            <th class="ant-table-cell">Ngày đóng</th>-->
                         </tr>
                         </thead>
                         <tbody class="ant-table-tbody">
                         <tr v-for="(item,i) in 12" class="ant-table-row ant-table-row-level-0">
                             <td class="ant-table-cell"><span class="ant-typography">Kì thứ {{ i + 1 }}</span></td>
                             <td class="ant-table-cell"><span
-                                class="ant-typography"><strong>{{ thongTinCaNhan.tra_moi_ky ? thongTinCaNhan.tra_moi_ky.toLocaleString() : 0 }}</strong></span>
+                                class="ant-typography"><strong>{{
+                                    thongTinCaNhan.tra_moi_ky ? thongTinCaNhan.tra_moi_ky.toLocaleString() : 0
+                                }}</strong></span>
                             </td>
-<!--                            <td class="ant-table-cell"><span class="ant-typography"><strong>13 - 9</strong></span>-->
-<!--                            </td>-->
+                            <!--                            <td class="ant-table-cell"><span class="ant-typography"><strong>13 - 9</strong></span>-->
+                            <!--                            </td>-->
                         </tr>
                         </tbody>
                     </table>

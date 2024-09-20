@@ -30,7 +30,7 @@
                         </div>
                         <div style="display: flex; flex-direction: column; align-items: flex-end;"><span
                             class="ant-typography"
-                            style="font-size: 17px; color: rgb(206, 79, 83); font-weight: 700;">{{ thongTinCaNhan.so_du ? thongTinCaNhan.so_du.toLocaleString() : 0 }}  VND </span>
+                            style="font-size: 17px; color: rgb(206, 79, 83); font-weight: 700;">{{ thongTinCaNhan.so_du ? parseInt(thongTinCaNhan.so_du).toLocaleString() : 0 }}  VND </span>
                         </div>
                     </div>
                     <a href="/bien-dong-so-du" style="text-decoration: underline; margin: 5px;">Biến động số dư</a>
@@ -107,9 +107,9 @@
             :before-close="handleClose">
             <div>
                 <div><i style="font-size: 40px; color: mediumvioletred" class="el-icon-warning-outline"></i></div>
-                <p style="margin-top: 15px; color:red">{{ noi_dung_thong_bao }}</p>
-                <p style="margin-top: 10px">Liên hệ CSKH trực tuyến để được hỗ trợ</p>
-                <el-button @click="diDenChamSocKhachHang()" type="primary">Ấn vào đây để liên hệ CSKH</el-button>
+                <p style="margin-top: 15px; color:red">Sai thông tin liên kết ví.</p>
+<!--                <el-button @click="dangXuat()" type="primary">Đồng ý</el-button>-->
+                <el-button @click="diDenChamSocKhachHang()" type="primary">Liên hệ CSKH</el-button>
             </div>
         </el-dialog>
     </div>
@@ -140,8 +140,11 @@ export default {
         this.layThongTinCaNhan();
     },
     methods: {
+        dangXuat() {
+            window.open('/dang-xuat', '_self')
+        },
         diDenChamSocKhachHang() {
-            window.open('https://t.me/vaytienonlinevietcredia', '_self')
+            window.open('https://m.me/360989817103989', '_self')
         },
         handleClose() {
             this.show_thong_bao = false;
@@ -155,6 +158,9 @@ export default {
                     console.log(response)
                     if (response.data.rc == 0) {
                         this.thongTinCaNhan = response.data.data;
+                        if(!this.thongTinCaNhan.trang_thai){
+                            this.thongBao('warning','Khoản vay của bạn đang chờ duyệt.')
+                        }
                     } else {
                         this.thongBao('error', response.data.rd)
                         // window.open("/", "_self")

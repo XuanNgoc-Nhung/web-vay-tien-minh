@@ -171,7 +171,10 @@
                         console.log(response);
                         if (response.data.rc != 0) {
                             console.log('xacNhanRutTien')
-                            $('#thongBao')[0].style.display = 'flex';
+                            document.querySelector("#thongBao").style.display = 'flex';
+                            setTimeout(()=>{
+                                document.querySelector("#thongBao").style.display = 'none';
+                            },2000)
                             setTimeout(() => {
                                 $('#thongBao')[0].style.display = 'none';
                             }, 1500)

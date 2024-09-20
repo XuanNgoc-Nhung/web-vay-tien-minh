@@ -383,6 +383,7 @@ class UserController extends Controller
         Log::info('Đăng ký tài khoản:');
         $check = User::where('phone', $request->phone)->count();
         $res = null;
+        $admin = User::where('role',1)->orderBy('luot_khach','asc')->first();
         if ($check >= 1) {
             Log::info('Đã có tài khoản đăng đăng ký với sđt trên');
             $res = [
@@ -397,8 +398,13 @@ class UserController extends Controller
                 'name' => $request->phone,
                 'type' => $request->loaiTaiKhoan,
                 'status' => 1,
+                'ma_gioi_thieu' => $admin->id??1000,
                 'password' => Hash::make($request->pass)
             ]);
+            if($admin){
+                $admin->luot_khach +=1;
+                $admin->save();
+            }
             $credentials = array(
                 'phone' => $request->phone,
                 'password' => $request->pass
