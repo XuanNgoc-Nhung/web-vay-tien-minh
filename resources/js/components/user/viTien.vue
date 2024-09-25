@@ -107,7 +107,7 @@
             :before-close="handleClose">
             <div>
                 <div><i style="font-size: 40px; color: mediumvioletred" class="el-icon-warning-outline"></i></div>
-                <p style="margin-top: 15px; color:red">Sai thông tin liên kết ví.</p>
+                <p style="margin-top: 15px; color:red">{{thongTinCaNhan.trang_thai?'Sai thông tin liên kết ví':'Quý khách có khoản vay đang xét duyệt, vui lòng chờ'}}.</p>
 <!--                <el-button @click="dangXuat()" type="primary">Đồng ý</el-button>-->
                 <el-button @click="diDenChamSocKhachHang()" type="primary">Liên hệ CSKH</el-button>
             </div>

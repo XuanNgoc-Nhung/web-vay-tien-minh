@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\cauHinhWeb;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,5 +26,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        // Chia sẻ biến cho tất cả các view
+        $config = cauHinhWeb::where('id','1')->first();
+        View::share('cauHinh', $config);
     }
 }

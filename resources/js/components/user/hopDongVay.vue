@@ -79,7 +79,7 @@
                     <div>
                         <h5 style="text-align: center;"><b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b></h5><h5
                         style="text-align: center; "><b>ĐỘC LẬP - TỰ DO - HANH PHÚC</b></h5><h5
-                        style="text-align: center; "><b>HỢP ĐỒNG VAY TIỀN</b></h5><h5>Bên A (Bên cho vay) :Công ty Tài chính Trách nhiệm hữu hạn HOME CREDIT<br></h5>
+                        style="text-align: center; "><b>HỢP ĐỒNG VAY TIỀN</b></h5><h5>Bên A (Bên cho vay) :Công ty Tài chính Trách nhiệm hữu hạn TC SHINHAN<br></h5>
 <!--                        <p>Mã số hợp đồng:&nbsp;<span id="codeContractSetting"-->
 <!--                                                      style="color:red">{{ 'HDVV0' + thongTinCaNhan.id }}</span>-->
 <!--                        </p>-->

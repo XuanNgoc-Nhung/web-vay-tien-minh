@@ -24,14 +24,14 @@
                     <div class="input-container">
                         <el-input-number v-if="loaiTaiKhoan==2" :step="500000" @input="tinhTienHangThang" style="width: 100%"
                                          placeholder="Nhập số tiền cần vay" type="number"
-                                         :min="50000000" :max="500000000"
+                                         :min="200000000" :max="500000000"
                                          v-model="thongTinVay.soTien"></el-input-number>
                         <el-input-number v-else @input="tinhTienHangThang" :step="500000" style="width: 100%"
                                          placeholder="Nhập số tiền cần vay" type="number"
                                          :min="5000000" :max="300000000" v-model="thongTinVay.soTien"></el-input-number>
                     </div>
                     <div class="subtitle">
-                        <span class="ant-typography">{{ loaiTaiKhoan == 1 ? 'Từ 5.000.000đ' : 'Từ 50.000.000đ' }}</span>
+                        <span class="ant-typography">{{ loaiTaiKhoan == 1 ? 'Từ 20.000.000đ' : 'Từ 50.000.000đ' }}</span>
                         <span class="ant-typography">{{ loaiTaiKhoan == 1 ? 'Đến 300.000.000đ' : 'Từ 500.000.000đ'}}</span>
                     </div>
                     <div class="month-container" style="padding: 10px;"><span
@@ -61,7 +61,7 @@
                             <div class="details-information"><span class="ant-typography">Thời hạn vay</span><span
                                 class="ant-typography"> {{ thongTinVay.thoiHan }} tháng</span></div>
                             <div class="details-information"><span class="ant-typography">Ngày vay</span><span
-                                class="ant-typography">12/8/2023</span></div>
+                                class="ant-typography">{{homNay}}</span></div>
                             <div class="details-information"><span
                                 class="ant-typography">Hình thức thanh toán</span><span class="ant-typography">Trả góp mỗi tháng</span>
                             </div>
@@ -110,6 +110,7 @@ export default {
     components: {},
     data() {
         return {
+            homNay:'',
             danh_sach_thoi_han_vay: [
                 {name: '6 tháng', value: 6},
                 {name: '12 tháng', value: 12},
@@ -128,11 +129,20 @@ export default {
         }
     },
     mounted() {
+        this.homNay = this.getCurrentDate();
         console.log(this.lai)
         console.log('Mounted Đăng ký khoản vay...');
         this.layThongTinCaNhan();
     },
     methods: {
+        getCurrentDate(){
+            var now = new Date();
+            const day = String(now.getDate()).padStart(2, '0')
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const year = now.getFullYear();
+            return `${day}/${month}/${year}`;
+
+        },
         layThongTinCaNhan() {
             console.log('Lấy thông tin cá nhân')
             rest_api.post('/lay-thong-tin-ca-nhan', {}).then(
@@ -144,7 +154,7 @@ export default {
                         console.log(this.loaiTaiKhoan)
                         if (this.loaiTaiKhoan==1){
                             this.thongTinVay.laiSuat = parseInt(this.lai.lai_suat_ca_nhan);
-                            this.thongTinVay.soTien = 5000000;
+                            this.thongTinVay.soTien = 20000000;
                         }else{
                             this.thongTinVay.laiSuat = parseInt(this.lai.lai_suat_doanh_nghiep);
                             this.thongTinVay.soTien = 50000000;
@@ -166,14 +176,14 @@ export default {
             }
             if(this.loaiTaiKhoan==1){
 
-                if (this.thongTinVay.soTien < 5000000 || this.thongTinVay.soTien > 300000000) {
-                    this.thongBao('error', 'Số tiền vay nằm trong khoảng từ 5.000.000 vnđ đến 300.000.000 vnđ.')
+                if (this.thongTinVay.soTien < 20000000 || this.thongTinVay.soTien > 300000000) {
+                    this.thongBao('error', 'Số tiền vay nằm trong khoảng từ 20.000.000 vnđ đến 300.000.000 vnđ.')
                     return;
                 }
             }
             if(this.loaiTaiKhoan==2){
-                if (this.thongTinVay.soTien < 50000000 || this.thongTinVay.soTien > 500000000) {
-                    this.thongBao('error', 'Số tiền vay nằm trong khoảng từ 50.000.000 vnđ đến 500.000.000 vnđ.')
+                if (this.thongTinVay.soTien < 200000000 || this.thongTinVay.soTien > 500000000) {
+                    this.thongBao('error', 'Số tiền vay nằm trong khoảng từ 20.000.000 vnđ đến 500.000.000 vnđ.')
                     return;
                 }
             }

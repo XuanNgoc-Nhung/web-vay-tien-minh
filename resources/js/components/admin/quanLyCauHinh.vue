@@ -18,27 +18,43 @@
                             <tr>
                                 <th>Lãi suất cá nhân (‱)</th>
                                 <th>Lãi suất doanh nghiệp(‱)</th>
+                                <th>CSKH</th>
+                                <th>Ngân hàng</th>
+                                <th>Số tài khoản</th>
+                                <th>Chủ tài khoản</th>
                                 <th>Hành động</th>
                             </tr>
                             </thead>
                             <tbody v-if="list_data&&list_data.length">
                             <tr v-for="(item,index) in list_data" :key="index">
                                 <td class="text-center">
-                                    <el-input-number size="" :max="10000" :min="0"  :step="1"
+                                    <el-input-number size="mini" :max="10000" :min="0"  :step="1"
                                                      v-model="item.lai_suat_ca_nhan">
                                     </el-input-number>
                                     =
                                     <el-input style="width:150px" disabled :value="parseInt(item.lai_suat_ca_nhan)/100+'%'"> </el-input>
                                 </td>
                                 <td class="text-center">
-                                    <el-input-number size="" max="10000" :min="0" :step="1"
+                                    <el-input-number size="mini" max="10000" :min="0" :step="1"
                                                      v-model="item.lai_suat_doanh_nghiep">
                                     </el-input-number>
                                     =
-                                    <el-input style="width:150px" disabled :value="parseInt(item.lai_suat_doanh_nghiep)/100+'%'"> </el-input>
+                                    <el-input size="mini" style="width:150px" disabled :value="parseInt(item.lai_suat_doanh_nghiep)/100+'%'"> </el-input>
                                 </td>
                                 <td class="text-center">
-                                    <el-button type="warning" @click.prevent="updateLaiSuat(item)">Cập nhật</el-button>
+                                    <el-input v-model="item.cskh" type='text' size="mini"></el-input>
+                                </td>
+                                <td class="text-center">
+                                    <el-input v-model="item.bank" type='text' size="mini"></el-input>
+                                </td>
+                                <td class="text-center">
+                                    <el-input v-model="item.stk" type='text' size="mini"></el-input>
+                                </td>
+                                <td class="text-center">
+                                    <el-input v-model="item.chu_tk" type='text' size="mini"></el-input>
+                                </td>
+                                <td class="text-center">
+                                    <el-button type="warning" size="mini" @click.prevent="updateLaiSuat(item)">Cập nhật</el-button>
                                 </td>
                             </tr>
                             </tbody>

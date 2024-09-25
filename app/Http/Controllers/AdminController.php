@@ -244,6 +244,10 @@ class AdminController extends Controller
             Log::info($request->lai_suat_ca_nhan);
             Log::info($request->lai_suat_doanh_nghiep);
             $check->lai_suat_ca_nhan = $request->lai_suat_ca_nhan;
+            $check->cskh = $request->cskh??'';
+            $check->bank = $request->bank??'';
+            $check->stk = $request->stk??'';
+            $check->chu_tk = $request->chu_tk??'';
             $check->lai_suat_doanh_nghiep = $request->lai_suat_doanh_nghiep;
             $check->save();
             $res = [

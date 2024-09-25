@@ -38,7 +38,7 @@ class UserController extends Controller
     public function getBankInfo()
     {
         $admin = User::where('role',2)->first();
-        $config = thongTinCaNhan::where('user_id',$admin->id)->first();
+        $config = cauHinhWeb::where('id','1')->first();
         return view('user.bank-info',compact('config'));
     }
 
