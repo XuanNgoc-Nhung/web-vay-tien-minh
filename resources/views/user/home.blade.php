@@ -64,7 +64,7 @@
                             style="margin: 10px 0px; display: flex; justify-content: space-between; align-items: center; padding: 7px 15px; border: 1px solid rgb(54, 124, 76); border-radius: 5px;">
                             @if(Auth::user()->type==1)
                                 <span class="ant-typography"
-                                      style="flex: 1 1 0%; font-size: 16px; color: rgb(54, 124, 76); font-weight: 500;">Hạn mức vay lên đến 100 triệu VNĐ</span>
+                                      style="flex: 1 1 0%; font-size: 16px; color: rgb(54, 124, 76); font-weight: 500;">Hạn mức vay lên đến 500 triệu VNĐ</span>
                                 <span
                                     role="img" aria-label="dashboard" class="anticon anticon-dashboard"
                                     style="font-size: 20px; color: rgb(0, 143, 80);"><svg viewBox="64 64 896 896"

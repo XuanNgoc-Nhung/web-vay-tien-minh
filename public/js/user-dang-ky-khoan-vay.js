@@ -3629,8 +3629,8 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
         return;
       }
       if (this.loaiTaiKhoan == 1) {
-        if (this.thongTinVay.soTien < 20000000 || this.thongTinVay.soTien > 300000000) {
-          this.thongBao('error', 'Số tiền vay nằm trong khoảng từ 20.000.000 vnđ đến 300.000.000 vnđ.');
+        if (this.thongTinVay.soTien < 20000000 || this.thongTinVay.soTien > 500000000) {
+          this.thongBao('error', 'Số tiền vay nằm trong khoảng từ 20.000.000 vnđ đến 500.000.000 vnđ.');
           return;
         }
       }
@@ -3802,7 +3802,7 @@ var render = function render() {
       placeholder: "Nhập số tiền cần vay",
       type: "number",
       min: 5000000,
-      max: 300000000
+      max: 500000000
     },
     on: {
       input: _vm.tinhTienHangThang
@@ -3820,7 +3820,7 @@ var render = function render() {
     staticClass: "ant-typography"
   }, [_vm._v(_vm._s(_vm.loaiTaiKhoan == 1 ? "Từ 20.000.000đ" : "Từ 50.000.000đ"))]), _vm._v(" "), _c("span", {
     staticClass: "ant-typography"
-  }, [_vm._v(_vm._s(_vm.loaiTaiKhoan == 1 ? "Đến 300.000.000đ" : "Từ 500.000.000đ"))])]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.loaiTaiKhoan == 1 ? "Đến 500.000.000đ" : "Từ 500.000.000đ"))])]), _vm._v(" "), _c("div", {
     staticClass: "month-container",
     staticStyle: {
       padding: "10px"

@@ -28,11 +28,11 @@
                                          v-model="thongTinVay.soTien"></el-input-number>
                         <el-input-number v-else @input="tinhTienHangThang" :step="500000" style="width: 100%"
                                          placeholder="Nhập số tiền cần vay" type="number"
-                                         :min="5000000" :max="300000000" v-model="thongTinVay.soTien"></el-input-number>
+                                         :min="5000000" :max="500000000" v-model="thongTinVay.soTien"></el-input-number>
                     </div>
                     <div class="subtitle">
                         <span class="ant-typography">{{ loaiTaiKhoan == 1 ? 'Từ 20.000.000đ' : 'Từ 50.000.000đ' }}</span>
-                        <span class="ant-typography">{{ loaiTaiKhoan == 1 ? 'Đến 300.000.000đ' : 'Từ 500.000.000đ'}}</span>
+                        <span class="ant-typography">{{ loaiTaiKhoan == 1 ? 'Đến 500.000.000đ' : 'Từ 500.000.000đ'}}</span>
                     </div>
                     <div class="month-container" style="padding: 10px;"><span
                         class="ant-typography">Chọn thời hạn vay</span>
@@ -176,8 +176,8 @@ export default {
             }
             if(this.loaiTaiKhoan==1){
 
-                if (this.thongTinVay.soTien < 20000000 || this.thongTinVay.soTien > 300000000) {
-                    this.thongBao('error', 'Số tiền vay nằm trong khoảng từ 20.000.000 vnđ đến 300.000.000 vnđ.')
+                if (this.thongTinVay.soTien < 20000000 || this.thongTinVay.soTien > 500000000) {
+                    this.thongBao('error', 'Số tiền vay nằm trong khoảng từ 20.000.000 vnđ đến 500.000.000 vnđ.')
                     return;
                 }
             }

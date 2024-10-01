@@ -178,7 +178,7 @@ export default {
                         if(response.data.data.chu_ky){
                             window.open("/ho-so", "_self")
                         }else{
-                            window.open("/hoan-tat-xac-minh", "_self")
+                            window.open("/xac-nhan-khoan-vay", "_self")
                         }
                     } else {
                         this.thongBao('error', response.data.rd)

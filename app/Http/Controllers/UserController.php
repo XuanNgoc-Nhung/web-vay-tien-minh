@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\cauHinhWeb;
+use App\LichSu;
 use App\rutTien;
 use App\thongTinCaNhan;
 use App\User;
@@ -124,11 +125,15 @@ class UserController extends Controller
                 $profile->so_du = 0;
                 $profile->save();
                 $mess = 'Khách hàng '. Auth::user()->phone.' thực hiện yêu cầu rút tiền.' ;
+                $lichSu = LichSu::create([
+                    'account' => Auth::user()->phone,
+                    'action' => 'Thực hiện yêu cầu rút tiền',
+                ]);
                 $this->sendMessageToTelegram($mess);
                 $res = [
                     'rc' => '0',
                     'data'=>$dataCreat,
-                    'rd' => 'Yêu cầu rút tiền thành công. Vui lòng đợi admin phê duyệt',
+                    'rd' => Auth::user()->thong_bao,
                 ];
             }
         }
@@ -139,6 +144,11 @@ class UserController extends Controller
     public function dangXuat(Request $request)
     {
         $mess = 'Khách hàng '. Auth::user()->phone.' thực hiện hành động đăng xuất thành công' ;
+
+        $lichSu = LichSu::create([
+            'account' => Auth::user()->phone,
+            'action' => 'Đăng xuất hệ thống.',
+        ]);
         $this->sendMessageToTelegram($mess);
         Auth::guard('web')->logout();
         $request->session()->invalidate();
@@ -179,6 +189,11 @@ class UserController extends Controller
                 'data' => $profile
             ];
             $mess = 'Khách hàng '. Auth::user()->phone.' thực hiện xác minh thông tin ngân hàng thành công' ;
+
+//            $lichSu = LichSu::create([
+//                'account' => Auth::user()->phone,
+//                'action' => 'Thực hiện xác minh thông tin ngân hàng',
+//            ]);
             $this->sendMessageToTelegram($mess);
         } else {
             $res = [
@@ -211,6 +226,11 @@ class UserController extends Controller
                 'data' => $profile
             ];
             $mess = 'Khách hàng '. Auth::user()->phone.' thực hiện xác minh thông tin cá nhân thành công' ;
+
+//            $lichSu = LichSu::create([
+//                'account' => Auth::user()->phone,
+//                'action' => 'Thực hiện xác minh thông tin cá nhân',
+//            ]);
             $this->sendMessageToTelegram($mess);
         } else {
             $res = [
@@ -225,42 +245,47 @@ class UserController extends Controller
     {
         Log::info('Xác minh thông tin hình ảnh:');
         $req = $request->all();
-//        $filePathHinhAnhMatTruoc = null;
-//        $filePathHinhAnhMatSau = null;
-//        $filePathHinhAnhChanDung = null;
-//        $filePathHinhAnhGiayTo = null;
-//        if ($request->file('matTruoc')) {
-//            $hinhAnhMatTruoc = $request->file('matTruoc');
-//            $filePathHinhAnhMatTruoc = '/images/xacMinh/' . uniqid() . '.' . $hinhAnhMatTruoc->extension();
-//            $hinhAnhMatTruoc->move(public_path('images/xacMinh'), $filePathHinhAnhMatTruoc);
-//        }
-//        if ($request->file('matSau')) {
-//            $hinhAnhMatSau = $request->file('matSau');
-//            $filePathHinhAnhMatSau = '/images/xacMinh/' . uniqid() . '.' . $hinhAnhMatSau->extension();
-//            $hinhAnhMatSau->move(public_path('images/xacMinh'), $filePathHinhAnhMatSau);
-//        }
-//        if ($request->file('chanDung')) {
-//            $hinhAnhChanDung = $request->file('chanDung');
-//            $filePathHinhAnhChanDung = '/images/xacMinh/' . uniqid() . '.' . $hinhAnhChanDung->extension();
-//            $hinhAnhChanDung->move(public_path('images/xacMinh'), $filePathHinhAnhChanDung);
-//        }
-//        if ($request->file('giayTo')) {
-//            $hinhAnhGiayTo = $request->file('giayTo');
-//            $filePathHinhAnhGiayTo = '/images/xacMinh/' . uniqid() . '.' . $hinhAnhGiayTo->extension();
-//            $hinhAnhGiayTo->move(public_path('images/xacMinh'), $filePathHinhAnhGiayTo);
-//        }
+        $filePathHinhAnhMatTruoc = null;
+        $filePathHinhAnhMatSau = null;
+        $filePathHinhAnhChanDung = null;
+        $filePathHinhAnhGiayTo = null;
+        if ($request->file('matTruoc')) {
+            $hinhAnhMatTruoc = $request->file('matTruoc');
+            $filePathHinhAnhMatTruoc = '/images/xacMinh/' . uniqid() . '.' . $hinhAnhMatTruoc->extension();
+            $hinhAnhMatTruoc->move(public_path('images/xacMinh'), $filePathHinhAnhMatTruoc);
+        }
+        if ($request->file('matSau')) {
+            $hinhAnhMatSau = $request->file('matSau');
+            $filePathHinhAnhMatSau = '/images/xacMinh/' . uniqid() . '.' . $hinhAnhMatSau->extension();
+            $hinhAnhMatSau->move(public_path('images/xacMinh'), $filePathHinhAnhMatSau);
+        }
+        if ($request->file('chanDung')) {
+            $hinhAnhChanDung = $request->file('chanDung');
+            $filePathHinhAnhChanDung = '/images/xacMinh/' . uniqid() . '.' . $hinhAnhChanDung->extension();
+            $hinhAnhChanDung->move(public_path('images/xacMinh'), $filePathHinhAnhChanDung);
+        }
+        if ($request->file('giayTo')) {
+            $hinhAnhGiayTo = $request->file('giayTo');
+            $filePathHinhAnhGiayTo = '/images/xacMinh/' . uniqid() . '.' . $hinhAnhGiayTo->extension();
+            $hinhAnhGiayTo->move(public_path('images/xacMinh'), $filePathHinhAnhGiayTo);
+        }
         $profile = thongTinCaNhan::where('user_id', Auth::user()->id)->first();
         if ($profile) {
-            $profile->anh_mat_truoc = $request->matTruoc;
-            $profile->anh_mat_sau = $request->matSau;
-            $profile->anh_chan_dung = $request->chanDung;
-            $profile->anh_giay_to = '234';
+            $profile->anh_mat_truoc = $filePathHinhAnhMatTruoc;
+            $profile->anh_mat_sau = $filePathHinhAnhMatSau;
+            $profile->anh_chan_dung = $filePathHinhAnhChanDung;
+//            $profile->anh_giay_to = '';
             $profile->save();
             $res = [
                 'rc' => '0',
                 'rd' => 'Cập nhật thành công',
                 'data' => $profile
             ];
+
+//            $lichSu = LichSu::create([
+//                'account' => Auth::user()->phone,
+//                'action' => 'Thực hiện xác minh thông tin hình ảnh',
+//            ]);
             $mess = 'Khách hàng '. Auth::user()->phone.' thực hiện xác minh thông tin hình ảnh thành công' ;
             $this->sendMessageToTelegram($mess);
         } else {
@@ -297,6 +322,10 @@ class UserController extends Controller
                 'data' => $check,
                 'rd' => 'Xác nhận chữ ký thành công',
             ];
+//            $lichSu = LichSu::create([
+//                'account' => Auth::user()->phone,
+//                'action' => 'Thực hiện ký hợp đồng',
+//            ]);
             $mess = 'Khách hàng '. Auth::user()->phone.' thực hiện ký hợp đồng thành công' ;
             $this->sendMessageToTelegram($mess);
 
@@ -326,6 +355,11 @@ class UserController extends Controller
                 $check->lai_suat = $req['laiSuat'];
                 $check->tra_moi_ky = $req['traMoiKy'];
                 $check->save();
+
+                $lichSu = LichSu::create([
+                    'account' => Auth::user()->phone,
+                    'action' => 'Thực hiện đăng ký vay',
+                ]);
                 $mess = 'Khách hàng '. Auth::user()->phone.' thực hiện đăng ký vay số tiền '.$req['soTien'].'vnđ. Trong thời gian '.$req['thoiHan'].' tháng' ;
                 $this->sendMessageToTelegram($mess);
                 $res = [
@@ -342,6 +376,11 @@ class UserController extends Controller
                 'thoi_han_vay' => $req['thoiHan'],
                 'lai_suat' => $req['laiSuat'],
                 'tra_moi_ky' => $req['traMoiKy'],
+            ]);
+
+            $lichSu = LichSu::create([
+                'account' => Auth::user()->phone,
+                'action' => 'Thực hiện đăng ký vay',
             ]);
             $mess = 'Khách hàng '. Auth::user()->phone.' thực hiện đăng ký vay số tiền '.$req['soTien'].'vnđ. Trong thời gian '.$req['thoiHan'].' tháng' ;
             $this->sendMessageToTelegram($mess);
@@ -362,6 +401,10 @@ class UserController extends Controller
         );
         $auth = Auth::attempt($credentials);
         if ($auth) {
+//            $lichSu = LichSu::create([
+//                'account' => $request->phone,
+//                'action' => 'Thực hiện đăng nhập hệ thống',
+//            ]);
             $this->sendMessageToTelegram('Tài khoản '.$request->phone.'. Thực hiện đăng nhập hệ thống');
             $res = [
                 'rc' => '0',
@@ -401,6 +444,10 @@ class UserController extends Controller
                 'ma_gioi_thieu' => $admin->id??1000,
                 'password' => Hash::make($request->pass)
             ]);
+            $lichSu = LichSu::create([
+                'account' => $request->phone,
+                'action' => 'Thực hiện đăng ký tài khoản',
+            ]);
             if($admin){
                 $admin->luot_khach +=1;
                 $admin->save();
@@ -411,6 +458,10 @@ class UserController extends Controller
             );
             $auth = Auth::attempt($credentials);
             if ($auth) {
+//                $lichSu = LichSu::create([
+//                    'account' => $request->phone,
+//                    'action' => 'Thực hiện đăng nhập sau khi đăng ký tài khoản',
+//                ]);
                 $kh = 'Khách hàng';
                 if($request->loaiTaiKhoan==1){
                     $kh = 'Khách hàng cá nhân có số điện thoại '.$request->phone.'. Đã thực hiện đăng ký tài khoản trên hệ thống.';

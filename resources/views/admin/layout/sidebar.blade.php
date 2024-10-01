@@ -6,6 +6,9 @@
                 <li class=" {{ Request::routeIs('admin.home')? 'active' : '' }}">
                     <a href="{{route('admin.home')}}"><i class="feather-grid"></i> <span>Tổng quan</span></a>
                 </li>
+                <li class=" {{ Request::routeIs('admin.quanLyThongBao')? 'active' : '' }}">
+                    <a href="{{route('admin.quanLyThongBao')}}"><i class="feather-grid"></i> <span>Thông báo</span></a>
+                </li>
                 <li class=" {{ Request::routeIs('admin.cauHinh')? 'active' : '' }}">
                     <a href="{{route('admin.cauHinh')}}"><i class="feather-grid"></i> <span>Cấu hình</span></a>
                 </li>

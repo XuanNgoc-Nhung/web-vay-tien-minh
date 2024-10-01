@@ -3665,6 +3665,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 var render = function render() {
+  var _vm$noi_dung_thong_ba;
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
@@ -3940,7 +3941,7 @@ var render = function render() {
       "margin-top": "15px",
       color: "red"
     }
-  }, [_vm._v(_vm._s(_vm.thongTinCaNhan.trang_thai ? "Sai thông tin liên kết ví" : "Quý khách có khoản vay đang xét duyệt, vui lòng chờ") + ".")]), _vm._v(" "), _c("el-button", {
+  }, [_vm._v(_vm._s((_vm$noi_dung_thong_ba = _vm.noi_dung_thong_bao) !== null && _vm$noi_dung_thong_ba !== void 0 ? _vm$noi_dung_thong_ba : "Sai thông tin liên kết ví") + ".")]), _vm._v(" "), _c("el-button", {
     attrs: {
       type: "primary"
     },

@@ -100,9 +100,9 @@
                             - Bên vay phải trả nợ gốc và lãi trong thời gian quy định hợp đồng. Đối với phần
                             quá hạn, người cho vay có quyền thu hồi nợ trong thời hạn và thu ( lãi quá hạn ) %
                             trên tổng số tiền vay trong ngày.<br>
-                            - Gốc và lãi của mỗi lần trả nợ sẽ được hệ thống tự động chuyển từ tài khoản ngân
-                            hàng do bên B bảo lưu sang tài khoản ngân hàng của bên A. Bên B phải đảm bảo có
-                            đủ tiền trong tài khoản ngân hàng trước ngày trả nợ hàng tháng.<br>
+<!--                            - Gốc và lãi của mỗi lần trả nợ sẽ được hệ thống tự động chuyển từ tài khoản ngân-->
+<!--                            hàng do bên B bảo lưu sang tài khoản ngân hàng của bên A. Bên B phải đảm bảo có-->
+<!--                            đủ tiền trong tài khoản ngân hàng trước ngày trả nợ hàng tháng.<br>-->
                             5.Chịu trách nhiệm do vi phạm hợp đồng<br>
                             - Nếu bên B không trả được khoản vay theo quy định trong hợp đồng. Bên B phải
                             chịu các khoản bồi thường thiệt hại đã thanh lý và phí luật sư, phí kiện tụng, chi phí
@@ -135,7 +135,7 @@
                             </el-col>
                             <el-col :span="12">
                                 <p style="text-align: center; "><img style="max-width:100%;"
-                                                                     src="/static/media/anhConDau.jpg"><br>
+                                                                     src="/static/media/anhConDau.jpg?=112"><br>
                                 </p>
                             </el-col>
                         </el-row>

@@ -45,8 +45,10 @@ Route::group(['prefix' => '/admin','middleware'=>['checkLogin','checkAdmin']], f
     Route::get('/khoan-vay', 'AdminController@getKhoanVay')->name('admin.khoanVay');
     Route::get('/tai-khoan', 'AdminController@getQuanLyTaiKhoan')->name('admin.quanLyTaiKhoan');
     Route::get('/yeu-cau-rut-tien', 'AdminController@getYeuCauRutTien')->name('admin.quanLyYeuCauRutTien');
+    Route::get('/thong-bao', 'AdminController@getThongBao')->name('admin.quanLyThongBao');
     Route::post('/danh-sach-tai-khoan', 'AdminController@danhSachTaiKhoan');
     Route::post('/danh-sach-yeu-cau-vay', 'AdminController@danhSachYeuCauVay');
+    Route::post('/danh-sach-thong-bao', 'AdminController@danhSachThongBao');
     Route::post('/cap-nhat-trang-thai-yeu-cau-vay', 'AdminController@capNhatTrangThaiYeuCauVay');
     Route::post('/cap-nhat-trang-thai-tai-khoan', 'AdminController@capNhatTrangThaiTaiKhoan');
     Route::post('/cap-nhat-thong-tin-nguoi-dung', 'AdminController@capNhatTrangThaiNguoiDung');

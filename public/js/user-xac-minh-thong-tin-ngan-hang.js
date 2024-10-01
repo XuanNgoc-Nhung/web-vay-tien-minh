@@ -3885,7 +3885,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(element_ui__WEBPACK_IMPORTED_MODU
           if (response.data.data.chu_ky) {
             window.open("/ho-so", "_self");
           } else {
-            window.open("/hoan-tat-xac-minh", "_self");
+            window.open("/xac-nhan-khoan-vay", "_self");
           }
         } else {
           _this.thongBao('error', response.data.rd);

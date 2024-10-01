@@ -30,6 +30,9 @@
                                 <th>STT</th>
                                 <th>Số điện thoại</th>
                                 <th>Vai trò</th>
+                                <th>
+                                    Lượt khách
+                                </th>
                                 <th>Ngân hàng</th>
                                 <th>Số tài khoản</th>
                                 <th>Chủ tài khoản</th>
@@ -37,6 +40,7 @@
                                 <th>Thông báo khi rút tiền</th>
                                 <th>Loại tài khoản</th>
                                 <th>Trạng thái rút tiền</th>
+                                <th>Thời gian đăng ký</th>
                                 <th>Hành động</th>
                             </tr>
                             </thead>
@@ -45,37 +49,51 @@
                                 <td class="text-center">{{ index + 1 }}</td>
                                 <td class="text-center">{{ item.phone }}</td>
                                 <td class="text-center">{{ item.role == 1 ? 'Quản trị viên' : 'Người dùng' }}</td>
-                                <td class="text-center">{{ item.thong_tin_tai_khoan.ngan_hang }}
-                                    <td class="text-center">{{ item.thong_tin_tai_khoan.so_tai_khoan }}
-                                        <td class="text-center">{{ item.thong_tin_tai_khoan.chu_tai_khoan }}
-                                            <td class="text-center">
-                                                {{ parseInt(item.thong_tin_tai_khoan.so_du).toLocaleString() }}
-                                                vnđ
-                                            </td>
-                                            <td class="text-center">{{ item.thong_bao }}</td>
+                                <td class="text-center">{{ item.luot_khach }}
+                                    <td class="text-center">
+                                        {{ item.thong_tin_tai_khoan ? item.thong_tin_tai_khoan.ngan_hang : '' }}
+                                        <td class="text-center">
+                                            {{ item.thong_tin_tai_khoan ? item.thong_tin_tai_khoan.so_tai_khoan : '' }}
                                             <td class="text-center">{{
-                                                    item.type == 2 ? 'Khách hàng doanh nghiệp' : item.type == 1 ? 'Khách hàng cá nhân'
-                                                        : 'Chưa xác định'
+                                                    item.thong_tin_tai_khoan ? item.thong_tin_tai_khoan.chu_tai_khoan : ''
                                                 }}
+                                                <td class="text-center">
+                                                    {{
+                                                        parseInt(item.thong_tin_tai_khoan ? item.thong_tin_tai_khoan.so_du : 0).toLocaleString()
+                                                    }}
+                                                    vnđ
+                                                </td>
+                                                <td class="text-center">{{ item.thong_bao }}</td>
+                                                <td class="text-center">{{
+                                                        item.type == 2 ? 'Khách hàng doanh nghiệp' : item.type == 1 ? 'Khách hàng cá nhân'
+                                                            : 'Chưa xác định'
+                                                    }}
+                                                </td>
+                                                <td class="text-center">
+                                                    <span v-if="item.status==1"
+                                                          style="color: green">Đang hoạt động</span>
+                                                    <span v-else style="color: red">Đang bảo trì</span>
+                                                </td>
+                                                <td class="text-center">{{ item.created_at }}</td>
+                                                <td class="text-center">
+                                                    <el-button v-if="item.status!=1"
+                                                               @click.prevent="updateStatus(item,1)"
+                                                               size="mini"
+                                                               type="success">Bật
+                                                    </el-button>
+                                                    <el-button v-else @click.prevent="updateStatus(item,0)" size="mini"
+                                                               type="danger">
+                                                        Chặn rút tiền
+                                                    </el-button>
+                                                    <el-button size="mini" type="primary"
+                                                               @click.prevent="chinhSuaThongTin(item)">Chỉnh
+                                                        sửa
+                                                    </el-button>
+                                                </td>
                                             </td>
-                                            <td class="text-center">
-                                                <span v-if="item.status==1" style="color: green">Đang hoạt động</span>
-                                                <span v-else style="color: red">Đang bảo trì</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <el-button v-if="item.status!=1" @click.prevent="updateStatus(item,1)"
-                                                           size="mini"
-                                                           type="success">Bật
-                                                </el-button>
-                                                <el-button v-else @click.prevent="updateStatus(item,0)" size="mini"
-                                                           type="danger">
-                                                    Chặn rút tiền
-                                                </el-button>
-                                                <el-button size="mini" type="primary"
-                                                           @click.prevent="chinhSuaThongTin(item)">Chỉnh
-                                                    sửa
-                                                </el-button>
-                                            </td>
+                                        </td>
+                                    </td>
+                                </td>
                             </tr>
                             </tbody>
                             <tbody v-else>

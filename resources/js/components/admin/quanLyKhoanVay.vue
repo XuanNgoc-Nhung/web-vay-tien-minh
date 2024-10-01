@@ -64,6 +64,7 @@
                                 <th>Ảnh CMND/CCCD mặt sau</th>
                                 <th>Ảnh chân dung</th>
                                 <th>Giấy tờ liên quan</th>
+                                <th>Ảnh chữ ký</th>
                                 <th>Số tiền vay</th>
                                 <th>Lãi suất</th>
                                 <th>Thời hạn vay</th>
@@ -119,6 +120,12 @@
                                 <td class="text-center">
                                     <el-card shadow="always">
                                         <img :src="item.anh_giay_to" alt=""
+                                             style="min-width:100px;min-height:100px;max-width:150px;max-height:150px">
+                                    </el-card>
+                                </td>
+                                <td class="text-center">
+                                    <el-card shadow="always">
+                                        <img :src="item.chu_ky" alt=""
                                              style="min-width:100px;min-height:100px;max-width:150px;max-height:150px">
                                     </el-card>
                                 </td>
