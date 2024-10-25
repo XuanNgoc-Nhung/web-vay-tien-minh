@@ -8,6 +8,17 @@
                       v-model="keySearch"
             ></el-input>
         </el-col>
+        <el-col :sm="8" :md="4">
+            <label>Trạng thái</label>
+            <el-select v-model="trangThaiVay" placeholder="Chọn">
+                <el-option
+                    v-for="item in list_co_khong"
+                    :key="item.value"
+                    :label="item.name"
+                    :value="item.value">
+                </el-option>
+            </el-select>
+        </el-col>
         <el-col :sm="8" :md="4" style="text-align:center">
             <label style="color: transparent">Tìm kiếm</label>
             <el-button type="success" @click.prevent="getData()" class="d-block">Tìm kiếm
@@ -29,16 +40,19 @@
                             <tr>
                                 <th>STT</th>
                                 <th>Số điện thoại</th>
+                                <th>Trạng thái vay</th>
                                 <th>Vai trò</th>
                                 <th>
                                     Lượt khách
                                 </th>
+                                <th>Người giới thiệu</th>
                                 <th>Ngân hàng</th>
                                 <th>Số tài khoản</th>
                                 <th>Chủ tài khoản</th>
                                 <th>Số dư tài khoản</th>
                                 <th>Thông báo khi rút tiền</th>
-                                <th>Loại tài khoản</th>
+                                <th>Link CSKH</th>
+                                <!--                                <th>Loại tài khoản</th>-->
                                 <th>Trạng thái rút tiền</th>
                                 <th>Thời gian đăng ký</th>
                                 <th>Hành động</th>
@@ -48,51 +62,60 @@
                             <tr v-for="(item,index) in list_data" :key="index">
                                 <td class="text-center">{{ index + 1 }}</td>
                                 <td class="text-center">{{ item.phone }}</td>
+                                <td class="text-center">{{ item.trang_thai_vay?'Đã vay':'Chưa vay' }}</td>
                                 <td class="text-center">{{ item.role == 1 ? 'Quản trị viên' : 'Người dùng' }}</td>
                                 <td class="text-center">{{ item.luot_khach }}
-                                    <td class="text-center">
-                                        {{ item.thong_tin_tai_khoan ? item.thong_tin_tai_khoan.ngan_hang : '' }}
-                                        <td class="text-center">
-                                            {{ item.thong_tin_tai_khoan ? item.thong_tin_tai_khoan.so_tai_khoan : '' }}
-                                            <td class="text-center">{{
-                                                    item.thong_tin_tai_khoan ? item.thong_tin_tai_khoan.chu_tai_khoan : ''
-                                                }}
-                                                <td class="text-center">
-                                                    {{
-                                                        parseInt(item.thong_tin_tai_khoan ? item.thong_tin_tai_khoan.so_du : 0).toLocaleString()
-                                                    }}
-                                                    vnđ
-                                                </td>
-                                                <td class="text-center">{{ item.thong_bao }}</td>
-                                                <td class="text-center">{{
-                                                        item.type == 2 ? 'Khách hàng doanh nghiệp' : item.type == 1 ? 'Khách hàng cá nhân'
-                                                            : 'Chưa xác định'
-                                                    }}
-                                                </td>
-                                                <td class="text-center">
+
+                                </td>
+
+                                <td class="text-left">
+                                    {{ item.nguoi_gioi_thieu ? item.nguoi_gioi_thieu.name : '' }}
+                                </td>
+                                <td class="text-center">
+                                    {{ item.thong_tin_tai_khoan ? item.thong_tin_tai_khoan.ngan_hang : '' }}
+                                </td>
+                                <td class="text-center">
+                                    {{ item.thong_tin_tai_khoan ? item.thong_tin_tai_khoan.so_tai_khoan : '' }}
+                                </td>
+                                <td class="text-center">{{
+                                        item.thong_tin_tai_khoan ? item.thong_tin_tai_khoan.chu_tai_khoan : ''
+                                    }}
+                                </td>
+                                <td class="text-center">
+                                    <div v-if="item.thong_tin_tai_khoan&&item.thong_tin_tai_khoan.so_du">
+                                        {{ parseInt(item.thong_tin_tai_khoan.so_du).toLocaleString()}} vnđ
+                                    </div>
+                                    <div v-else>0 vnđ</div>
+                                </td>
+                                <td class="text-center">{{ item.thong_bao }}</td>
+                                <td class="text-center">
+                                    <a v-if="item.role==1" :href="item.cskh">{{item.cskh}}</a>
+                                </td>
+                                <!--                                                <td class="text-center">{{-->
+                                <!--                                                        item.type == 2 ? 'Khách hàng doanh nghiệp' : item.type == 1 ? 'Khách hàng cá nhân'-->
+                                <!--                                                            : 'Chưa xác định'-->
+                                <!--                                                    }}-->
+                                <!--                                                </td>-->
+                                <td class="text-center">
                                                     <span v-if="item.status==1"
                                                           style="color: green">Đang hoạt động</span>
-                                                    <span v-else style="color: red">Đang bảo trì</span>
-                                                </td>
-                                                <td class="text-center">{{ item.created_at }}</td>
-                                                <td class="text-center">
-                                                    <el-button v-if="item.status!=1"
-                                                               @click.prevent="updateStatus(item,1)"
-                                                               size="mini"
-                                                               type="success">Bật
-                                                    </el-button>
-                                                    <el-button v-else @click.prevent="updateStatus(item,0)" size="mini"
-                                                               type="danger">
-                                                        Chặn rút tiền
-                                                    </el-button>
-                                                    <el-button size="mini" type="primary"
-                                                               @click.prevent="chinhSuaThongTin(item)">Chỉnh
-                                                        sửa
-                                                    </el-button>
-                                                </td>
-                                            </td>
-                                        </td>
-                                    </td>
+                                    <span v-else style="color: red">Đang bảo trì</span>
+                                </td>
+                                <td class="text-center">{{ item.created_at }}</td>
+                                <td class="text-center">
+                                    <el-button v-if="item.status!=1"
+                                               @click.prevent="updateStatus(item,1)"
+                                               size="mini"
+                                               type="success">Bật
+                                    </el-button>
+                                    <el-button v-else @click.prevent="updateStatus(item,0)" size="mini"
+                                               type="danger">
+                                        Chặn rút tiền
+                                    </el-button>
+                                    <el-button size="mini" type="primary"
+                                               @click.prevent="chinhSuaThongTin(item)">Chỉnh
+                                        sửa
+                                    </el-button>
                                 </td>
                             </tr>
                             </tbody>
@@ -142,7 +165,7 @@
                     <el-col :span="6" style="margin-top:20px">
                         <label>Vai trò</label>
                         <div>
-                            <el-select v-model="thongTinChinhSua.type" placeholder="Chọn" style="width: 100%">
+                            <el-select v-model="thongTinChinhSua.role" placeholder="Chọn" style="width: 100%">
                                 <el-option
                                     v-for="item in danh_sach_loai_tai_khoan"
                                     :key="item.name"
@@ -247,11 +270,17 @@
                         <el-input placeholder="Nhập..." type="text"
                                   v-model="infoUpdate.tra_moi_ky"></el-input>
                     </el-col>
-                    <el-col :span="24" style="margin-top:20px">
+                    <el-col :span="thongTinChinhSua.role==1?12:24" style="margin-top:20px">
                         <label>Thông báo khi rút tiền</label>
                         <el-input placeholder="Nhập..." type="text"
                                   v-model="thongTinChinhSua.thong_bao"></el-input>
                     </el-col>
+                    <el-col :span="12" v-if="thongTinChinhSua.role==1" style="margin-top:20px">
+                        <label>Liên kết chăm sóc khách hàng</label>
+                        <el-input placeholder="Nhập..." type="text"
+                                  v-model="thongTinChinhSua.cskh"></el-input>
+                    </el-col>
+
                     <el-col :span="8" style="margin-top: 20px">
                         <label>Ảnh mặt trước CCCD</label>
                         <div class="source d-flex">
@@ -341,7 +370,13 @@ export default {
     },
     data() {
         return {
+            list_co_khong: [
+                {name: 'Tất cả', value: 1},
+                {name: 'Đã vay', value: 2},
+                {name: 'Chưa vay', value: 3},
+            ],
             keySearch: '',
+            trangThaiVay: 1,
             anhMatTruocCCCD: [],
             anhMatSauCCCD: [],
             anhChanDungCCCD: [],
@@ -368,8 +403,8 @@ export default {
             },
             infoUpdate: {},
             danh_sach_loai_tai_khoan: [
-                {name: 'Khách hàng cá nhân', value: 1},
-                {name: 'Khách hàng doanh nghiệp', value: 2},
+                {name: 'Quản trị viên', value: 1},
+                {name: 'Người dùng', value: 0},
             ],
             danh_sach_thu_nhap: [
                 {name: 'Dưới 5tr'},
@@ -504,7 +539,9 @@ export default {
                     dataForm.append('user_id', this.thongTinChinhSua.id)
                     dataForm.append('type', this.thongTinChinhSua.type)
                     dataForm.append('so_du', this.infoUpdate.so_du)
+                    dataForm.append('role', this.thongTinChinhSua.role)
                     dataForm.append('thong_bao', this.thongTinChinhSua.thong_bao)
+                    dataForm.append('cskh', this.thongTinChinhSua.cskh)
                     dataForm.append('ngan_hang', this.infoUpdate.ngan_hang)
                     dataForm.append('so_tai_khoan', this.infoUpdate.so_tai_khoan)
                     dataForm.append('chu_tai_khoan', this.infoUpdate.chu_tai_khoan)
@@ -610,6 +647,7 @@ export default {
                 start: this.paging.start,
                 limit: this.paging.limit,
                 key: this.keySearch,
+                trangThaiVay: this.trangThaiVay,
             }
             this.loading.status = true;
             this.loading.text = 'Loading...'

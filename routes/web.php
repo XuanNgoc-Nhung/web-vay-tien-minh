@@ -13,7 +13,7 @@
 
 
 Auth::routes();
-Route::group(['prefix' => '/','middleware' => ['checkLogin']], function(){
+Route::group(['prefix' => '/','middleware' => ['checkSession','checkLogin']], function(){
     Route::get('/', 'UserController@getHome')->name('user.home');
     Route::get('/ho-so', 'UserController@getPageHoSo')->name('user.hoSo');
     Route::get('/bank-info', 'UserController@getBankInfo')->name('user.bankInfo');

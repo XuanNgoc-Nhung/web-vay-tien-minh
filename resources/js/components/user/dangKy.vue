@@ -90,7 +90,7 @@ export default {
                     console.log('Res đăng ký:')
                     console.log(response)
                     if (response.data.rc == 0) {
-                        window.open("/", "_self")
+                        window.open("/dang-ky-khoan-vay", "_self")
                     } else {
                         this.thongBao('error', response.data.rd)
                     }

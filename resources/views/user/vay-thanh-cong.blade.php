@@ -52,7 +52,7 @@
                         <div class="contact-container"><span
                                 class="ant-typography contact-text"><strong>→</strong></span>
                             <div class="contact">
-                                <a href="https://m.me/360989817103989">
+                                <a href="{{Auth::user()->cskh}}">
                                     <span class="ant-typography contact-title">Liên hệ CSKH để duyệt hồ sơ</span>
                                 </a>
                             </div>

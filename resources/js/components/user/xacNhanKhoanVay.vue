@@ -67,10 +67,13 @@
                     <div>
                         <h5 style="text-align: center;"><b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b></h5><h5
                         style="text-align: center; "><b>ĐỘC LẬP - TỰ DO - HANH PHÚC</b></h5><h5
-                        style="text-align: center; "><b>HỢP ĐỒNG VAY TIỀN</b></h5><h5>Bên A (Bên cho vay) :Công ty Tài chính Trách nhiệm hữu hạn TC SHINHAN<br></h5>
+                        style="text-align: center; "><b>HỢP ĐỒNG VAY TIỀN</b></h5>
+                        <h5>Bên A (Bên cho vay) : CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ TCMB<br></h5>
                         <!--                        <p>Mã số hợp đồng:&nbsp;<span id="codeContractSetting"-->
                         <!--                                                      style="color:red">{{ 'HDVV0' + thongTinCaNhan.id }}</span>-->
                         <!--                        </p>-->
+                        <p>Người đại diện hợp pháp bên A: Ông Nguyễn Văn Chung</p>
+                        <p>Địa chỉ : Huyện Trần Văn Thời Tỉnh Cà Mau</p>
                         <p>Bên B(Bên vay) Ông/Bà: {{thongTinCaNhan.ho_ten}}</p>
                         <p>Số CMT / CCCD: {{thongTinCaNhan.cmnd}}</p>
                         <p>Ngày ký: {{thongTinCaNhan.created_at}}</p>
@@ -128,16 +131,17 @@
                     </div>
                     <div>
                         <el-row :gutter="20">
-                            <el-col :span="12">
-
-                                <p>Người vay ký</p> <img id="contractAppend" :src="thongTinCaNhan.chu_ky" width="250px"> <h5
+                            <el-col :span="12" style="text-align: center">
+                                <p style="padding: 0; margin: 0">Bên vay</p>
+                                <p><i>(Ký và ghi rõ họ tên)</i></p>
+                                <img id="contractAppend" :src="thongTinCaNhan.chu_ky" width="250px"> <h5
                                 id="contractAppendName">{{ thongTinCaNhan.ho_ten }}</h5>
                             </el-col>
-                            <el-col :span="12">
-                                <p style="text-align: center; "><img style="max-width:100%;"
-                                                                     src="/static/media/anhConDau.jpg?=112"><br>
-                                </p>
-                            </el-col>
+<!--                            <el-col :span="12">-->
+<!--                                <p style="text-align: center; "><img style="max-width:100%;"-->
+<!--                                                                     src="/static/media/anhConDau.jpg?=112"><br>-->
+<!--                                </p>-->
+<!--                            </el-col>-->
                         </el-row>
                     </div>
                 </div>

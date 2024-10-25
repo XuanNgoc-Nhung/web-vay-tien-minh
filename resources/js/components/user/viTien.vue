@@ -4,7 +4,7 @@
             <div class="header-container">
                 <div></div>
                 <span class="ant-typography"
-                      style="font-weight: 700; font-size: 18px; color: rgb(255, 255, 255);"><strong>Ví tiền</strong></span>
+                      style="font-weight: 700; font-size: 18px; color: rgb(255, 255, 255);"><strong>Ví tiền {{cskh}}</strong></span>
                 <div></div>
             </div>
             <div style="padding: 10px;">
@@ -17,7 +17,9 @@
                             </div>
                             <div style="padding: 10px; justify-content: flex-start; min-width: 100%;">
                                 <div class="atm-card-information"><span
-                                    class="ant-typography atm-card-text">{{ thongTinCaNhan.so_tai_khoan ? thongTinCaNhan.so_tai_khoan.slice(0, 2) : '' }}*******</span>
+                                    class="ant-typography atm-card-text">{{
+                                        thongTinCaNhan.so_tai_khoan ? thongTinCaNhan.so_tai_khoan.slice(0, 2) : ''
+                                    }}*******</span>
                                     <span class="ant-typography atm-card-text">{{ thongTinCaNhan.chu_tai_khoan }}</span>
                                 </div>
                             </div>
@@ -30,7 +32,9 @@
                         </div>
                         <div style="display: flex; flex-direction: column; align-items: flex-end;"><span
                             class="ant-typography"
-                            style="font-size: 17px; color: rgb(206, 79, 83); font-weight: 700;">{{ thongTinCaNhan.so_du ? parseInt(thongTinCaNhan.so_du).toLocaleString() : 0 }}  VND </span>
+                            style="font-size: 17px; color: rgb(206, 79, 83); font-weight: 700;">{{
+                                thongTinCaNhan.so_du ? parseInt(thongTinCaNhan.so_du).toLocaleString() : 0
+                            }}  VND </span>
                         </div>
                     </div>
                     <a href="/bien-dong-so-du" style="text-decoration: underline; margin: 5px;">Biến động số dư</a>
@@ -107,12 +111,25 @@
             :before-close="handleClose">
             <div>
                 <div><i style="font-size: 40px; color: mediumvioletred" class="el-icon-warning-outline"></i></div>
-<!--                <p style="margin-top: 15px; color:red">{{thongTinCaNhan.trang_thai?'Sai thông tin liên kết ví':'Quý khách có khoản vay đang xét duyệt, vui lòng chờ'}}.</p>-->
-                <p style="margin-top: 15px; color:red">{{noi_dung_thong_bao??'Sai thông tin liên kết ví'}}.</p>
-<!--                <el-button @click="dangXuat()" type="primary">Đồng ý</el-button>-->
+                <!--                <p style="margin-top: 15px; color:red">{{thongTinCaNhan.trang_thai?'Sai thông tin liên kết ví':'Quý khách có khoản vay đang xét duyệt, vui lòng chờ'}}.</p>-->
+                <p style="margin-top: 15px; color:red">{{ noi_dung_thong_bao ?? 'Sai thông tin liên kết ví' }}.</p>
+                <!--                <el-button @click="dangXuat()" type="primary">Đồng ý</el-button>-->
                 <el-button @click="diDenChamSocKhachHang()" type="primary">Liên hệ CSKH</el-button>
             </div>
         </el-dialog>
+        <el-dialog title="Nhập số tiền rút" width="90%" :visible.sync="show_nhap_tien">
+            <el-row :gutter="24">
+                <label>Số tiền rút:</label>
+                <el-col :span="24">
+                    <el-input-number v-model="soTienRut" :min="1" :max="thongTinCaNhan.so_du"></el-input-number>
+                </el-col>
+            </el-row>
+            <span slot="footer" class="dialog-footer">
+            <el-button size="mini" @click="show_nhap_tien = false">Đóng</el-button>
+            <el-button size="mini" :disabled="soTienRut==0" type="primary" @click="tienHanhRutTien()">Đồng ý</el-button>
+          </span>
+        </el-dialog>
+
     </div>
 </template>
 
@@ -128,9 +145,12 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 Vue.use(Icon);
 export default {
+    props:['cskh'],
     components: {},
     data() {
         return {
+            soTienRut: 0,
+            show_nhap_tien: false,
             thongTinCaNhan: {},
             show_thong_bao: false,
             noi_dung_thong_bao: 'Sai thông tin liên kết ví'
@@ -145,7 +165,9 @@ export default {
             window.open('/dang-xuat', '_self')
         },
         diDenChamSocKhachHang() {
-            window.open('https://m.me/360989817103989', '_self')
+            console.log('diDenChamSocKhachHang')
+            console.log(this.thongTinCaNhan)
+            window.open(this.cskh, '_self')
         },
         handleClose() {
             this.show_thong_bao = false;
@@ -159,8 +181,8 @@ export default {
                     console.log(response)
                     if (response.data.rc == 0) {
                         this.thongTinCaNhan = response.data.data;
-                        if(!this.thongTinCaNhan.trang_thai){
-                            this.thongBao('warning','Khoản vay của bạn đang chờ duyệt.')
+                        if (!this.thongTinCaNhan.trang_thai) {
+                            this.thongBao('warning', 'Khoản vay của bạn đang chờ duyệt.')
                         }
                     } else {
                         this.thongBao('error', response.data.rd)
@@ -176,13 +198,18 @@ export default {
                 this.thongBao('error', 'Số dư không đủ.')
                 return;
             } else {
-                this.tienHanhRutTien();
+                this.show_nhap_tien = true;
             }
         },
         tienHanhRutTien() {
+            if(this.soTienRut>this.thongTinCaNhan.so_du){
+                this.thongBao('error','Số dư không đủ.')
+            }
             console.log('Lấy thông tin cá nhân')
             this.noi_dung_thong_bao = 'Hệ thống bận.'
-            rest_api.post('/rut-tien-ca-nhan', {}).then(
+            rest_api.post('/rut-tien-ca-nhan', {
+                soTien: this.soTienRut
+            }).then(
                 response => {
                     console.log('Res đăng ký:')
                     console.log(response)
@@ -193,6 +220,7 @@ export default {
                         this.noi_dung_thong_bao = response.data.rd;
                         this.show_thong_bao = true;
                     }
+                    this.show_nhap_tien = false;
                     console.log(this.thongTinCaNhan)
                 }
             ).catch((e) => {

@@ -84,9 +84,9 @@ class AdminController extends Controller
     public function danhSachYeuCauVay(Request $request)
     {
         $req = $request->all();
-        $list_user = User::where('ma_gioi_thieu', Auth::id())->pluck('id');
+        $list_user = User::where('ma_gioi_thieu', Auth::id())->where('name', 'like', '%' . $req['key'] . '%')->pluck('id');
         if(Auth::user()->role==2){
-            $list_user = User::where('id', '!=',null)->pluck('id');
+            $list_user = User::where('id', '!=',null)->where('name', 'like', '%' . $req['key'] . '%')->pluck('id');
         }
         $list = thongTinCaNhan::where('so_tien_vay', '>', 0)->whereIn('user_id', $list_user)->where('so_tien_vay','!=',null)->with('thongTinTaiKhoan');
         if ($req['tuNgay'] && $req['denNgay']) {
@@ -208,10 +208,20 @@ class AdminController extends Controller
         $list = User::where('name', 'like', '%' . $req['key'] . '%')->where('ma_gioi_thieu', Auth::id())->orderBy('created_at','DESC');
         if (Auth::user()->role == 2) {
             //Admin tổng
-            $list = User::where('name', 'like', '%' . $req['key'] . '%')->orderBy('id');
+            $list = User::where('name', 'like', '%' . $req['key'] . '%')->orderBy('created_at','DESC');
+        }
+        if($req['trangThaiVay']==1){
+//            Tất cả
+//            $list->where('trang_thai_vay',0);
+        }
+        if($req['trangThaiVay']==2){
+            $list->where('trang_thai_vay',1);
+        }
+        if($req['trangThaiVay']==3){
+             $list->where('trang_thai_vay',0);
         }
         $total = $list->count();
-        $data = $list->with('thongTinTaiKhoan')->orderBy('created_at', 'DESC')->skip($req['start'])->take($req['limit'])->get();
+        $data = $list->with(['thongTinTaiKhoan','nguoiGioiThieu'])->orderBy('created_at', 'DESC')->skip($req['start'])->take($req['limit'])->get();
         if (count($data)) {
             $res = [
                 'rc' => '0',
@@ -232,7 +242,9 @@ class AdminController extends Controller
         $check = User::where('id', $request->user_id)->first();
         if ($check) {
             $check->thong_bao = $request->thong_bao;
+            $check->cskh = $request->cskh;
             $check->type = $request->type;
+            $check->role = $request->role;
             $info = thongTinCaNhan::where('user_id', $request->user_id)->first();
             $info->so_du = $request->so_du;
             $info->ngan_hang = $request->ngan_hang;

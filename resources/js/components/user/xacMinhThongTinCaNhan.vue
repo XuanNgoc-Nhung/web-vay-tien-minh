@@ -62,14 +62,14 @@
                         <el-input placeholder="Địa chỉ"
                                   maxlength="500"
                                   show-word-limit v-model="thongTinCaNhan.diaChi"></el-input>
-                        <el-input placeholder="SĐT người thân" type="number"
-                                  maxlength="10"
-                                  show-word-limit v-model="thongTinCaNhan.sdtNguoiThan"></el-input>
-                        <el-input
-                            maxlength="30"
-                            show-word-limit
-                            placeholder="Mối quan hệ với người thân"
-                                  v-model="thongTinCaNhan.mqhNguoiThan"></el-input>
+<!--                        <el-input placeholder="SĐT người thân" type="number"-->
+<!--                                  maxlength="10"-->
+<!--                                  show-word-limit v-model="thongTinCaNhan.sdtNguoiThan"></el-input>-->
+<!--                        <el-input-->
+<!--                            maxlength="30"-->
+<!--                            show-word-limit-->
+<!--                            placeholder="Mối quan hệ với người thân"-->
+<!--                                  v-model="thongTinCaNhan.mqhNguoiThan"></el-input>-->
                     </form>
                     <div class="" style="display: flex; justify-content: center; padding-top: 30px">
                         <button @click.prevent="xacMinhThongTinCaNhan()" type="submit"
@@ -159,14 +159,14 @@ export default {
         },
         xacMinhThongTinCaNhan() {
             console.log('xác minh thông tin:')
-            if (!this.thongTinCaNhan.hoTen || !this.thongTinCaNhan.cccd || !this.thongTinCaNhan.gioiTinh || !this.thongTinCaNhan.ngaySinh || !this.thongTinCaNhan.ngheNghiep || !this.thongTinCaNhan.thuNhap || !this.thongTinCaNhan.mucDichVay || !this.thongTinCaNhan.diaChi || !this.thongTinCaNhan.sdtNguoiThan || !this.thongTinCaNhan.mqhNguoiThan) {
+            if (!this.thongTinCaNhan.hoTen || !this.thongTinCaNhan.cccd || !this.thongTinCaNhan.gioiTinh || !this.thongTinCaNhan.ngaySinh || !this.thongTinCaNhan.ngheNghiep || !this.thongTinCaNhan.thuNhap || !this.thongTinCaNhan.mucDichVay || !this.thongTinCaNhan.diaChi ) {
                 this.thongBao('error', 'Vui lòng bổ sung thông tin.')
                 return;
             }
-            if(this.thongTinCaNhan.sdtNguoiThan.length!=10){
-                this.thongBao('error','Số điện thoại người thân không hợp lệ.')
-                return;
-            }
+            // if(this.thongTinCaNhan.sdtNguoiThan.length!=10){
+            //     this.thongBao('error','Số điện thoại người thân không hợp lệ.')
+            //     return;
+            // }
             console.log(this.thongTinCaNhan)
             rest_api.post('/xac-minh-thong-tin-ca-nhan', this.thongTinCaNhan).then(
                 response => {

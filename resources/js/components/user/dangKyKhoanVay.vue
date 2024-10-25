@@ -24,14 +24,14 @@
                     <div class="input-container">
                         <el-input-number v-if="loaiTaiKhoan==2" :step="500000" @input="tinhTienHangThang" style="width: 100%"
                                          placeholder="Nhập số tiền cần vay" type="number"
-                                         :min="200000000" :max="500000000"
+                                         :min="300000000" :max="500000000"
                                          v-model="thongTinVay.soTien"></el-input-number>
                         <el-input-number v-else @input="tinhTienHangThang" :step="500000" style="width: 100%"
                                          placeholder="Nhập số tiền cần vay" type="number"
                                          :min="5000000" :max="500000000" v-model="thongTinVay.soTien"></el-input-number>
                     </div>
                     <div class="subtitle">
-                        <span class="ant-typography">{{ loaiTaiKhoan == 1 ? 'Từ 20.000.000đ' : 'Từ 50.000.000đ' }}</span>
+                        <span class="ant-typography">{{ loaiTaiKhoan == 1 ? 'Từ 30.000.000đ' : 'Từ 50.000.000đ' }}</span>
                         <span class="ant-typography">{{ loaiTaiKhoan == 1 ? 'Đến 500.000.000đ' : 'Từ 500.000.000đ'}}</span>
                     </div>
                     <div class="month-container" style="padding: 10px;"><span
@@ -117,7 +117,7 @@ export default {
                 {name: '24 tháng', value: 24},
                 {name: '36 tháng', value: 36},
                 {name: '48 tháng', value: 48},
-                // {name: '60 tháng', value: 60},
+                {name: '60 tháng', value: 60},
             ],
             thongTinVay: {
                 traKyDau: 0,
@@ -154,11 +154,12 @@ export default {
                         console.log(this.loaiTaiKhoan)
                         if (this.loaiTaiKhoan==1){
                             this.thongTinVay.laiSuat = parseInt(this.lai.lai_suat_ca_nhan);
-                            this.thongTinVay.soTien = 20000000;
+                            this.thongTinVay.soTien = 30000000;
                         }else{
                             this.thongTinVay.laiSuat = parseInt(this.lai.lai_suat_doanh_nghiep);
                             this.thongTinVay.soTien = 50000000;
                         }
+                        console.error('thongTinVay')
                         console.error(this.thongTinVay)
                     } else {
                         this.thongBao('error', response.data.rd)
@@ -176,14 +177,14 @@ export default {
             }
             if(this.loaiTaiKhoan==1){
 
-                if (this.thongTinVay.soTien < 20000000 || this.thongTinVay.soTien > 500000000) {
-                    this.thongBao('error', 'Số tiền vay nằm trong khoảng từ 20.000.000 vnđ đến 500.000.000 vnđ.')
+                if (this.thongTinVay.soTien < 30000000 || this.thongTinVay.soTien > 500000000) {
+                    this.thongBao('error', 'Số tiền vay nằm trong khoảng từ 30.000.000 vnđ đến 500.000.000 vnđ.')
                     return;
                 }
             }
             if(this.loaiTaiKhoan==2){
-                if (this.thongTinVay.soTien < 200000000 || this.thongTinVay.soTien > 500000000) {
-                    this.thongBao('error', 'Số tiền vay nằm trong khoảng từ 20.000.000 vnđ đến 500.000.000 vnđ.')
+                if (this.thongTinVay.soTien < 300000000 || this.thongTinVay.soTien > 500000000) {
+                    this.thongBao('error', 'Số tiền vay nằm trong khoảng từ 30.000.000 vnđ đến 500.000.000 vnđ.')
                     return;
                 }
             }
@@ -215,7 +216,7 @@ export default {
             console.log(this.thongTinVay.thoiHan)
             let moiThang = (parseInt(this.thongTinVay.soTien) / this.thongTinVay.thoiHan);
             console.log('mỗi tháng trả:' + moiThang)
-            let tienLai = (moiThang * this.thongTinVay.laiSuat) / 10000;
+            let tienLai = (this.thongTinVay.soTien * this.thongTinVay.laiSuat) / 10000;
             this.thongTinVay.traKyDau = (parseInt(moiThang + tienLai))
             console.log('Tiền lãi:' + tienLai)
             console.log('Trả mỗi kỳ:' + this.thongTinVay.traKyDau)

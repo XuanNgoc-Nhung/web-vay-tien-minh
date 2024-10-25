@@ -7,7 +7,7 @@
         <div style="padding-bottom: 80px;">
             <div class="fadein">
                 <div style="opacity: 1; transform: none;">
-                    <div class="header"><span class="ant-typography header-text">Hồ sơ</span></div>
+                    <div class="header"><span class="ant-typography header-text">Hồ sơ {{$linkCSKH}}</span></div>
                     <div>
                         <div class="avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"
                                                   style="width: 120px; height: 120px; line-height: 120px; font-size: 18px;">
@@ -26,7 +26,8 @@
                         </div> <!---->
                         @if($profile->anh_chan_dung==null)
                             <div class="alert-container">
-                                <div><span class="ant-typography" style="font-size: 17px; color: rgb(18, 18, 18);"><strong>Xác thực tài khoản</strong></span>
+                                <div><span class="ant-typography"
+                                           style="font-size: 17px; color: rgb(18, 18, 18);"><strong>Xác thực tài khoản</strong></span>
                                     <div
                                         style="border-bottom: 1px solid rgba(0, 106, 176, 0.3); height: 0.1px; width: 100%;"></div>
                                     <div
@@ -57,7 +58,8 @@
                         @endif
                         @if($profile->anh_chan_dung&&($profile->ho_ten==null||$profile->ho_ten==''||!$profile->ho_ten))
                             <div class="alert-container">
-                                <div><span class="ant-typography" style="font-size: 17px; color: rgb(18, 18, 18);"><strong>Xác thực thông tin cá nhân</strong></span>
+                                <div><span class="ant-typography"
+                                           style="font-size: 17px; color: rgb(18, 18, 18);"><strong>Xác thực thông tin cá nhân</strong></span>
                                     <div
                                         style="border-bottom: 1px solid rgba(0, 106, 176, 0.3); height: 0.1px; width: 100%;"></div>
                                     <div
@@ -88,7 +90,8 @@
                         @endif
                         @if($profile->ho_ten&&(!$profile->so_tai_khoan||$profile->so_tai_khoan==''||$profile->so_tai_khoan==null))
                             <div class="alert-container">
-                                <div><span class="ant-typography" style="font-size: 17px; color: rgb(18, 18, 18);"><strong>Xác thực thông ngân hàng</strong></span>
+                                <div><span class="ant-typography"
+                                           style="font-size: 17px; color: rgb(18, 18, 18);"><strong>Xác thực thông ngân hàng</strong></span>
                                     <div
                                         style="border-bottom: 1px solid rgba(0, 106, 176, 0.3); height: 0.1px; width: 100%;"></div>
                                     <div
@@ -119,7 +122,8 @@
                         @endif
                         @if($profile->so_tai_khoan&&(!$profile->chu_ky||$profile->chu_ky==''||$profile->chu_ky==null))
                             <div class="alert-container">
-                                <div><span class="ant-typography" style="font-size: 17px; color: rgb(18, 18, 18);"><strong>Ký hợp đồng</strong></span>
+                                <div><span class="ant-typography"
+                                           style="font-size: 17px; color: rgb(18, 18, 18);"><strong>Ký hợp đồng</strong></span>
                                     <div
                                         style="border-bottom: 1px solid rgba(0, 106, 176, 0.3); height: 0.1px; width: 100%;"></div>
                                     <div
@@ -196,13 +200,16 @@
                                     <span class="ant-typography tab-text" style="color: rgb(255, 255, 255);">Thông tin cá nhân</span>
                                 </a>
                             </div>
-                            <div class="tab"><span role="img" aria-label="customer-service"
-                                                   class="anticon anticon-customer-service"
-                                                   style="color: rgb(255, 255, 255); font-size: 25px; margin-right: 20px;"><svg
+                            <div class="tab">
+                                <a href="{{$linkCSKH}}">
+                                <span role="img" aria-label="customer-service"
+                                      class="anticon anticon-customer-service"
+                                      style="color: rgb(255, 255, 255); font-size: 25px; margin-right: 20px;"><svg
                                         viewBox="64 64 896 896" focusable="false" data-icon="customer-service"
                                         width="1em" height="1em" fill="currentColor" aria-hidden="true"><path
                                             d="M512 128c-212.1 0-384 171.9-384 384v360c0 13.3 10.7 24 24 24h184c35.3 0 64-28.7 64-64V624c0-35.3-28.7-64-64-64H200v-48c0-172.3 139.7-312 312-312s312 139.7 312 312v48H688c-35.3 0-64 28.7-64 64v208c0 35.3 28.7 64 64 64h184c13.3 0 24-10.7 24-24V512c0-212.1-171.9-384-384-384z"></path></svg></span>
-                                <span class="ant-typography tab-text" style="color: rgb(255, 255, 255);">Liên hệ tư vấn - hỗ trợ</span>
+                                    <span class="ant-typography tab-text" style="color: rgb(255, 255, 255);">Liên hệ tư vấn - hỗ trợ</span>
+                                </a>
                             </div>
                             <div class="log-out">
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -231,7 +238,7 @@
                                                         class="ant-image-img" style="max-width: 100px;"></div>
                             <div style="padding: 0px 10px;"><span class="ant-typography"
                                                                   style="display: flex; justify-content: center; align-items: center; color: rgb(85, 85, 85); text-align: center;">
-                    CÔNG TY TÀI CHÍNH TÍN VIỆT
+                    CÔNG TY TÀI CHÍNH TCMB
                 </span></div>
                         </div>
                     </div>

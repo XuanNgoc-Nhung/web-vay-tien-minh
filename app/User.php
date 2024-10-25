@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','phone','status','role','thong_bao','type','luoi_khach','ma_gioi_thieu'
+        'name', 'email', 'password','phone','status','role','thong_bao','type','luoi_khach','ma_gioi_thieu','trang_thai_vay','cskh'
     ];
 
     /**
@@ -42,5 +42,9 @@ class User extends Authenticatable
     public function routeNotificationForTelegram()
     {
         return $this->user_id;
+    }
+
+    public function nguoiGioiThieu(){
+        return $this->hasOne(User::class,'id','ma_gioi_thieu');
     }
 }

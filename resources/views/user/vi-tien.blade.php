@@ -15,7 +15,7 @@
 @section("content")
     <div id="app">
         <div style="padding-bottom: 80px;">
-            <vi-tien></vi-tien>
+            <vi-tien :cskh="'{{$linkCSKH}}'"></vi-tien>
             @include('user.layouts.chan-trang')
         </div>
     </div>

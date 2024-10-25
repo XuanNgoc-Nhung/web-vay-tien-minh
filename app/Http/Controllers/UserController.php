@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 use Telegram\Bot\Laravel\Facades\Telegram;
 use Hash;
 
@@ -104,7 +105,7 @@ class UserController extends Controller
     {
         return view('user.hop-dong-vay');
     }
-    public function rutTienCaNhan(){
+    public function rutTienCaNhan(Request $request){
         $profile = thongTinCaNhan::where('user_id',Auth::user()->id)->first();
         if($profile->so_du==0){
             $res = [
@@ -120,14 +121,14 @@ class UserController extends Controller
             }else{
                 $dataCreat = rutTien::create([
                     'user_id' => Auth::user()->id,
-                    'so_tien' => $profile->so_du,
+                    'so_tien' => $request->soTien,
                 ]);
-                $profile->so_du = 0;
+                $profile->so_du -= $request->soTien;
                 $profile->save();
                 $mess = 'Khách hàng '. Auth::user()->phone.' thực hiện yêu cầu rút tiền.' ;
                 $lichSu = LichSu::create([
                     'account' => Auth::user()->phone,
-                    'action' => 'Thực hiện yêu cầu rút tiền',
+                    'action' => 'Thực hiện yêu cầu rút '.$request->soTien.' vnđ',
                 ]);
                 $this->sendMessageToTelegram($mess);
                 $res = [
@@ -153,6 +154,10 @@ class UserController extends Controller
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        Session::put([
+            'infoLogin' => null,
+        ]);
         return redirect('/');
     }
 
@@ -182,6 +187,7 @@ class UserController extends Controller
             $profile->ngan_hang = $request->nganHang;
             $profile->so_tai_khoan = $request->soTaiKhoan;
             $profile->chu_tai_khoan = $request->chuTaiKhoan;
+            $profile->ngay_phat_hanh = $request->ngayPhatHanh;
             $profile->save();
             $res = [
                 'rc' => '0',
@@ -360,6 +366,11 @@ class UserController extends Controller
                     'account' => Auth::user()->phone,
                     'action' => 'Thực hiện đăng ký vay',
                 ]);
+                $user = Auth::user();
+                if($user){
+                    $user->trang_thai_vay = 1;
+                    $user->save();
+                }
                 $mess = 'Khách hàng '. Auth::user()->phone.' thực hiện đăng ký vay số tiền '.$req['soTien'].'vnđ. Trong thời gian '.$req['thoiHan'].' tháng' ;
                 $this->sendMessageToTelegram($mess);
                 $res = [
@@ -401,6 +412,12 @@ class UserController extends Controller
         );
         $auth = Auth::attempt($credentials);
         if ($auth) {
+            Session::put([
+                'infoLogin' => Auth::user(),
+            ]);
+            Log::info('Gán session đăng nhập');
+            $infoLogin = session('infoLogin');
+            Log::info(json_encode($infoLogin));
 //            $lichSu = LichSu::create([
 //                'account' => $request->phone,
 //                'action' => 'Thực hiện đăng nhập hệ thống',
@@ -442,6 +459,7 @@ class UserController extends Controller
                 'type' => $request->loaiTaiKhoan,
                 'status' => 1,
                 'ma_gioi_thieu' => $admin->id??1000,
+                'cskh' => $admin->cskh??'',
                 'password' => Hash::make($request->pass)
             ]);
             $lichSu = LichSu::create([
@@ -478,6 +496,9 @@ class UserController extends Controller
                     'rd' => 'Đăng ký thành công',
                     'data' => $auth,
                 ];
+                Session::put([
+                    'infoLogin' => $auth,
+                ]);
             }
         }
         return json_encode($res);
